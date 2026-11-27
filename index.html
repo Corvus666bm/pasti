@@ -90,6 +90,10 @@ svg.ic{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-wid
 .meta svg.ic{width:16px;height:16px;stroke-width:1.75}
 .meal .note{margin-top:12px;font-size:15px;line-height:1.45;background:var(--verza-c);color:var(--ink);padding:10px 12px;border-radius:12px}
 .meal .acts{display:flex;gap:8px;padding:16px}
+.meal .skip{display:flex;align-items:center;justify-content:center;width:calc(100% - 32px);min-height:44px;margin:-10px 16px 8px;border:0;background:none;color:var(--mut);font:600 15px var(--font);text-decoration:underline;text-decoration-color:var(--box);text-underline-offset:4px;cursor:pointer}
+.meal.saltato .art{opacity:.4;filter:grayscale(.6)}
+.meal.saltato h2{color:var(--mut);text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--penna)}
+.meal .note.salt{background:var(--penna-c);color:var(--ink);font-weight:600}
 
 /* variante compatta: secondo pasto di Oggi e tutti i pasti della Settimana */
 /* riga 1: immagine + titolo; poi meta, nota e bottoni a tutta larghezza */
@@ -102,6 +106,7 @@ svg.ic{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-wid
 #s-oggi .meal+.meal .meta,#w-day .meal .meta{gap:6px 12px;margin-top:12px}
 #s-oggi .meal+.meal .acts,#w-day .meal .acts{grid-column:1/-1;padding:12px 8px 8px}
 #s-oggi .meal+.meal .btn,#w-day .meal .btn{min-height:46px}
+#s-oggi .meal+.meal .skip,#w-day .meal .skip{grid-column:1/-1;width:calc(100% - 16px);margin:-4px 8px 4px}
 
 /* domani */
 .next{display:flex;align-items:center;gap:14px;width:100%;min-height:68px;padding:8px 12px 8px 8px;margin-bottom:8px;background:var(--foglio);border:1px solid var(--riga);border-radius:16px;text-align:left;cursor:pointer;transition:transform .09s ease-out}
@@ -264,6 +269,23 @@ form.add input::placeholder{color:var(--mut);opacity:1}
 .steps li::before{content:counter(s);flex:none;width:28px;height:28px;margin-top:-1px;border-radius:50%;background:var(--verza-c);color:var(--verza-t);font-size:15px;font-weight:700;line-height:28px;text-align:center}
 .sheet .acts{position:sticky;bottom:0;display:flex;padding:28px 20px calc(16px + var(--safe-b));background:linear-gradient(to bottom,transparent,var(--carta) 24px)}
 .sheet .acts .btn{min-height:52px}
+.sheet .acts .btn+.btn{margin-left:8px}
+/* pasto saltato: mangiato fuori o altro */
+.sk-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding-top:4px}
+.sk .when{font-size:15px;font-weight:700;color:var(--verza-t)}
+.sheet .sk h2{font-size:24px;line-height:1.2;margin-top:4px}
+.sk .small{margin-top:4px;font-size:15px}
+.sheet .sk .close{position:static;flex:none;background:var(--foglio);border:1px solid var(--riga)}
+.opts{display:grid;gap:8px;margin-top:20px}
+.opt{display:block;width:100%;min-height:64px;padding:10px 16px;border-radius:14px;border:1.5px solid var(--riga);background:var(--foglio);color:var(--ink);font:700 17px var(--font);text-align:left;cursor:pointer;transition:transform .09s ease-out}
+.opt:active{transform:scale(.98)}
+.opt small{display:block;margin-top:2px;font-size:15px;font-weight:400;color:var(--mut);line-height:1.3}
+.opt[aria-pressed=true]{border-color:var(--verza);background:var(--verza-c)}
+.sk-l{display:block;margin-top:24px;font-size:17px;font-weight:700}
+.sk-in{display:block;width:100%;height:48px;margin-top:8px;padding:0 14px;font:500 17px var(--font);border-radius:12px;border:1.5px solid var(--box);background:var(--foglio);color:var(--ink)}
+.sk-in::placeholder{color:var(--mut);opacity:1}
+.sk .grp{margin-top:12px}
+.sk .banner{margin:24px 0 0}
 
 /* ---------- modalità cucina: sempre lavagna ---------- */
 .cook{position:fixed;inset:0;z-index:30;background:#18211f;color:#edf1ec;display:flex;flex-direction:column;padding:calc(10px + var(--safe-t)) 20px calc(20px + var(--safe-b))}
@@ -451,11 +473,14 @@ document.querySelector('.tabbar').addEventListener('click',e=>{const t=e.target.
 addEventListener('hashchange',route);
 
 /* ---------- render ---------- */
-function mealCard(m,when){const r=M.ricette[m?.id];if(!r)return'';
+function mealCard(m,when,i,p){const r=M.ricette[m?.id];if(!r)return'';const s=skipOf(i,p),k=i+'|'+p;
+  if(s)return `<article class="meal saltato"><div class="art" style="background:${bg(r)}">${art(m.id,r)}</div><div class="ttl"><p class="when">${when}</p>
+  <h2>${esc(r.nome)}</h2></div><div class="bd"><p class="note salt">${esc(skipTxt(s))}</p></div>
+  <div class="acts"><button class="btn wide" data-skip="${k}" type="button">Modifica</button><button class="btn line wide" data-unskip="${k}" type="button">Ripristina</button></div></article>`;
   return `<article class="meal"><div class="art" style="background:${bg(r)}">${art(m.id,r)}</div><div class="ttl"><p class="when">${when}</p>
   <h2>${esc(r.nome)}</h2></div><div class="bd"><div class="meta">${tag(r.tipo)}<span>${esc(r.tempo)}</span><span>${esc(r.porzioni)}</span></div>
   ${m.nota?`<p class="note">${esc(m.nota)}</p>`:''}</div>
-  <div class="acts"><button class="btn wide" data-open="${esc(m.id)}" type="button">Ricetta</button><button class="btn pri wide" data-cook="${esc(m.id)}" type="button">Cucina ora</button></div></article>`}
+  <div class="acts"><button class="btn wide" data-open="${esc(m.id)}" type="button">Ricetta</button><button class="btn pri wide" data-cook="${esc(m.id)}" type="button">Cucina ora</button></div><button class="skip" data-skip="${k}" type="button">Mangiato fuori o altro?</button></article>`}
 function renderOggi(){
   const G=M.giorni,ti=todayIdx(),i=Math.min(Math.max(ti,0),G.length-1),now=new Date(),h=now.getHours();
   const hello=h<12?'Buongiorno':h<18?'Buon pomeriggio':'Buonasera';
@@ -466,13 +491,13 @@ function renderOggi(){
   const lunch=h<15||ti!==i;
   $('#s-oggi').innerHTML=`<div class="hd"><h1>${hello}</h1><p>${esc(fmt(now,{weekday:'long',day:'numeric',month:'long'}))}</p></div>${ban}
   ${ti!==i?`<p class="sec">${esc(g.giorno)}</p>`:''}
-  ${lunch?mealCard(g.pranzo,'Pranzo'):''}${mealCard(g.cena,'Cena')}
-  ${nx?`<p class="sec">Domani, ${esc(nx.giorno.toLowerCase())}</p>${['pranzo','cena'].map(k=>{const m=nx[k],r=M.ricette[m?.id];return r?`<button class="next" data-open="${esc(m.id)}" type="button"><span class="mini" style="background:${bg(r)}">${art(m.id,r,true)}</span><span class="nx"><span class="lbl">${k==='pranzo'?'Pranzo':'Cena'}</span><b>${esc(r.nome)}</b></span>${I.chev}</button>`:''}).join('')}`:''}
+  ${lunch?mealCard(g.pranzo,'Pranzo',i,'pranzo'):''}${mealCard(g.cena,'Cena',i,'cena')}
+  ${nx?`<p class="sec">Domani, ${esc(nx.giorno.toLowerCase())}</p>${['pranzo','cena'].map(k=>{const m=nx[k],r=M.ricette[m?.id];return r?`<button class="next" data-open="${esc(m.id)}" type="button"><span class="mini" style="background:${bg(r)}">${art(m.id,r,true)}</span><span class="nx"><span class="lbl">${k==='pranzo'?'Pranzo':'Cena'}${skipOf(i+1,k)?' · '+esc(skipTxt(skipOf(i+1,k)).toLowerCase()):''}</span><b>${esc(r.nome)}</b></span>${I.chev}</button>`:''}).join('')}`:''}
   ${M.nota?`<p class="small foot">${esc(M.nota)}</p>`:''}`}
 function renderSettimana(){
   const ti=todayIdx();$('#w-title').textContent=M.titolo||'';
   $('#chips').innerHTML=M.giorni.map((g,i)=>{const d=dateOf(i);return `<button class="chip${i===sel?' on':''}${i===ti?' today':''}" data-d="${i}" type="button" aria-pressed="${i===sel}"><span>${esc(g.giorno.slice(0,3))}</span><b>${d.getDate()}</b></button>`}).join('');
-  const g=M.giorni[sel];$('#w-day').innerHTML=g?mealCard(g.pranzo,'Pranzo')+mealCard(g.cena,'Cena'):''}
+  const g=M.giorni[sel];$('#w-day').innerHTML=g?mealCard(g.pranzo,'Pranzo',sel,'pranzo')+mealCard(g.cena,'Cena',sel,'cena'):''}
 function renderRicette(){if(!M)return;
   const W=M.ricette||{},all={...A,...W},q=norm(($('#rcerca')?.value||'').trim());
   let ids=rview==='settimana'?Object.keys(W):rview==='preferiti'?Object.keys(all).filter(i=>P.has(i)):Object.keys(all);
@@ -525,7 +550,7 @@ async function setCasa(id,on,nome,reparto){CS[id]={...(CS[id]||{}),ce:on,nome,re
 function renderAll(){if(!M)return;renderOggi();renderSettimana();renderRicette();renderSpesa()}
 
 /* ---------- ricetta e cucina ---------- */
-function openRecipe(id){const r=RR(id);if(!r)return;
+function openRecipe(id){const r=RR(id);if(!r)return;skS=null;
   $('#sh').innerHTML=`<div class="grab" aria-hidden="true"></div><div class="art" style="background:${bg(r)}">${art(id,r)}<button class="close" id="sh-x" type="button" aria-label="Chiudi">${I.x}</button><button class="cuore" type="button" data-fav="${esc(id)}" aria-pressed="${P.has(id)}" aria-label="${P.has(id)?'Togli dai preferiti':'Aggiungi ai preferiti'}">${HEART}</button><button class="pollice" type="button" data-no="${esc(id)}" aria-pressed="${B.has(id)}" aria-label="Non ci è piaciuto">${THUMB}<span>${B.has(id)?'Non vi è piaciuto':'Non ci è piaciuto'}</span></button></div><div class="bd">
   <h2 id="sh-name">${esc(r.nome)}</h2><div class="meta">${tag(r.tipo)}<span>${esc(r.tempo)}</span><span>${esc(r.porzioni)}</span></div>
   <h3>Ingredienti</h3><ul class="ing">${r.ingredienti.map(x=>`<li>${nb(esc(x))}</li>`).join('')}</ul>
@@ -554,7 +579,68 @@ addEventListener('keydown',e=>{if(e.key==='Escape'){closeSheet();closeCook()}
   if(!$('#cook').hidden){if(e.key==='ArrowRight')$('#ck-next').click();if(e.key==='ArrowLeft')$('#ck-prev').click()}});
 document.addEventListener('click',e=>{const o=e.target.closest('[data-open]'),c=e.target.closest('[data-cook]'),d=e.target.closest('[data-d]');
   if(c)openCook(c.dataset.cook);else if(o)openRecipe(o.dataset.open);
-  if(d){sel=+d.dataset.d;renderSettimana()}});
+  if(d){sel=+d.dataset.d;renderSettimana()}
+  const sk=e.target.closest('[data-skip]'),us=e.target.closest('[data-unskip]');
+  if(sk){const [i,p]=sk.dataset.skip.split('|');openSkip(+i,p)}
+  if(us){const [i,p]=us.dataset.unskip.split('|');undoSkip(+i,p)}});
+
+/* ---------- pasti saltati: mangiato fuori o altro ----------
+   Salvati come righe speciali della tabella "spunte" (niente tabelle nuove), nel formato
+   pasto|AAAA-MM-GG(inizio)|indice giorno|pranzo/cena|fuori/altro|cosa avete mangiato|prodotti finiti
+   Il controllo delle 23:59 li legge da stato.json e adatta i pasti dei giorni dopo. */
+const SKP='pasto|';
+const dec=v=>{try{return decodeURIComponent(v||'')}catch{return v||''}};
+const skKey=(i,p)=>SKP+(M?.inizio||'')+'|'+i+'|'+p+'|';
+function skipOf(i,p){if(!M)return null;const k=skKey(i,p);
+  for(const s of spunte)if(s.startsWith(k)){const f=s.split('|');return{sid:s,tipo:f[4]==='altro'?'altro':'fuori',nota:dec(f[5]),usati:dec(f[6]).split(',').filter(Boolean)}}
+  return null}
+const skipTxt=s=>s.tipo==='fuori'?'Mangiato fuori':'Mangiato altro'+(s.nota?': '+s.nota:'');
+/* cosa c'è da usare: dispensa (senza "Casa e igiene") + spesa spuntata di questa settimana */
+function pantryItems(){const out=[],seen=new Set(),bought=id=>spunte.has(K(id));
+  for(const p of AB){if(p.cibo===false||p.reparto==='Casa e igiene')continue;
+    out.push({id:p.id,nome:p.nome,reparto:p.reparto||'Altro',on:(CS[p.id]?!!CS[p.id].ce:!!p.ce)||bought(p.id),casa:1});seen.add(p.id)}
+  for(const [id,c] of Object.entries(CS)){if(seen.has(id)||c.reparto==='Casa e igiene')continue;
+    out.push({id,nome:c.nome||id,reparto:c.reparto||'Altro',on:!!c.ce||bought(id),casa:1});seen.add(id)}
+  for(const s of M?.spesa||[]){if(seen.has(s.id)||!bought(s.id))continue;out.push({id:s.id,nome:s.nome,reparto:s.reparto||'Altro',on:true,casa:0});seen.add(s.id)}
+  return out}
+let skS=null;
+function openSkip(i,p){const m=M?.giorni?.[i]?.[p];if(!M?.ricette?.[m?.id])return;const old=skipOf(i,p);
+  skS={i,p,tipo:old?.tipo||'fuori',nota:old?.nota||'',usati:new Set(old?.usati||[])};drawSkip();
+  $('#sheet').classList.add('open');setTimeout(()=>$('#sh-x')?.focus(),50)}
+function drawSkip(){const {i,p,tipo}=skS,g=M.giorni[i],r=M.ricette[g[p].id],altro=tipo==='altro',had=!!skipOf(i,p);
+  const items=pantryItems().filter(x=>x.on||skS.usati.has(x.id)),by={};for(const it of items)(by[it.reparto]||(by[it.reparto]=[])).push(it);
+  const order=[...REP.filter(x=>by[x]),...Object.keys(by).filter(x=>!REP.includes(x))];
+  const list=order.map(rep=>`<div class="grp"><h3>${esc(rep)}</h3>${by[rep].sort((x,y)=>x.nome.localeCompare(y.nome,'it')).map(it=>{const on=skS.usati.has(it.id);
+    return `<div class="it${on?' done':''}" data-sku="${esc(it.id)}" role="checkbox" aria-checked="${on}" tabindex="0">${check}<span class="tx"><span class="nm">${esc(it.nome)}</span></span></div>`}).join('')}</div>`).join('');
+  $('#sh').innerHTML=`<div class="grab" aria-hidden="true"></div><div class="bd sk">
+  <div class="sk-hd"><div><p class="when">${p==='pranzo'?'Pranzo':'Cena'} di ${esc(g.giorno.toLowerCase())}</p><h2 id="sh-name">Non mangiate questo piatto?</h2><p class="small">${esc(r.nome)}</p></div><button class="close" id="sh-x" type="button" aria-label="Chiudi">${I.x}</button></div>
+  <div class="opts" role="group" aria-label="Cosa avete fatto">
+    <button class="opt" type="button" data-skt="fuori" aria-pressed="${!altro}">Mangiato fuori<small>Salta il pasto: a casa non si cucina</small></button>
+    <button class="opt" type="button" data-skt="altro" aria-pressed="${altro}">Mangiato altro a casa<small>Avete cucinato qualcosa di vostro</small></button></div>
+  ${altro?`<label class="sk-l" for="sk-n">Cosa avete mangiato?</label><input id="sk-n" class="sk-in" maxlength="60" placeholder="Es. pasta al pesto, mezzo peperone" value="${esc(skS.nota)}" autocomplete="off">
+  <p class="sk-l">Cosa avete finito?</p><p class="small">Spuntate quello che è finito del tutto: in dispensa diventa «Manca». Se ne avete usato solo una parte, scrivetelo sopra.</p>
+  ${list||'<p class="hint">Non risulta niente in casa.</p>'}`:''}
+  <p class="banner">${altro?'Stasera alle 23:59 i pasti dei prossimi giorni si adattano: il piatto saltato viene spostato o cambiato, e quello che avete usato non viene più contato.':'Gli ingredienti di questo piatto restano in casa: stasera alle 23:59 il piatto viene spostato in un altro giorno o adattato, così non si spreca niente.'}</p></div>
+  <div class="acts">${had?'<button class="btn wide" data-skr type="button">Ripristina</button>':''}<button class="btn pri wide" data-sks type="button">Salva</button></div>`}
+async function saveSkip(){const {i,p,tipo}=skS,old=skipOf(i,p),items=pantryItems();
+  const nota=tipo==='altro'?skS.nota.trim().slice(0,60):'',usati=tipo==='altro'?[...skS.usati]:[];
+  const sid=skKey(i,p)+tipo+'|'+encodeURIComponent(nota)+'|'+encodeURIComponent(usati.join(','));
+  if(old)spunte.delete(old.sid);spunte.add(sid);saveLocal();
+  for(const id of usati){const it=items.find(x=>x.id===id);if(it?.casa)setCasa(id,false,it.nome,it.reparto)}
+  for(const id of old?.usati||[]){if(usati.includes(id))continue;const it=items.find(x=>x.id===id);if(it?.casa)setCasa(id,true,it.nome,it.reparto)}
+  renderAll();
+  if(sb){if(old&&old.sid!==sid)await run(sb.from('spunte').delete().eq('id',old.sid));if(!old||old.sid!==sid)await run(sb.from('spunte').upsert({id:sid}))}}
+async function undoSkip(i,p){const old=skipOf(i,p);if(!old)return;const items=pantryItems();spunte.delete(old.sid);saveLocal();
+  for(const id of old.usati){const it=items.find(x=>x.id===id);if(it?.casa)setCasa(id,true,it.nome,it.reparto)}
+  renderAll();if(sb)await run(sb.from('spunte').delete().eq('id',old.sid))}
+function toggleSku(el){const id=el.dataset.sku,on=!skS.usati.has(id);on?skS.usati.add(id):skS.usati.delete(id);el.classList.toggle('done',on);el.classList.toggle('fx',on);el.setAttribute('aria-checked',on)}
+$('#sh').addEventListener('click',e=>{if(!skS)return;
+  const t=e.target.closest('[data-skt]');if(t){skS.tipo=t.dataset.skt;drawSkip();return}
+  const u=e.target.closest('[data-sku]');if(u){toggleSku(u);return}
+  if(e.target.closest('[data-sks]')){saveSkip();closeSheet();return}
+  if(e.target.closest('[data-skr]')){undoSkip(skS.i,skS.p);closeSheet()}});
+$('#sh').addEventListener('keydown',e=>{const u=skS&&e.target.closest('[data-sku]');if(u&&(e.key===' '||e.key==='Enter')){e.preventDefault();toggleSku(u)}});
+$('#sh').addEventListener('input',e=>{if(skS&&e.target.id==='sk-n')skS.nota=e.target.value});
 
 /* ---------- lista: salvataggio locale o Supabase ---------- */
 const LS={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
@@ -607,8 +693,8 @@ async function toggleNo(id){const on=!B.has(id);on?B.add(id):B.delete(id);LS.set
 document.addEventListener('click',e=>{const f=e.target.closest('[data-no]');if(f){e.stopPropagation();toggleNo(f.dataset.no)}},true);
 $('#reset').addEventListener('click',async()=>{const b=$('#reset');
   if(!armed){armed=true;b.textContent='Sicuro?';setTimeout(()=>{armed=false;b.textContent='Azzera spunte'},3500);return}
-  armed=false;b.textContent='Azzera spunte';spunte=new Set();extra=extra.filter(e=>!e.fatto);saveLocal();renderSpesa();
-  if(sb){await run(sb.from('spunte').delete().neq('id',''));await run(sb.from('extra').delete().eq('fatto',true))}});
+  armed=false;b.textContent='Azzera spunte';spunte=new Set([...spunte].filter(x=>x.startsWith(SKP)));extra=extra.filter(e=>!e.fatto);saveLocal();renderSpesa();
+  if(sb){await run(sb.from('spunte').delete().not('id','like',SKP+'%'));await run(sb.from('extra').delete().eq('fatto',true))}});
 
 let lib=null;
 function connect(pin){const C=window.PASTI_CONFIG;
