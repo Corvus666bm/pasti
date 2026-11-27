@@ -722,8 +722,12 @@ route();
 P=new Set(LS.get('pasti-preferiti',[]));B=new Set(LS.get('pasti-bocciati',[]));CS=LS.get('pasti-casa-stato',{})||{};
 fetch('abituale.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).then(d=>{AB=(d&&d.prodotti)||[];if(sview==='casa')renderCasa()}).catch(()=>{});
 fetch('ricettario.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).then(d=>{A=(d&&d.ricette)||{};if(M)renderRicette()}).catch(()=>{});
-fetch('menu.json',{cache:'no-cache'}).then(r=>r.json()).then(d=>{M=d;const ti=todayIdx();sel=Math.min(Math.max(ti,0),M.giorni.length-1);renderAll()})
-  .catch(()=>{$('#s-oggi').innerHTML='<div class="empty"><h2>Menù non raggiungibile</h2><p>Controlla la connessione e riapri l’app.</p></div>'});
+let lastDay='';
+function loadMenu(){return fetch('menu.json',{cache:'no-cache'}).then(r=>r.json()).then(d=>{const day=new Date().toDateString(),nuovo=d.inizio!==M?.inizio;M=d;
+  if(nuovo||day!==lastDay){const ti=todayIdx();sel=Math.min(Math.max(ti,0),M.giorni.length-1)}lastDay=day;renderAll()})}
+loadMenu().catch(()=>{$('#s-oggi').innerHTML='<div class="empty"><h2>Menù non raggiungibile</h2><p>Controlla la connessione e riapri l’app.</p></div>'});
+/* quando l'app torna in primo piano (anche dopo giorni in background): giorno e menù sempre aggiornati */
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&M)loadMenu().catch(()=>renderAll())});
 startSync();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 }
