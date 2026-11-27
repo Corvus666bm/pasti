@@ -86,7 +86,7 @@
     "Taglia le patate a spicchi, condiscile con olio, sale e paprika e cuocile 30–35 minuti, girandole a metà.",
     "Cuoci i burger in padella come indicato sulla confezione.",
     "Scalda i panini e componi con insalata e pomodorini.",
-    "Controlla l'etichetta: alcuni burger vegetali contengono formaggio o uova."
+    "Scegli burger vegetali senza formaggio: controlla l'etichetta."
    ],
    "portabile": false,
    "porzioni": "2 porzioni",
@@ -160,16 +160,16 @@
   "farro": {
    "ingredienti": [
     "200 g di farro perlato",
-    "200 g di feta",
+    "125 g di mozzarelline (ciliegine)",
     "250 g di pomodorini",
     "1 cetriolo",
     "1 lattina di ceci",
     "1 limone, olio, sale, origano"
    ],
-   "nome": "Insalata di farro, feta e pomodorini",
+   "nome": "Insalata di farro, mozzarelline e pomodorini",
    "passi": [
     "Cuoci il farro in acqua salata per circa 20 minuti, scolalo e fallo raffreddare.",
-    "Taglia pomodorini, cetriolo e feta a cubetti.",
+    "Taglia pomodorini e cetriolo a cubetti e le mozzarelline a metà.",
     "Unisci tutto con i ceci scolati.",
     "Condisci con olio, succo di limone, sale e origano."
    ],
@@ -191,14 +191,13 @@
     "250 g di patate",
     "200 g di spinaci surgelati",
     "¼ di cipolla",
-    "30 g di grana grattugiato",
-    "Olio, sale, pepe"
+    "Olio, sale, pepe, un pizzico di noce moscata (facoltativa)"
    ],
    "nome": "Frittata in padella con patate e spinaci",
    "passi": [
     "Taglia le patate a cubetti piccoli e cuocile in padella con olio e cipolla per 10 minuti, coperte.",
     "Aggiungi gli spinaci surgelati e cuoci 5 minuti, finché l'acqua evapora.",
-    "Sbatti le uova con grana, sale e pepe e versale nella padella.",
+    "Sbatti le uova con sale, pepe e noce moscata e versale nella padella.",
     "Cuoci coperto a fuoco basso per 6 minuti, gira la frittata con il coperchio e cuoci altri 2 minuti."
    ],
    "portabile": true,
@@ -271,28 +270,26 @@
     "180 g di riso Carnaroli",
     "500 g di zucca",
     "½ cipolla",
-    "1 scamorza affumicata",
-    "30 g di grana",
     "1 litro di brodo vegetale",
-    "Olio, sale"
+    "Rosmarino secco, olio, sale, pepe"
    ],
-   "nome": "Risotto alla zucca e scamorza",
+   "nome": "Risotto alla zucca e rosmarino",
    "passi": [
     "Taglia la zucca a cubetti e cuocila con la cipolla e l'olio per 10 minuti, finché è morbida.",
     "Aggiungi il riso e tostalo per 2 minuti.",
-    "Aggiungi il brodo caldo un mestolo alla volta, mescolando, per circa 17 minuti.",
-    "A fuoco spento manteca con grana e scamorza a cubetti. Lascia riposare 2 minuti."
+    "Aggiungi il brodo caldo un mestolo alla volta, mescolando, per circa 17 minuti, con un pizzico di rosmarino.",
+    "A fuoco spento schiaccia un po' di zucca nel riso e manteca con un filo d'olio crudo e pepe: diventa cremoso anche senza formaggio."
    ],
    "portabile": false,
    "porzioni": "2 porzioni",
    "tempo": "40 min",
-   "tipo": "vegetariano",
+   "tipo": "vegano",
    "forma": "ciotola",
    "colori": [
     "#f0b15a",
     "#fbe7c0",
     "#e07b2a",
-    "#fff4d6"
+    "#7a9e4d"
    ]
   },
   "vellutata": {
@@ -557,30 +554,9 @@
   {
    "id": "mozzarella",
    "nome": "Mozzarella",
-   "qty": "3 × 125 g",
+   "qty": "3 × 125 g + 1 confezione di ciliegine da 125 g",
    "reparto": "Frigo",
-   "prezzo": 2.37
-  },
-  {
-   "id": "feta",
-   "nome": "Feta",
-   "qty": "200 g",
-   "reparto": "Frigo",
-   "prezzo": 1.49
-  },
-  {
-   "id": "scamorza",
-   "nome": "Scamorza affumicata",
-   "qty": "1 pezzo",
-   "reparto": "Frigo",
-   "prezzo": 1.29
-  },
-  {
-   "id": "grana",
-   "nome": "Grana grattugiato",
-   "qty": "100 g",
-   "reparto": "Frigo",
-   "prezzo": 1.79
+   "prezzo": 3.16
   },
   {
    "id": "hummus",
@@ -591,7 +567,7 @@
   },
   {
    "id": "burger",
-   "nome": "Burger vegetali",
+   "nome": "Burger vegetali senza formaggio",
    "qty": "2 confezioni",
    "reparto": "Frigo",
    "prezzo": 4.98
