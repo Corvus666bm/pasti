@@ -1,1 +1,59 @@
-{"esportato":null,"casa":[],"spunte":[],"extra":[]}
+{
+ "casa": [
+  {
+   "id": "patatedolci",
+   "nome": "Patate dolci",
+   "reparto": "Frutta e verdura",
+   "ce": false
+  },
+  {
+   "id": "spinacino",
+   "nome": "Spinacino",
+   "reparto": "Frutta e verdura",
+   "ce": false
+  },
+  {
+   "id": "cotolettevegetalimegliol",
+   "nome": "Cotolette vegetali (meglio Lidl)",
+   "reparto": "Frigo",
+   "ce": true
+  },
+  {
+   "id": "mozzarellabiopoli",
+   "nome": "Mozzarella bio (Poli)",
+   "reparto": "Frigo",
+   "ce": true
+  }
+ ],
+ "spunte": [
+  "2026-11-30:cipolle",
+  "2026-11-30:aglio",
+  "2026-11-30:carote",
+  "2026-11-30:patate",
+  "2026-11-30:peperoni",
+  "2026-11-30:zucchine",
+  "2026-11-30:melanzana",
+  "2026-11-30:insalata",
+  "2026-11-30:limoni",
+  "2026-11-30:piadine",
+  "2026-11-30:uova",
+  "2026-11-30:mozzarella",
+  "2026-11-30:burger",
+  "2026-11-30:gnocchi",
+  "2026-11-30:mais",
+  "2026-11-30:ceci",
+  "2026-11-30:lenticchie",
+  "2026-11-30:pelati",
+  "2026-11-30:passata",
+  "2026-11-30:basmati",
+  "2026-11-30:carnaroli",
+  "2026-11-30:penne",
+  "2026-11-30:farro",
+  "2026-11-30:curry",
+  "2026-11-30:spezie",
+  "2026-11-30:spinaci",
+  "2026-11-30:piselli"
+ ],
+ "extra": [],
+ "esportato": "2026-11-27"
+}
