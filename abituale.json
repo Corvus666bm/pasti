@@ -304,8 +304,8 @@
    "cibo": true
   },
   {
-   "id": "lattedicocco",
-   "nome": "Latte di cocco",
+   "id": "bevandacocco",
+   "nome": "Bevanda al cocco",
    "reparto": "Dispensa",
    "ce": false,
    "cibo": true

@@ -134,7 +134,7 @@
   "curry": {
    "ingredienti": [
     "125 g di lenticchie rosse",
-    "½ lattina di latte di cocco (200 ml)",
+    "300 ml di bevanda al cocco (da un brick da 1 litro)",
     "1 lattina di pomodori pelati",
     "100 g di spinaci surgelati",
     "½ cipolla, 1 spicchio d'aglio",
@@ -147,8 +147,8 @@
     "Trita la cipolla e lo spicchio d'aglio. Metti le lenticchie in un colino e sciacquale sotto l'acqua corrente finché l'acqua esce chiara.",
     "In una pentola media metti 2 cucchiai d'olio a fuoco medio e cuoci cipolla e aglio per 5 minuti, mescolando: devono ammorbidirsi senza scurirsi.",
     "Aggiungi il curry e mescola per 1 minuto.",
-    "Aggiungi lenticchie, pelati schiacciati con il cucchiaio, latte di cocco e 100 ml d'acqua (mezzo bicchiere). Mescola.",
-    "Quando inizia a bollire, abbassa a fuoco basso e cuoci 18 minuti senza coperchio, mescolando spesso perché le lenticchie tendono ad attaccarsi. Sono pronte quando si sfaldano e il curry è denso; se si asciuga troppo, aggiungi un po' d'acqua.",
+    "Aggiungi lenticchie, pelati schiacciati con il cucchiaio, 300 ml di bevanda al cocco (non serve aggiungere acqua). Mescola.",
+    "Quando inizia a bollire, abbassa a fuoco basso e cuoci 18 minuti senza coperchio, mescolando spesso perché le lenticchie tendono ad attaccarsi. Sono pronte quando si sfaldano e il curry è denso; la bevanda al cocco è piuttosto liquida, quindi se resta troppo brodoso lascialo cuocere qualche minuto in più senza coperchio; se invece si asciuga troppo, aggiungi un po' d'acqua.",
     "Negli ultimi 5 minuti aggiungi gli spinaci surgelati direttamente nella pentola. Sala e aggiungi qualche goccia di limone.",
     "Intanto cuoci il riso in una pentola d'acqua salata che bolle, per il tempo della confezione, e scolalo. Servi il curry sopra il riso."
    ],
@@ -318,7 +318,7 @@
     "1 patata",
     "1 carota",
     "½ cipolla",
-    "½ lattina di latte di cocco (il resto di quella del curry)",
+    "300 ml di bevanda al cocco (il resto del brick del curry; quello che avanza si può bere a colazione)",
     "Pane casereccio",
     "1 confezione di hummus (200 g)",
     "Olio, sale, pepe"
@@ -328,7 +328,7 @@
     "Sbuccia zucca, patata e carota e tagliale a pezzi di circa 3 cm; taglia la cipolla in quattro.",
     "Metti tutto in una pentola e aggiungi acqua fredda quanto basta a coprire appena le verdure. Aggiungi un cucchiaino di sale.",
     "Porta a bollore, poi abbassa a fuoco medio-basso, metti il coperchio e cuoci 20 minuti, finché una forchetta entra nelle verdure senza fatica.",
-    "Spegni e togli un po' dell'acqua di cottura (tienila in una tazza). Aggiungi il latte di cocco e frulla con il frullatore a immersione finché è liscia. Se è troppo densa, aggiungi un po' dell'acqua tenuta da parte.",
+    "Spegni e togli quasi tutta l'acqua di cottura (tienila in una tazza): la bevanda al cocco è liquida e la vellutata deve restare densa. Aggiungi la bevanda al cocco e frulla con il frullatore a immersione finché è liscia. Se è troppo densa, aggiungi poco alla volta un po' dell'acqua tenuta da parte.",
     "Assaggia e aggiungi sale e pepe se serve.",
     "Taglia il pane a fette e tostalo in una padella asciutta a fuoco medio, 2 minuti per lato, oppure 5 minuti in forno a 200 °C. Spalmaci sopra l'hummus.",
     "Servi la vellutata con un filo d'olio crudo e i crostoni a parte."
@@ -659,11 +659,11 @@
    "prezzo": 0.79
   },
   {
-   "id": "cocco",
-   "nome": "Latte di cocco",
-   "qty": "1 lattina da 400 ml",
+   "id": "bevandacocco",
+   "nome": "Bevanda al cocco",
+   "qty": "1 brick da 1 litro",
    "reparto": "Dispensa",
-   "prezzo": 1.29
+   "prezzo": 1.49
   },
   {
    "id": "basmati",
