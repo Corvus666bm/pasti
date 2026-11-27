@@ -137,6 +137,9 @@ form.add input{flex:1;font:16px Inter,sans-serif;min-height:46px;padding:0 14px;
 .cook .btn{min-height:58px;font-size:17px}
 .cook .btn.ghost{color:#fff;border-color:rgb(255 255 255/.35)}
 .cook .btn.pri{background:var(--sun);color:#1f4a28}
+.pin{background:var(--card);border-radius:20px;box-shadow:var(--shadow);padding:14px 16px 4px;margin-top:12px}.pin p{margin:0 0 4px}.pin .add{display:flex;gap:8px;padding:8px 0}
+.pin input{flex:1;font:20px Inter,sans-serif;letter-spacing:.2em;min-height:48px;padding:0 14px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)}
+#pin-err{color:var(--tom);min-height:1em}.lnk{margin-left:auto;border:0;background:none;color:var(--leafT);font-weight:600;font-size:13px;cursor:pointer;padding:8px 0}
 .empty{text-align:center;color:var(--mut);padding:40px 10px}
 @media(min-width:620px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -156,7 +159,9 @@ form.add input{flex:1;font:16px Inter,sans-serif;min-height:46px;padding:0 14px;
     <svg class="ring" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="34" stroke="rgb(255 255 255/.25)" stroke-width="9" fill="none"/><circle id="ring" cx="42" cy="42" r="34" stroke="#f6c945" stroke-width="9" fill="none" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="213.6" transform="rotate(-90 42 42)" style="transition:stroke-dashoffset .4s"/><text id="ring-t" x="42" y="48" text-anchor="middle" fill="#fff" font-family="Fredoka, sans-serif" font-weight="600" font-size="18">0%</text></svg>
     <div><h2 id="sp-t">0 di 0</h2><p id="sp-s"></p></div>
   </div>
-  <div class="sync" id="sync"><i></i><span>Solo su questo telefono</span></div>
+  <div class="sync" id="sync"><i></i><span>Solo su questo telefono</span><button class="lnk" id="pin-chg" type="button" hidden>Cambia codice</button></div>
+  <form class="pin" id="pinf" hidden><p><b>Codice di casa</b><br><span class="small">Inseriscilo una volta su questo telefono per sincronizzare la lista.</span></p>
+    <div class="add"><input id="pini" inputmode="numeric" autocomplete="one-time-code" maxlength="12" placeholder="Codice" aria-label="Codice di casa"><button class="btn pri" type="submit">Conferma</button></div><p class="small" id="pin-err" role="alert"></p></form>
   <div class="tools"><button class="btn pri wide" id="copy" type="button">Copia per WhatsApp</button><button class="btn warn" id="reset" type="button">Azzera</button></div>
   <div id="lista"></div>
   <div class="grp"><h3>Aggiunti da voi</h3><div id="extra"></div>
@@ -266,7 +271,8 @@ function renderSpesa(){if(!M)return;
   $('#ring').style.strokeDashoffset=(213.6*(1-p)).toFixed(1);$('#ring-t').textContent=Math.round(p*100)+'%';
   $('#incasa').textContent='Di solito già in casa: '+(M.inCasa||[]).join(', ')+'.';
   const sy=$('#sync');sy.className='sync'+(syncState==='ok'?' ok':syncState==='err'?' err':'');
-  sy.querySelector('span').textContent=syncState==='ok'?'Sincronizzata in tempo reale':syncState==='err'?'Non sincronizzata: controllo la connessione…':'Solo su questo telefono';
+  sy.querySelector('span').textContent=syncState==='ok'?'Sincronizzata con l’altro telefono':syncState==='err'?'Non sincronizzata: controllo la connessione…':syncState==='pin'?'Inserisci il codice di casa per sincronizzare':'Solo su questo telefono';
+  $('#pinf').hidden=syncState!=='pin';$('#pin-chg').hidden=syncState!=='ok'&&syncState!=='err';
   const tabS=document.querySelector('.tab[data-v=spesa]');let d=tabS.querySelector('.dot');
   const rem=all-done;if(rem>0){if(!d){d=document.createElement('span');d.className='dot';tabS.prepend(d)}d.textContent=rem}else d?.remove()}
 function renderAll(){if(!M)return;renderOggi();renderSettimana();renderRicette();renderSpesa()}
@@ -305,7 +311,8 @@ async function pull(){if(!sb)return;
   const [a,b]=await Promise.all([sb.from('spunte').select('id'),sb.from('extra').select('*').order('creato')]);
   if(a.error||b.error){syncState='err';renderSpesa();return}
   spunte=new Set(a.data.map(x=>x.id));extra=b.data;syncState='ok';saveLocal();renderSpesa()}
-async function run(q){const {error}=await q;if(error){syncState='err';renderSpesa();setTimeout(pull,1500)}}
+async function run(q){const {error}=await q;if(error){syncState='err';renderSpesa();setTimeout(pull,1500)}else ping()}
+let ch=null;function ping(){try{ch?.send({type:'broadcast',event:'cambio',payload:{}})}catch{}}
 async function toggleItem(it){const id=K(it);const on=!spunte.has(id);on?spunte.add(id):spunte.delete(id);saveLocal();renderSpesa();
   if(sb)await run(on?sb.from('spunte').upsert({id}):sb.from('spunte').delete().eq('id',id))}
 async function toggleExtra(id){const e=extra.find(x=>String(x.id)===id);if(!e)return;e.fatto=!e.fatto;saveLocal();renderSpesa();
@@ -317,7 +324,7 @@ function onItem(e){if(e.target.closest('[data-x]'))return;const it=e.target.clos
 for(const el of [$('#lista'),$('#extra')]){el.addEventListener('click',onItem);el.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();onItem(e)}})}
 $('#extra').addEventListener('click',e=>{const x=e.target.closest('[data-x]');if(x)removeExtra(x.dataset.x)});
 $('#addf').addEventListener('submit',async e=>{e.preventDefault();const v=$('#addi').value.trim();if(!v)return;$('#addi').value='';
-  if(sb){const {data,error}=await sb.from('extra').insert({nome:v}).select();if(error){syncState='err';renderSpesa()}else{extra.push(...data);renderSpesa()}}
+  if(sb){const {data,error}=await sb.from('extra').insert({nome:v}).select();if(error){syncState='err';renderSpesa()}else{extra.push(...data);renderSpesa();ping()}}
   else{extra.push({id:'l'+Date.now(),nome:v,fatto:false});saveLocal();renderSpesa()}});
 let armed=false;
 $('#reset').addEventListener('click',async()=>{const b=$('#reset');
@@ -331,13 +338,25 @@ $('#copy').addEventListener('click',async()=>{if(!M)return;const by={};
   const b=$('#copy');try{await navigator.clipboard.writeText(t);b.textContent='Copiata!'}catch{b.textContent='Copia non riuscita'}
   setTimeout(()=>b.textContent='Copia per WhatsApp',1800)});
 
+let lib=null;
+function connect(pin){const C=window.PASTI_CONFIG;
+  sb=lib.createClient(C.supabaseUrl,C.supabaseKey,{global:{headers:{'x-casa':pin}}});
+  try{ch?.unsubscribe()}catch{}
+  ch=sb.channel('pasti-lista').on('broadcast',{event:'cambio'},()=>pull()).subscribe()}
+async function checkPin(pin){connect(pin);const {data,error}=await sb.rpc('casa_ok');if(error)return null;return data===true}
 function startSync(){const C=window.PASTI_CONFIG||{};if(!C.supabaseUrl||!C.supabaseKey)return;
   const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2/dist/umd/supabase.js';
-  s.onload=()=>{try{sb=window.supabase.createClient(C.supabaseUrl,C.supabaseKey);
-    sb.channel('pasti').on('postgres_changes',{event:'*',schema:'public',table:'spunte'},pull).on('postgres_changes',{event:'*',schema:'public',table:'extra'},pull).subscribe();
-    pull()}catch{syncState='err';renderSpesa()}};
+  s.onload=async()=>{lib=window.supabase;const pin=LS.get('pasti-casa','');
+    if(!pin){syncState='pin';renderSpesa();return}
+    connect(pin);pull()};
   s.onerror=()=>{syncState='err';renderSpesa()};document.head.appendChild(s);
-  document.addEventListener('visibilitychange',()=>{if(!document.hidden)pull()})}
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)pull()});
+  setInterval(()=>{if(!document.hidden)pull()},20000)}
+$('#pinf').addEventListener('submit',async e=>{e.preventDefault();const pin=$('#pini').value.trim();if(!pin||!lib)return;
+  $('#pin-err').textContent='Controllo…';const ok=await checkPin(pin);
+  if(ok){LS.set('pasti-casa',pin);$('#pini').value='';$('#pin-err').textContent='';pull()}
+  else{sb=null;$('#pin-err').textContent=ok===null?'Non riesco a collegarmi, riprova tra poco.':'Codice sbagliato.'}});
+$('#pin-chg').addEventListener('click',()=>{LS.set('pasti-casa','');sb=null;syncState='pin';renderSpesa();$('#pini').focus()});
 
 /* ---------- avvio ---------- */
 spunte=new Set(LS.get('pasti-spunte',[]));extra=LS.get('pasti-extra',[]);
