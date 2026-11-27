@@ -331,7 +331,7 @@ $('#copy').addEventListener('click',async()=>{if(!M)return;const by={};
   setTimeout(()=>b.textContent='Copia per WhatsApp',1800)});
 
 function startSync(){const C=window.PASTI_CONFIG||{};if(!C.supabaseUrl||!C.supabaseKey)return;
-  const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js';
+  const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2/dist/umd/supabase.js';
   s.onload=()=>{try{sb=window.supabase.createClient(C.supabaseUrl,C.supabaseKey);
     sb.channel('pasti').on('postgres_changes',{event:'*',schema:'public',table:'spunte'},pull).on('postgres_changes',{event:'*',schema:'public',table:'extra'},pull).subscribe();
     pull()}catch{syncState='err';renderSpesa()}};
