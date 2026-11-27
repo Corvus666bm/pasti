@@ -1,7 +1,7 @@
 {
  "titolo": "30 novembre – 6 dicembre",
  "inizio": "2026-11-30",
- "nota": "Un solo pranzo a doppia dose: la pasta e ceci di lunedì. L'altra metà la mangiate martedì a pranzo oppure lunedì sera. I pranzi da lunedì a sabato si possono portare al lavoro.",
+ "nota": "Un solo pranzo a doppia dose: la pasta e ceci di lunedì. L'altra metà la mangiate martedì a pranzo oppure lunedì sera. Tutte le altre ricette sono per 2 porzioni.",
  "offerte": [],
  "giorni": [
   {
@@ -114,7 +114,7 @@
     "Unisci pelati schiacciati, fagioli e mais scolati, sala e cuoci 20 minuti a fuoco basso.",
     "Intanto cuoci il riso in acqua salata e servi il chili sopra."
    ],
-   "portabile": true,
+   "portabile": false,
    "porzioni": "2 porzioni",
    "tempo": "35 min",
    "tipo": "vegano",
@@ -145,7 +145,7 @@
     "Negli ultimi 5 minuti unisci gli spinaci, sala e aggiungi qualche goccia di limone.",
     "Servi con il riso basmati cotto intanto in acqua salata."
    ],
-   "portabile": true,
+   "portabile": false,
    "porzioni": "2 porzioni",
    "tempo": "30 min",
    "tipo": "vegano",
@@ -173,7 +173,7 @@
     "Unisci tutto con i ceci scolati.",
     "Condisci con olio, succo di limone, sale e origano."
    ],
-   "portabile": true,
+   "portabile": false,
    "porzioni": "2 porzioni",
    "tempo": "30 min",
    "tipo": "vegetariano",
@@ -200,7 +200,7 @@
     "Sbatti le uova con sale, pepe e noce moscata e versale nella padella.",
     "Cuoci coperto a fuoco basso per 6 minuti, gira la frittata con il coperchio e cuoci altri 2 minuti."
    ],
-   "portabile": true,
+   "portabile": false,
    "porzioni": "2 porzioni",
    "tempo": "25 min",
    "tipo": "vegetariano",
@@ -228,9 +228,9 @@
     "Aggiungi i ceci scolati, la passata, il rosmarino e 1 litro d'acqua. Cuoci 10 minuti.",
     "Frulla un terzo dei ceci con un mestolo di brodo e rimettili in pentola: diventa cremosa.",
     "Butta la pasta direttamente nella pentola e cuoci, aggiungendo acqua se serve.",
-    "Fai riposare 5 minuti e finisci con un filo d'olio a crudo. Metti metà in un contenitore."
+    "Fai riposare 5 minuti e finisci con un filo d'olio a crudo."
    ],
-   "portabile": true,
+   "portabile": false,
    "porzioni": "4 porzioni (doppia dose)",
    "tempo": "35 min",
    "tipo": "vegano",
@@ -337,10 +337,9 @@
     "Taglia zucchina, melanzana e peperone a fette sottili.",
     "Grigliale in padella antiaderente con un filo d'olio e un pizzico di sale, 3–4 minuti per lato.",
     "Scalda le piadine 30 secondi per lato.",
-    "Spalma l'hummus, aggiungi verdure, ceci e insalata, poi arrotola.",
-    "Per il lavoro: avvolgi ogni wrap nella carta stagnola."
+    "Spalma l'hummus, aggiungi verdure, ceci e insalata, poi arrotola."
    ],
-   "portabile": true,
+   "portabile": false,
    "porzioni": "2 porzioni",
    "tempo": "20 min",
    "tipo": "vegano",
@@ -357,7 +356,7 @@
    "tipo": "vegetariano",
    "tempo": "25 min",
    "porzioni": "2 porzioni",
-   "portabile": true,
+   "portabile": false,
    "ingredienti": [
     "160 g di riso basmati",
     "150 g di piselli surgelati",
@@ -386,7 +385,7 @@
    "tipo": "vegano",
    "tempo": "20 min",
    "porzioni": "2 porzioni",
-   "portabile": true,
+   "portabile": false,
    "ingredienti": [
     "180 g di penne",
     "2 zucchine",
