@@ -20,13 +20,16 @@ jobs:
           U="https://vstkcwuroupmydglzybw.supabase.co/rest/v1/rpc"
           K="sb_publishable__GqAHtVB-KW50CP0_VSV1Q_e-2_lCjV"
           curl -fsS -X POST "$U/elenco_preferiti" -H "apikey: $K" -H "Content-Type: application/json" -d '{}' > /tmp/p.json
+          curl -fsS -X POST "$U/elenco_bocciati" -H "apikey: $K" -H "Content-Type: application/json" -d '{}' > /tmp/b.json || echo '[]' > /tmp/b.json
           curl -fsS -X POST "$U/stato_casa" -H "apikey: $K" -H "Content-Type: application/json" -d '{}' > /tmp/s.json
           python3 - <<'PY'
           import json, datetime
           oggi = datetime.date.today().isoformat()
           ids = json.load(open('/tmp/p.json'))
           ids = sorted({x if isinstance(x, str) else list(x.values())[0] for x in ids})
-          json.dump({"aggiornato": oggi, "preferiti": ids}, open('preferiti.json', 'w'), ensure_ascii=False, indent=1)
+          no = json.load(open('/tmp/b.json'))
+          no = sorted({x if isinstance(x, str) else list(x.values())[0] for x in no})
+          json.dump({"aggiornato": oggi, "preferiti": ids, "bocciati": no}, open('preferiti.json', 'w'), ensure_ascii=False, indent=1)
           st = json.load(open('/tmp/s.json'))
           st["esportato"] = oggi
           json.dump(st, open('stato.json', 'w'), ensure_ascii=False, indent=1)

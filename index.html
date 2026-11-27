@@ -165,6 +165,12 @@ svg.ic{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-wid
 .cuore[aria-pressed=true] svg{fill:currentColor}
 .cuore:active svg{transform:scale(.85)}
 .sheet .cuore{top:8px;right:auto;left:8px}
+.pollice{position:absolute;top:8px;left:58px;height:44px;padding:0 14px 0 10px;border-radius:22px;border:0;display:flex;align-items:center;gap:6px;background:color-mix(in srgb,var(--foglio) 88%,transparent);color:var(--ink);font:600 14px var(--font);cursor:pointer;z-index:2}
+.pollice svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round}
+.pollice[aria-pressed=true]{background:var(--pomodoro);color:#fff}
+.pollice[aria-pressed=true] svg{fill:currentColor}
+.rcw.no .rc{opacity:.55}
+.rc .wk.nok{color:var(--pomodoro);font-weight:600}
 .rc .wk{font-size:12px;color:var(--mut)}
 .it[hidden],.grp[hidden]{display:none!important}
 #copy::before{content:"";width:20px;height:20px;flex:none;background:currentColor;-webkit-mask:var(--i-copy) center/contain no-repeat;mask:var(--i-copy) center/contain no-repeat}
@@ -382,8 +388,9 @@ const nb=s=>String(s??'').replace(/(\d)\s*([–-])\s*(\d)/g,'$1⁠$2⁠$3').repl
 const eur=n=>(Number(n)||0).toLocaleString('it-IT',{style:'currency',currency:'EUR'});
 const REP=['Frutta e verdura','Pane','Frigo','Dispensa','Surgelati'];
 const DAY=86400000;
-let A={},P=new Set(),rview='settimana',AB=[],CS={},sview='lista';
+let B=new Set(),A={},P=new Set(),rview='settimana',AB=[],CS={},sview='lista';
 const RR=id=>M?.ricette?.[id]||A[id];
+const THUMB='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 15H5.5a2 2 0 0 1-2-2.3l1-6A2 2 0 0 1 6.5 5H16v9l-3.5 6a1.8 1.8 0 0 1-3.3-1.2z"/><path d="M16 5h3v9h-3"/></svg>';
 const HEART='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>';
 const K=id=>(M?.inizio||'')+':'+id;
 let M=null,spunte=new Set(),extra=[],sel=0,sb=null,syncState='local';
@@ -474,7 +481,7 @@ function renderRicette(){if(!M)return;
   const ve=ids.filter(i=>all[i].tipo==='vegano').length;
   $('#r-sub').textContent=rview==='settimana'?`${ids.length} piatti, di cui ${ve} vegani`:rview==='tutte'?`${Object.keys(all).length} ricette nel vostro ricettario`:`${[...P].filter(i=>all[i]).length} preferiti: tornano nel menù appena possibile`;
   document.querySelectorAll('[data-rv]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.rv===rview));
-  $('#grid').innerHTML=ids.map(id=>{const r=all[id];return `<div class="rcw"><button class="rc" data-open="${esc(id)}" type="button"><div class="art" style="background:${bg(r)}">${art(id,r)}</div><div class="bd"><b>${esc(r.nome)}</b><span class="rm">${tag(r.tipo)}<span>${esc(r.tempo)}</span></span>${rview!=='settimana'&&W[id]?'<span class="wk">Questa settimana</span>':''}</div></button><button class="cuore" type="button" data-fav="${esc(id)}" aria-pressed="${P.has(id)}" aria-label="${P.has(id)?'Togli dai preferiti':'Aggiungi ai preferiti'}">${HEART}</button></div>`}).join('');
+  $('#grid').innerHTML=ids.map(id=>{const r=all[id];return `<div class="rcw${B.has(id)?' no':''}"><button class="rc" data-open="${esc(id)}" type="button"><div class="art" style="background:${bg(r)}">${art(id,r)}</div><div class="bd"><b>${esc(r.nome)}</b><span class="rm">${tag(r.tipo)}<span>${esc(r.tempo)}</span></span>${B.has(id)?'<span class="wk nok">Non vi è piaciuto: non torna più</span>':rview!=='settimana'&&W[id]?'<span class="wk">Questa settimana</span>':''}</div></button><button class="cuore" type="button" data-fav="${esc(id)}" aria-pressed="${P.has(id)}" aria-label="${P.has(id)?'Togli dai preferiti':'Aggiungi ai preferiti'}">${HEART}</button></div>`}).join('');
   const none=$('#r-none');none.hidden=ids.length>0;none.textContent=q?'Nessuna ricetta trovata.':rview==='preferiti'?'Nessun preferito ancora: tocca il cuore su una ricetta che vi è piaciuta.':''}
 const check='<span class="chk"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span>';
 function renderSpesa(){if(!M)return;
@@ -519,7 +526,7 @@ function renderAll(){if(!M)return;renderOggi();renderSettimana();renderRicette()
 
 /* ---------- ricetta e cucina ---------- */
 function openRecipe(id){const r=RR(id);if(!r)return;
-  $('#sh').innerHTML=`<div class="grab" aria-hidden="true"></div><div class="art" style="background:${bg(r)}">${art(id,r)}<button class="close" id="sh-x" type="button" aria-label="Chiudi">${I.x}</button><button class="cuore" type="button" data-fav="${esc(id)}" aria-pressed="${P.has(id)}" aria-label="${P.has(id)?'Togli dai preferiti':'Aggiungi ai preferiti'}">${HEART}</button></div><div class="bd">
+  $('#sh').innerHTML=`<div class="grab" aria-hidden="true"></div><div class="art" style="background:${bg(r)}">${art(id,r)}<button class="close" id="sh-x" type="button" aria-label="Chiudi">${I.x}</button><button class="cuore" type="button" data-fav="${esc(id)}" aria-pressed="${P.has(id)}" aria-label="${P.has(id)?'Togli dai preferiti':'Aggiungi ai preferiti'}">${HEART}</button><button class="pollice" type="button" data-no="${esc(id)}" aria-pressed="${B.has(id)}" aria-label="Non ci è piaciuto">${THUMB}<span>${B.has(id)?'Non vi è piaciuto':'Non ci è piaciuto'}</span></button></div><div class="bd">
   <h2 id="sh-name">${esc(r.nome)}</h2><div class="meta">${tag(r.tipo)}<span>${esc(r.tempo)}</span><span>${esc(r.porzioni)}</span></div>
   <h3>Ingredienti</h3><ul class="ing">${r.ingredienti.map(x=>`<li>${nb(esc(x))}</li>`).join('')}</ul>
   <h3>Preparazione</h3><ol class="steps">${r.passi.map(x=>`<li><span>${nb(esc(x))}</span></li>`).join('')}</ol></div>
@@ -556,7 +563,7 @@ async function pull(){if(!sb)return;
   const [a,b]=await Promise.all([sb.from('spunte').select('id'),sb.from('extra').select('*').order('creato')]);
   if(a.error||b.error){syncState='err';renderSpesa();return}
   spunte=new Set(a.data.map(x=>x.id));extra=b.data;syncState='ok';saveLocal();renderSpesa();pullFav()}
-async function pullFav(){if(!sb)return;const {data,error}=await sb.from('preferiti').select('id');if(error)return;P=new Set(data.map(x=>x.id));LS.set('pasti-preferiti',[...P]);if(M)renderRicette();pullCasa()}
+async function pullFav(){if(!sb)return;const {data,error}=await sb.from('preferiti').select('id');if(error)return;P=new Set(data.map(x=>x.id));LS.set('pasti-preferiti',[...P]);const nb=await sb.from('bocciati').select('id');if(!nb.error){B=new Set(nb.data.map(x=>x.id));LS.set('pasti-bocciati',[...B])}if(M)renderRicette();pullCasa()}
 async function run(q){const {error}=await q;if(error){syncState='err';renderSpesa();setTimeout(pull,1500)}else ping()}
 let ch=null;function ping(){try{ch?.send({type:'broadcast',event:'cambio',payload:{}})}catch{}}
 async function toggleItem(it){const id=K(it);const on=!spunte.has(id);on?spunte.add(id):spunte.delete(id);fx=on?id:null;saveLocal();renderSpesa();
@@ -587,10 +594,17 @@ $('#casaf').addEventListener('submit',e=>{e.preventDefault();const v=$('#casai')
   if(ex){setCasa(ex.id,true,ex.nome,ex.reparto||'Altro');return}
   setCasa('c'+Date.now().toString(36),true,v,'Altro')});
 document.querySelector('.seg').addEventListener('click',e=>{const b=e.target.closest('[data-rv]');if(!b)return;rview=b.dataset.rv;renderRicette()});
-async function toggleFav(id){const on=!P.has(id);on?P.add(id):P.delete(id);LS.set('pasti-preferiti',[...P]);renderRicette();
+async function toggleFav(id){const on=!P.has(id);on?P.add(id):P.delete(id);if(on&&B.has(id)){B.delete(id);LS.set('pasti-bocciati',[...B]);if(sb)run(sb.from('bocciati').delete().eq('id',id))}LS.set('pasti-preferiti',[...P]);renderRicette();syncSheetBtns();
   document.querySelectorAll('#sh [data-fav]').forEach(b=>{b.setAttribute('aria-pressed',P.has(b.dataset.fav));b.setAttribute('aria-label',P.has(b.dataset.fav)?'Togli dai preferiti':'Aggiungi ai preferiti')});
   if(sb)await run(on?sb.from('preferiti').upsert({id}):sb.from('preferiti').delete().eq('id',id))}
 document.addEventListener('click',e=>{const f=e.target.closest('[data-fav]');if(f){e.stopPropagation();toggleFav(f.dataset.fav)}},true);
+function syncSheetBtns(){document.querySelectorAll('#sh [data-fav]').forEach(b=>{b.setAttribute('aria-pressed',P.has(b.dataset.fav))});
+  document.querySelectorAll('#sh [data-no]').forEach(b=>{const on=B.has(b.dataset.no);b.setAttribute('aria-pressed',on);b.querySelector('span').textContent=on?'Non vi è piaciuto':'Non ci è piaciuto'})}
+async function toggleNo(id){const on=!B.has(id);on?B.add(id):B.delete(id);LS.set('pasti-bocciati',[...B]);
+  if(on&&P.has(id)){P.delete(id);LS.set('pasti-preferiti',[...P]);if(sb)run(sb.from('preferiti').delete().eq('id',id))}
+  renderRicette();syncSheetBtns();
+  if(sb)await run(on?sb.from('bocciati').upsert({id}):sb.from('bocciati').delete().eq('id',id))}
+document.addEventListener('click',e=>{const f=e.target.closest('[data-no]');if(f){e.stopPropagation();toggleNo(f.dataset.no)}},true);
 $('#reset').addEventListener('click',async()=>{const b=$('#reset');
   if(!armed){armed=true;b.textContent='Sicuro?';setTimeout(()=>{armed=false;b.textContent='Azzera spunte'},3500);return}
   armed=false;b.textContent='Azzera spunte';spunte=new Set();extra=extra.filter(e=>!e.fatto);saveLocal();renderSpesa();
@@ -619,7 +633,7 @@ $('#pin-chg').addEventListener('click',()=>{LS.set('pasti-casa','');sb=null;sync
 /* ---------- avvio ---------- */
 spunte=new Set(LS.get('pasti-spunte',[]));extra=LS.get('pasti-extra',[]);
 route();
-P=new Set(LS.get('pasti-preferiti',[]));CS=LS.get('pasti-casa-stato',{})||{};
+P=new Set(LS.get('pasti-preferiti',[]));B=new Set(LS.get('pasti-bocciati',[]));CS=LS.get('pasti-casa-stato',{})||{};
 fetch('abituale.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).then(d=>{AB=(d&&d.prodotti)||[];if(sview==='casa')renderCasa()}).catch(()=>{});
 fetch('ricettario.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).then(d=>{A=(d&&d.ricette)||{};if(M)renderRicette()}).catch(()=>{});
 fetch('menu.json',{cache:'no-cache'}).then(r=>r.json()).then(d=>{M=d;const ti=todayIdx();sel=Math.min(Math.max(ti,0),M.giorni.length-1);renderAll()})
