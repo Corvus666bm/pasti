@@ -1,0 +1,635 @@
+{
+ "titolo": "30 novembre – 6 dicembre",
+ "inizio": "2026-11-30",
+ "nota": "Turno di mattina: i pranzi segnati come avanzi si portano al lavoro. Le cene da 4 porzioni bastano anche per il pranzo del giorno dopo.",
+ "offerte": [],
+ "giorni": [
+  {
+   "cena": {
+    "id": "chili",
+    "nota": "Doppia dose: metà per domani"
+   },
+   "giorno": "Lunedì",
+   "pranzo": {
+    "id": "wrap"
+   }
+  },
+  {
+   "cena": {
+    "id": "frittata",
+    "nota": "Doppia dose: metà per domani"
+   },
+   "giorno": "Martedì",
+   "pranzo": {
+    "id": "chili",
+    "nota": "Avanzi di lunedì"
+   }
+  },
+  {
+   "cena": {
+    "id": "pastaceci",
+    "nota": "Doppia dose: metà per domani"
+   },
+   "giorno": "Mercoledì",
+   "pranzo": {
+    "id": "frittata",
+    "nota": "Avanzi di martedì, con insalata"
+   }
+  },
+  {
+   "cena": {
+    "id": "curry",
+    "nota": "Doppia dose: metà per domani"
+   },
+   "giorno": "Giovedì",
+   "pranzo": {
+    "id": "pastaceci",
+    "nota": "Avanzi di mercoledì"
+   }
+  },
+  {
+   "cena": {
+    "id": "pizza"
+   },
+   "giorno": "Venerdì",
+   "pranzo": {
+    "id": "curry",
+    "nota": "Avanzi di giovedì"
+   }
+  },
+  {
+   "cena": {
+    "id": "burger"
+   },
+   "giorno": "Sabato",
+   "pranzo": {
+    "id": "farro",
+    "nota": "Il farro si può cuocere la sera prima"
+   }
+  },
+  {
+   "cena": {
+    "id": "vellutata"
+   },
+   "giorno": "Domenica",
+   "pranzo": {
+    "id": "risotto"
+   }
+  }
+ ],
+ "ricette": {
+  "burger": {
+   "ingredienti": [
+    "2 confezioni di burger vegetali (4 burger)",
+    "4 panini per hamburger",
+    "800 g di patate",
+    "Pomodorini e insalata",
+    "Olio, sale, paprika"
+   ],
+   "nome": "Burger vegetali con patate al forno",
+   "passi": [
+    "Accendi il forno a 210 °C.",
+    "Taglia le patate a spicchi, condiscile con olio, sale e paprika e cuocile 30–35 minuti, girandole a metà.",
+    "Cuoci i burger in padella come indicato sulla confezione.",
+    "Scalda i panini e componi con insalata e pomodorini.",
+    "Controlla l'etichetta: alcuni burger vegetali contengono formaggio o uova."
+   ],
+   "portabile": false,
+   "porzioni": "2 porzioni",
+   "tempo": "40 min",
+   "tipo": "vegano",
+   "forma": "burger",
+   "colori": []
+  },
+  "chili": {
+   "ingredienti": [
+    "1 cipolla",
+    "1 peperone",
+    "2 carote",
+    "3 lattine di fagioli rossi",
+    "1 lattina di mais",
+    "2 lattine di pomodori pelati",
+    "1 cucchiaino di cumino, 1 di paprika",
+    "300 g di riso basmati",
+    "Olio, sale"
+   ],
+   "nome": "Chili sin carne con riso",
+   "passi": [
+    "Trita cipolla, carote e peperone e falli appassire in pentola con l'olio per 8 minuti.",
+    "Aggiungi cumino e paprika, mescola per 1 minuto.",
+    "Unisci pelati schiacciati, fagioli e mais scolati. Sala e cuoci 25 minuti a fuoco basso.",
+    "Intanto cuoci il riso in acqua salata.",
+    "Metti da parte 2 porzioni in un contenitore per il pranzo di domani."
+   ],
+   "portabile": true,
+   "porzioni": "4 porzioni",
+   "tempo": "40 min",
+   "tipo": "vegano",
+   "forma": "ciotola",
+   "colori": [
+    "#a8321f",
+    "#6b1f14",
+    "#f2c230",
+    "#e2683a"
+   ]
+  },
+  "curry": {
+   "ingredienti": [
+    "250 g di lenticchie rosse",
+    "1 lattina di latte di cocco",
+    "1 lattina di pomodori pelati",
+    "200 g di spinaci surgelati",
+    "1 cipolla, 2 spicchi d'aglio",
+    "2 cucchiaini di curry in polvere",
+    "300 g di riso basmati",
+    "Olio, sale, limone"
+   ],
+   "nome": "Curry di lenticchie rosse e cocco",
+   "passi": [
+    "Soffriggi cipolla e aglio tritati con l'olio per 5 minuti, poi aggiungi il curry per 1 minuto.",
+    "Aggiungi lenticchie sciacquate, pelati, latte di cocco e 300 ml d'acqua.",
+    "Cuoci 20 minuti mescolando: le lenticchie si sfaldano e il curry si addensa.",
+    "Negli ultimi 5 minuti unisci gli spinaci. Sala e aggiungi qualche goccia di limone.",
+    "Servi con il riso basmati. Metti da parte 2 porzioni per domani."
+   ],
+   "portabile": true,
+   "porzioni": "4 porzioni",
+   "tempo": "30 min",
+   "tipo": "vegano",
+   "forma": "ciotola",
+   "colori": [
+    "#e8a53a",
+    "#f6e7c8",
+    "#3f7d3a",
+    "#d9772a"
+   ]
+  },
+  "farro": {
+   "ingredienti": [
+    "200 g di farro perlato",
+    "200 g di feta",
+    "250 g di pomodorini",
+    "1 cetriolo",
+    "1 lattina di ceci",
+    "1 limone, olio, sale, origano"
+   ],
+   "nome": "Insalata di farro, feta e pomodorini",
+   "passi": [
+    "Cuoci il farro in acqua salata per circa 20 minuti, scolalo e fallo raffreddare.",
+    "Taglia pomodorini, cetriolo e feta a cubetti.",
+    "Unisci tutto con i ceci scolati.",
+    "Condisci con olio, succo di limone, sale e origano."
+   ],
+   "portabile": true,
+   "porzioni": "2 porzioni",
+   "tempo": "30 min",
+   "tipo": "vegetariano",
+   "forma": "ciotola",
+   "colori": [
+    "#c8a46a",
+    "#ffffff",
+    "#e2483b",
+    "#7fb347"
+   ]
+  },
+  "frittata": {
+   "ingredienti": [
+    "8 uova",
+    "500 g di patate",
+    "400 g di spinaci surgelati",
+    "½ cipolla",
+    "50 g di grana grattugiato",
+    "Olio, sale, pepe"
+   ],
+   "nome": "Frittata al forno con patate e spinaci",
+   "passi": [
+    "Accendi il forno a 190 °C.",
+    "Taglia le patate a cubetti piccoli e cuocile in padella con olio e cipolla per 12 minuti.",
+    "Scongela gli spinaci in padella e strizzali bene.",
+    "Sbatti le uova con grana, sale e pepe, unisci patate e spinaci.",
+    "Versa in una teglia unta e cuoci 25 minuti. È buona anche fredda."
+   ],
+   "portabile": true,
+   "porzioni": "4 porzioni",
+   "tempo": "45 min",
+   "tipo": "vegetariano",
+   "forma": "frittata",
+   "colori": [
+    "#f2c94c",
+    "#3f7d3a",
+    "#e8d3a0",
+    "#d99a2b"
+   ]
+  },
+  "pastaceci": {
+   "ingredienti": [
+    "2 lattine di ceci",
+    "300 g di ditalini",
+    "200 g di passata di pomodoro",
+    "1 carota",
+    "½ cipolla",
+    "1 spicchio d'aglio",
+    "Rosmarino secco, olio, sale"
+   ],
+   "nome": "Pasta e ceci",
+   "passi": [
+    "Trita carota, cipolla e aglio e soffriggi in pentola con l'olio per 5 minuti.",
+    "Aggiungi i ceci scolati, la passata, il rosmarino e 1 litro d'acqua. Cuoci 10 minuti.",
+    "Frulla un terzo dei ceci con un mestolo di brodo e rimettili in pentola: diventa cremosa.",
+    "Butta la pasta direttamente nella pentola e cuoci, aggiungendo acqua se serve.",
+    "Fai riposare 5 minuti e finisci con un filo d'olio a crudo."
+   ],
+   "portabile": true,
+   "porzioni": "4 porzioni",
+   "tempo": "35 min",
+   "tipo": "vegano",
+   "forma": "ciotola",
+   "colori": [
+    "#e6b062",
+    "#f0d49a",
+    "#c9772f",
+    "#7a9e4d"
+   ]
+  },
+  "pizza": {
+   "ingredienti": [
+    "2 rotoli di pasta per pizza",
+    "300 g di passata di pomodoro",
+    "2 mozzarelle",
+    "1 zucchina",
+    "½ melanzana",
+    "Origano, olio, sale"
+   ],
+   "nome": "Pizza in teglia con verdure",
+   "passi": [
+    "Accendi il forno a 230 °C.",
+    "Stendi i rotoli nelle teglie, condisci la passata con olio, sale e origano e spalmala.",
+    "Aggiungi zucchina e melanzana a fette sottili.",
+    "Cuoci 10 minuti, poi aggiungi la mozzarella a pezzi e cuoci altri 6–8 minuti."
+   ],
+   "portabile": false,
+   "porzioni": "2 porzioni",
+   "tempo": "30 min",
+   "tipo": "vegetariano",
+   "forma": "pizza",
+   "colori": []
+  },
+  "risotto": {
+   "ingredienti": [
+    "180 g di riso Carnaroli",
+    "500 g di zucca",
+    "½ cipolla",
+    "1 scamorza affumicata",
+    "30 g di grana",
+    "1 litro di brodo vegetale",
+    "Olio, sale"
+   ],
+   "nome": "Risotto alla zucca e scamorza",
+   "passi": [
+    "Taglia la zucca a cubetti e cuocila con la cipolla e l'olio per 10 minuti, finché è morbida.",
+    "Aggiungi il riso e tostalo per 2 minuti.",
+    "Aggiungi il brodo caldo un mestolo alla volta, mescolando, per circa 17 minuti.",
+    "A fuoco spento manteca con grana e scamorza a cubetti. Lascia riposare 2 minuti."
+   ],
+   "portabile": false,
+   "porzioni": "2 porzioni",
+   "tempo": "40 min",
+   "tipo": "vegetariano",
+   "forma": "ciotola",
+   "colori": [
+    "#f0b15a",
+    "#fbe7c0",
+    "#e07b2a",
+    "#fff4d6"
+   ]
+  },
+  "vellutata": {
+   "ingredienti": [
+    "500 g di zucca",
+    "1 patata",
+    "1 carota",
+    "½ cipolla",
+    "Pane casereccio",
+    "1 confezione di hummus (200 g)",
+    "Olio, sale, pepe"
+   ],
+   "nome": "Vellutata di zucca con crostoni e hummus",
+   "passi": [
+    "Taglia zucca, patata, carota e cipolla a pezzi.",
+    "Mettili in pentola, copri appena con acqua salata e cuoci 20 minuti.",
+    "Frulla tutto fino a ottenere una crema e regola di sale e pepe.",
+    "Tosta il pane in padella o in forno e spalmaci l'hummus.",
+    "Servi la vellutata con un filo d'olio e i crostoni."
+   ],
+   "portabile": false,
+   "porzioni": "2 porzioni",
+   "tempo": "35 min",
+   "tipo": "vegano",
+   "forma": "ciotola",
+   "colori": [
+    "#ef8a2c",
+    "#f7b15c",
+    "#fff1d6",
+    "#5c8f3a"
+   ]
+  },
+  "wrap": {
+   "ingredienti": [
+    "4 piadine o tortillas",
+    "1 confezione di hummus (200 g)",
+    "1 zucchina",
+    "½ melanzana",
+    "1 peperone",
+    "1 lattina di ceci, scolati",
+    "Insalata, olio, sale"
+   ],
+   "nome": "Wrap con hummus e verdure grigliate",
+   "passi": [
+    "Taglia zucchina, melanzana e peperone a fette sottili.",
+    "Grigliale in padella antiaderente con un filo d'olio e un pizzico di sale, 3–4 minuti per lato.",
+    "Scalda le piadine 30 secondi per lato.",
+    "Spalma l'hummus, aggiungi verdure, ceci e insalata, poi arrotola.",
+    "Per il lavoro: avvolgi ogni wrap nella carta stagnola."
+   ],
+   "portabile": true,
+   "porzioni": "2 porzioni",
+   "tempo": "20 min",
+   "tipo": "vegano",
+   "forma": "wrap",
+   "colori": [
+    "#f1d9a6",
+    "#7fb347",
+    "#d9432a",
+    "#f3e7c9"
+   ]
+  }
+ },
+ "spesa": [
+  {
+   "id": "cipolle",
+   "nome": "Cipolle",
+   "prezzo": 1.29,
+   "qty": "rete da 1 kg",
+   "reparto": "Frutta e verdura"
+  },
+  {
+   "id": "aglio",
+   "nome": "Aglio",
+   "prezzo": 0.99,
+   "qty": "1 retina",
+   "reparto": "Frutta e verdura"
+  },
+  {
+   "id": "carote",
+   "nome": "Carote",
+   "prezzo": 0.99,
+   "qty": "1 kg",
+   "reparto": "Frutta e verdura"
+  },
+  {
+   "id": "patate",
+   "nome": "Patate",
+   "prezzo": 1.99,
+   "qty": "2 kg",
+   "reparto": "Frutta e verdura"
+  },
+  {
+   "id": "zucca",
+   "nome": "Zucca",
+   "prezzo": 1.49,
+   "qty": "circa 1 kg",
+   "reparto": "Frutta e verdura"
+  },
+  {
+   "id": "peperoni",
+   "nome": "Peperoni",
+   "prezzo": 1.79,
+   "qty": "2 pezzi",
+   "reparto": "Frutta e verdura"
+  },
+  {
+   "id": "zucchine",
+   "nome": "Zucchine",
+   "prezzo": 1.29,
+   "qty": "500 g",
+   "reparto": "Frutta e verdura"
+  },
+  {
+   "id": "melanzana",
+   "nome": "Melanzana",
+   "prezzo": 0.89,
+   "qty": "1 pezzo",
+   "reparto": "Frutta e verdura"
+  },
+  {
+   "id": "pomodorini",
+   "nome": "Pomodorini",
+   "prezzo": 1.79,
+   "qty": "500 g",
+   "reparto": "Frutta e verdura"
+  },
+  {
+   "id": "cetriolo",
+   "nome": "Cetriolo",
+   "prezzo": 0.59,
+   "qty": "1 pezzo",
+   "reparto": "Frutta e verdura"
+  },
+  {
+   "id": "insalata",
+   "nome": "Insalata in busta",
+   "prezzo": 1.98,
+   "qty": "2 confezioni",
+   "reparto": "Frutta e verdura"
+  },
+  {
+   "id": "limoni",
+   "nome": "Limoni",
+   "prezzo": 0.99,
+   "qty": "1 retina",
+   "reparto": "Frutta e verdura"
+  },
+  {
+   "id": "piadine",
+   "nome": "Piadine o tortillas",
+   "prezzo": 1.29,
+   "qty": "1 confezione",
+   "reparto": "Pane"
+  },
+  {
+   "id": "panini",
+   "nome": "Panini per hamburger",
+   "prezzo": 1.19,
+   "qty": "4 pezzi",
+   "reparto": "Pane"
+  },
+  {
+   "id": "pane",
+   "nome": "Pane casereccio",
+   "prezzo": 1.29,
+   "qty": "1 pezzo",
+   "reparto": "Pane"
+  },
+  {
+   "id": "uova",
+   "nome": "Uova",
+   "prezzo": 2.19,
+   "qty": "10 pezzi",
+   "reparto": "Frigo"
+  },
+  {
+   "id": "mozzarella",
+   "nome": "Mozzarella",
+   "prezzo": 1.58,
+   "qty": "2 × 125 g",
+   "reparto": "Frigo"
+  },
+  {
+   "id": "feta",
+   "nome": "Feta",
+   "prezzo": 1.49,
+   "qty": "200 g",
+   "reparto": "Frigo"
+  },
+  {
+   "id": "scamorza",
+   "nome": "Scamorza affumicata",
+   "prezzo": 1.29,
+   "qty": "1 pezzo",
+   "reparto": "Frigo"
+  },
+  {
+   "id": "grana",
+   "nome": "Grana grattugiato",
+   "prezzo": 1.79,
+   "qty": "100 g",
+   "reparto": "Frigo"
+  },
+  {
+   "id": "hummus",
+   "nome": "Hummus",
+   "prezzo": 2.78,
+   "qty": "2 confezioni da 200 g",
+   "reparto": "Frigo"
+  },
+  {
+   "id": "burger",
+   "nome": "Burger vegetali",
+   "prezzo": 4.98,
+   "qty": "2 confezioni",
+   "reparto": "Frigo"
+  },
+  {
+   "id": "pastapizza",
+   "nome": "Pasta per pizza stesa",
+   "prezzo": 2.38,
+   "qty": "2 rotoli",
+   "reparto": "Frigo"
+  },
+  {
+   "id": "fagioli",
+   "nome": "Fagioli rossi in lattina",
+   "prezzo": 1.77,
+   "qty": "3 lattine",
+   "reparto": "Dispensa"
+  },
+  {
+   "id": "mais",
+   "nome": "Mais in lattina",
+   "prezzo": 0.69,
+   "qty": "1 lattina",
+   "reparto": "Dispensa"
+  },
+  {
+   "id": "ceci",
+   "nome": "Ceci in lattina",
+   "prezzo": 2.36,
+   "qty": "4 lattine",
+   "reparto": "Dispensa"
+  },
+  {
+   "id": "lenticchie",
+   "nome": "Lenticchie rosse decorticate",
+   "prezzo": 1.49,
+   "qty": "500 g",
+   "reparto": "Dispensa"
+  },
+  {
+   "id": "pelati",
+   "nome": "Pomodori pelati",
+   "prezzo": 1.77,
+   "qty": "3 lattine",
+   "reparto": "Dispensa"
+  },
+  {
+   "id": "passata",
+   "nome": "Passata di pomodoro",
+   "prezzo": 0.79,
+   "qty": "1 bottiglia da 700 g",
+   "reparto": "Dispensa"
+  },
+  {
+   "id": "cocco",
+   "nome": "Latte di cocco",
+   "prezzo": 1.29,
+   "qty": "1 lattina da 400 ml",
+   "reparto": "Dispensa"
+  },
+  {
+   "id": "basmati",
+   "nome": "Riso basmati",
+   "prezzo": 1.99,
+   "qty": "1 kg",
+   "reparto": "Dispensa"
+  },
+  {
+   "id": "carnaroli",
+   "nome": "Riso Carnaroli",
+   "prezzo": 2.19,
+   "qty": "1 kg",
+   "reparto": "Dispensa"
+  },
+  {
+   "id": "ditalini",
+   "nome": "Pasta ditalini",
+   "prezzo": 0.69,
+   "qty": "500 g",
+   "reparto": "Dispensa"
+  },
+  {
+   "id": "farro",
+   "nome": "Farro perlato",
+   "prezzo": 1.49,
+   "qty": "400 g",
+   "reparto": "Dispensa"
+  },
+  {
+   "id": "curry",
+   "nome": "Curry in polvere",
+   "prezzo": 0.99,
+   "qty": "1 barattolo",
+   "reparto": "Dispensa"
+  },
+  {
+   "id": "spezie",
+   "nome": "Cumino e paprika",
+   "prezzo": 1.98,
+   "qty": "solo se mancano",
+   "reparto": "Dispensa"
+  },
+  {
+   "id": "spinaci",
+   "nome": "Spinaci surgelati",
+   "prezzo": 1.49,
+   "qty": "1 kg",
+   "reparto": "Surgelati"
+  }
+ ],
+ "inCasa": [
+  "olio extravergine",
+  "sale e pepe",
+  "origano",
+  "rosmarino secco",
+  "dado o brodo vegetale"
+ ]
+}
