@@ -23,13 +23,41 @@
    "nome": "Mozzarella bio (Poli)",
    "reparto": "Frigo",
    "ce": true
+  },
+  {
+   "id": "assorbenti",
+   "nome": "Assorbenti",
+   "reparto": "Casa e igiene",
+   "ce": true
+  },
+  {
+   "id": "cartaigienica",
+   "nome": "Carta igienica",
+   "reparto": "Casa e igiene",
+   "ce": true
+  },
+  {
+   "id": "collutorio",
+   "nome": "Collutorio",
+   "reparto": "Casa e igiene",
+   "ce": true
+  },
+  {
+   "id": "guantidacucina",
+   "nome": "Guanti da cucina",
+   "reparto": "Casa e igiene",
+   "ce": true
+  },
+  {
+   "id": "pomodorinipolilidl",
+   "nome": "Pomodorini (Poli/Lidl)",
+   "reparto": "Frutta e verdura",
+   "ce": true
   }
  ],
  "spunte": [
-  "2026-11-30:cipolle",
   "2026-11-30:aglio",
   "2026-11-30:carote",
-  "2026-11-30:patate",
   "2026-11-30:peperoni",
   "2026-11-30:zucchine",
   "2026-11-30:melanzana",
@@ -52,7 +80,8 @@
   "2026-11-30:curry",
   "2026-11-30:spezie",
   "2026-11-30:spinaci",
-  "2026-11-30:piselli"
+  "2026-11-30:piselli",
+  "2026-11-30:patate"
  ],
  "extra": [],
  "esportato": "2026-11-27"
