@@ -141,8 +141,7 @@ svg.ic{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-wid
 .sync span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sync.ok i{background:var(--verza)}.sync.err i{background:var(--pomodoro)}
 .lnk{flex:none;min-height:44px;padding:0 0 0 6px;border:0;background:none;color:var(--verza-t);font-size:15px;font-weight:700;cursor:pointer}
-.tools{display:flex;align-items:center;gap:8px;margin:8px 0 0}
-#copy{flex:1}
+.tools{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin:4px 0 0}
 #copy::before{content:"";width:20px;height:20px;flex:none;background:currentColor;-webkit-mask:var(--i-copy) center/contain no-repeat;mask:var(--i-copy) center/contain no-repeat}
 :root{--i-copy:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='11' height='11' rx='2'/%3E%3Cpath d='M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3'/%3E%3C/svg%3E");
 --i-alert:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7.5v5.5M12 16.5v.01'/%3E%3C/svg%3E")}
@@ -301,7 +300,7 @@ form.add input::placeholder{color:var(--mut);opacity:1}
   <div class="sync" id="sync"><i></i><span>Solo su questo telefono</span><button class="lnk" id="pin-chg" type="button" hidden>Cambia codice</button></div>
   <form class="pin" id="pinf" hidden><h3>Codice di casa</h3><p class="help">Inseriscilo una volta su questo telefono per sincronizzare la lista.</p>
     <input id="pini" inputmode="numeric" autocomplete="one-time-code" maxlength="12" placeholder="Codice" aria-label="Codice di casa"><button class="btn pri" type="submit">Conferma</button><p id="pin-err" role="alert"></p></form>
-  <div class="tools"><button class="btn line" id="copy" type="button">Copia per WhatsApp</button><button class="btn" id="reset" type="button">Azzera</button></div>
+  <div class="tools"><button class="btn" id="reset" type="button">Azzera spunte</button></div>
   <div id="lista"></div>
   <div class="grp"><h3>Aggiunti da voi</h3><div id="extra"></div>
     <form class="add" id="addf"><input id="addi" placeholder="Nuovo prodotto…" maxlength="80" aria-label="Nuovo prodotto" autocomplete="off"><button class="btn pri" type="submit">Aggiungi</button></form></div>
@@ -503,15 +502,9 @@ $('#addf').addEventListener('submit',async e=>{e.preventDefault();const v=$('#ad
   else{extra.push({id:'l'+Date.now(),nome:v,fatto:false});saveLocal();renderSpesa()}});
 let armed=false;
 $('#reset').addEventListener('click',async()=>{const b=$('#reset');
-  if(!armed){armed=true;b.textContent='Sicuro?';setTimeout(()=>{armed=false;b.textContent='Azzera'},3500);return}
-  armed=false;b.textContent='Azzera';spunte=new Set();extra=extra.filter(e=>!e.fatto);saveLocal();renderSpesa();
+  if(!armed){armed=true;b.textContent='Sicuro?';setTimeout(()=>{armed=false;b.textContent='Azzera spunte'},3500);return}
+  armed=false;b.textContent='Azzera spunte';spunte=new Set();extra=extra.filter(e=>!e.fatto);saveLocal();renderSpesa();
   if(sb){await run(sb.from('spunte').delete().neq('id',''));await run(sb.from('extra').delete().eq('fatto',true))}});
-$('#copy').addEventListener('click',async()=>{if(!M)return;const by={};
-  for(const it of M.spesa){if(spunte.has(K(it.id)))continue;(by[it.reparto]||(by[it.reparto]=[])).push(it)}
-  let t=`🛒 Spesa Lidl · ${M.titolo}\n`;for(const r of Object.keys(by))t+=`\n*${r}*\n`+by[r].map(i=>`☐ ${i.nome} (${i.qty})`).join('\n')+'\n';
-  const ex=extra.filter(e=>!e.fatto);if(ex.length)t+='\n*Altro*\n'+ex.map(e=>'☐ '+e.nome).join('\n')+'\n';
-  const b=$('#copy');try{await navigator.clipboard.writeText(t);b.textContent='Copiata!'}catch{b.textContent='Copia non riuscita'}
-  setTimeout(()=>b.textContent='Copia per WhatsApp',1800)});
 
 let lib=null;
 function connect(pin){const C=window.PASTI_CONFIG;
