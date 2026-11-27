@@ -439,7 +439,7 @@ function renderSpesa(){if(!M)return;
   $('#sp-t').textContent=`${done} di ${all} presi`;
   $('#sp-s').textContent=left>0?`Restano circa ${eur(left)}`:'Spesa completata!';
   $('#ring').style.strokeDashoffset=(213.6*(1-p)).toFixed(1);$('#ring-t').textContent=Math.round(p*100)+'%';
-  $('#incasa').textContent='Di solito già in casa: '+(M.inCasa||[]).join(', ')+'.';
+  $('#incasa').textContent='Di solito già in casa: '+(M.inCasa||[]).join(', ')+'.'+((M.dispensa||[]).length?' Avanzato dalle settimane scorse (non serve ricomprarlo): '+M.dispensa.map(d=>d.nome+(d.qty?' ('+d.qty+')':'')).join(', ')+'.':'');
   const sy=$('#sync');sy.className='sync'+(syncState==='ok'?' ok':syncState==='err'?' err':'');
   sy.querySelector('span').textContent=syncState==='ok'?'Sincronizzata':syncState==='err'?'Non sincronizzata':syncState==='pin'?'Inserisci il codice di casa':'Solo su questo telefono';
   $('#pinf').hidden=syncState!=='pin';$('#pin-chg').hidden=syncState!=='ok'&&syncState!=='err';

@@ -130,7 +130,7 @@
    "ingredienti": [
     "125 g di lenticchie rosse",
     "½ lattina di latte di cocco (200 ml)",
-    "½ lattina di pomodori pelati",
+    "1 lattina di pomodori pelati",
     "100 g di spinaci surgelati",
     "½ cipolla, 1 spicchio d'aglio",
     "1 cucchiaino di curry in polvere",
@@ -140,7 +140,7 @@
    "nome": "Curry di lenticchie rosse e cocco",
    "passi": [
     "Soffriggi cipolla e aglio tritati con l'olio per 5 minuti, poi aggiungi il curry per 1 minuto.",
-    "Aggiungi lenticchie sciacquate, pelati, latte di cocco e 150 ml d'acqua.",
+    "Aggiungi lenticchie sciacquate, pelati, latte di cocco e 100 ml d'acqua.",
     "Cuoci 18 minuti mescolando, finché le lenticchie si sfaldano.",
     "Negli ultimi 5 minuti unisci gli spinaci, sala e aggiungi qualche goccia di limone.",
     "Servi con il riso basmati cotto intanto in acqua salata."
@@ -298,6 +298,7 @@
     "1 patata",
     "1 carota",
     "½ cipolla",
+    "½ lattina di latte di cocco (il resto di quella del curry)",
     "Pane casereccio",
     "1 confezione di hummus (200 g)",
     "Olio, sale, pepe"
@@ -306,7 +307,7 @@
    "passi": [
     "Taglia zucca, patata, carota e cipolla a pezzi.",
     "Mettili in pentola, copri appena con acqua salata e cuoci 20 minuti.",
-    "Frulla tutto fino a ottenere una crema e regola di sale e pepe.",
+    "Frulla tutto con il latte di cocco fino a ottenere una crema e regola di sale e pepe.",
     "Tosta il pane in padella o in forno e spalmaci l'hummus.",
     "Servi la vellutata con un filo d'olio e i crostoni."
    ],
@@ -362,6 +363,7 @@
     "150 g di piselli surgelati",
     "½ lattina di mais",
     "2 uova",
+    "½ peperone (il resto di quello del chili)",
     "100 g di pomodorini",
     "½ limone, olio, sale"
    ],
@@ -369,7 +371,7 @@
     "Cuoci il riso in acqua salata; negli ultimi 4 minuti aggiungi i piselli nella stessa pentola.",
     "Intanto rassoda le uova: 9 minuti in acqua che bolle, poi in acqua fredda.",
     "Scola riso e piselli e passali sotto l'acqua fredda.",
-    "Unisci mais scolato, pomodorini a metà e uova a spicchi.",
+    "Unisci mais scolato, peperone a cubetti, pomodorini a metà e uova a spicchi.",
     "Condisci con olio, succo di limone e sale."
    ],
    "forma": "ciotola",
@@ -711,5 +713,73 @@
   "origano",
   "rosmarino secco",
   "dado o brodo vegetale"
+ ],
+ "dispensa": [],
+ "avanzi": [
+  {
+   "nome": "Riso basmati",
+   "qty": "circa 540 g"
+  },
+  {
+   "nome": "Riso Carnaroli",
+   "qty": "circa 820 g"
+  },
+  {
+   "nome": "Lenticchie rosse",
+   "qty": "circa 375 g"
+  },
+  {
+   "nome": "Pasta ditalini",
+   "qty": "circa 200 g"
+  },
+  {
+   "nome": "Penne",
+   "qty": "circa 320 g"
+  },
+  {
+   "nome": "Farro perlato",
+   "qty": "circa 200 g"
+  },
+  {
+   "nome": "Spinaci surgelati",
+   "qty": "circa 700 g"
+  },
+  {
+   "nome": "Piselli surgelati",
+   "qty": "circa 300 g"
+  },
+  {
+   "nome": "Mandorle a lamelle",
+   "qty": "circa 70 g"
+  },
+  {
+   "nome": "Curry in polvere",
+   "qty": "barattolo aperto"
+  },
+  {
+   "nome": "Cumino e paprika",
+   "qty": "barattoli aperti"
+  }
+ ],
+ "preferiti": [],
+ "storico": [
+  {
+   "inizio": "2026-11-30",
+   "piatti": [
+    "Burger vegetali con patate al forno",
+    "Chili sin carne con riso",
+    "Curry di lenticchie rosse e cocco",
+    "Frittata in padella con patate e spinaci",
+    "Gnocchi al pomodoro e mozzarella",
+    "Insalata di farro, mozzarelline e pomodorini",
+    "Insalata di riso con piselli, mais e uova",
+    "Pasta con zucchine, limone e mandorle",
+    "Pasta e ceci",
+    "Pizza in teglia con verdure",
+    "Risotto alla zucca e rosmarino",
+    "Vellutata di zucca con crostoni e hummus",
+    "Wrap con hummus e verdure grigliate"
+   ]
+  }
  ]
 }
