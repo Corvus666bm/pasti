@@ -141,7 +141,14 @@ svg.ic{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-wid
 .sync span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sync.ok i{background:var(--verza)}.sync.err i{background:var(--pomodoro)}
 .lnk{flex:none;min-height:44px;padding:0 0 0 6px;border:0;background:none;color:var(--verza-t);font-size:15px;font-weight:700;cursor:pointer}
-.tools{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin:4px 0 0}
+.tools{display:flex;align-items:center;gap:8px;margin:8px 0 0}
+.cerca{flex:1;position:relative;display:flex;align-items:center}
+.cerca input{flex:1;width:100%;height:48px;padding:0 12px 0 42px;font:500 17px var(--font);border-radius:12px;border:1.5px solid var(--box);background:var(--foglio);color:var(--ink);-webkit-appearance:none;appearance:none}
+.cerca input::placeholder{color:var(--mut);opacity:1}
+.cerca .lente{position:absolute;left:13px;width:20px;height:20px;background:var(--mut);pointer-events:none;-webkit-mask:var(--i-lente) center/contain no-repeat;mask:var(--i-lente) center/contain no-repeat}
+:root{--i-lente:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M15.5 15.5L20 20'/%3E%3C/svg%3E")}
+.nessuno{margin:14px 4px 0}
+.it[hidden],.grp[hidden]{display:none!important}
 #copy::before{content:"";width:20px;height:20px;flex:none;background:currentColor;-webkit-mask:var(--i-copy) center/contain no-repeat;mask:var(--i-copy) center/contain no-repeat}
 :root{--i-copy:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='11' height='11' rx='2'/%3E%3Cpath d='M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3'/%3E%3C/svg%3E");
 --i-alert:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7.5v5.5M12 16.5v.01'/%3E%3C/svg%3E")}
@@ -300,7 +307,8 @@ form.add input::placeholder{color:var(--mut);opacity:1}
   <div class="sync" id="sync"><i></i><span>Solo su questo telefono</span><button class="lnk" id="pin-chg" type="button" hidden>Cambia codice</button></div>
   <form class="pin" id="pinf" hidden><h3>Codice di casa</h3><p class="help">Inseriscilo una volta su questo telefono per sincronizzare la lista.</p>
     <input id="pini" inputmode="numeric" autocomplete="one-time-code" maxlength="12" placeholder="Codice" aria-label="Codice di casa"><button class="btn pri" type="submit">Conferma</button><p id="pin-err" role="alert"></p></form>
-  <div class="tools"><button class="btn" id="reset" type="button">Azzera spunte</button></div>
+  <div class="tools"><label class="cerca"><span class="lente" aria-hidden="true"></span><input id="cerca" type="search" placeholder="Cerca…" autocomplete="off" autocorrect="off" enterkeyhint="search" aria-label="Cerca un prodotto"></label><button class="btn" id="reset" type="button">Azzera spunte</button></div>
+  <p class="small nessuno" id="nessuno" hidden>Nessun prodotto trovato.</p>
   <div id="lista"></div>
   <div class="grp"><h3>Aggiunti da voi</h3><div id="extra"></div>
     <form class="add" id="addf"><input id="addi" placeholder="Nuovo prodotto…" maxlength="80" aria-label="Nuovo prodotto" autocomplete="off"><button class="btn pri" type="submit">Aggiungi</button></form></div>
@@ -442,8 +450,15 @@ function renderSpesa(){if(!M)return;
   const sy=$('#sync');sy.className='sync'+(syncState==='ok'?' ok':syncState==='err'?' err':'');
   sy.querySelector('span').textContent=syncState==='ok'?'Sincronizzata':syncState==='err'?'Non sincronizzata':syncState==='pin'?'Inserisci il codice di casa':'Solo su questo telefono';
   $('#pinf').hidden=syncState!=='pin';$('#pin-chg').hidden=syncState!=='ok'&&syncState!=='err';
+  filtra();
   const tabS=document.querySelector('.tab[data-v=spesa]');let d=tabS.querySelector('.dot');
   const rem=all-done;if(rem>0){if(!d){d=document.createElement('span');d.className='dot';tabS.prepend(d)}d.textContent=rem}else d?.remove()}
+const norm=v=>String(v).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+function filtra(){const q=norm(($('#cerca')?.value||'').trim());let n=0;
+  const match=it=>{const ok=!q||norm(it.querySelector('.nm')?.textContent||'').includes(q);it.hidden=!ok;if(ok)n++;return ok};
+  document.querySelectorAll('#lista .grp').forEach(g=>{let v=0;g.querySelectorAll('.it').forEach(it=>{if(match(it))v++});g.hidden=!v});
+  document.querySelectorAll('#extra .it').forEach(match);
+  $('#nessuno').hidden=!q||n>0}
 function renderAll(){if(!M)return;renderOggi();renderSettimana();renderRicette();renderSpesa()}
 
 /* ---------- ricetta e cucina ---------- */
@@ -501,6 +516,7 @@ $('#addf').addEventListener('submit',async e=>{e.preventDefault();const v=$('#ad
   if(sb){const {data,error}=await sb.from('extra').insert({nome:v}).select();if(error){syncState='err';renderSpesa()}else{extra.push(...data);renderSpesa();ping()}}
   else{extra.push({id:'l'+Date.now(),nome:v,fatto:false});saveLocal();renderSpesa()}});
 let armed=false;
+$('#cerca').addEventListener('input',filtra);
 $('#reset').addEventListener('click',async()=>{const b=$('#reset');
   if(!armed){armed=true;b.textContent='Sicuro?';setTimeout(()=>{armed=false;b.textContent='Azzera spunte'},3500);return}
   armed=false;b.textContent='Azzera spunte';spunte=new Set();extra=extra.filter(e=>!e.fatto);saveLocal();renderSpesa();
