@@ -152,6 +152,13 @@ svg.ic{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-wid
 .seg button{flex:1;min-height:44px;border:0;border-radius:10px;background:none;color:var(--mut);font:600 15px var(--font);cursor:pointer}
 .seg button[aria-pressed=true]{background:var(--verza);color:#fff}
 .rcerca{margin:0 0 12px}
+#sp-seg{margin:0 0 12px}
+#sv-casa .cerca{margin:4px 0 0}
+.casa-help{margin:4px 2px 12px;color:var(--mut);font-size:15px;line-height:1.4}
+#casa-lista .it .x{margin-left:auto}
+#casa-lista .it.done .nm{color:var(--ink);background-size:0 2.5px}
+#casa-lista .it .q{color:var(--mut)}#casa-lista .it.done .q{color:var(--verza)}
+.grp h3 .nf{display:block;font:500 13px var(--font);color:var(--mut);margin-top:2px}
 .rcw{position:relative;display:flex;min-width:0}.rcw>.rc{flex:1;min-width:0}
 .cuore{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:0;background:color-mix(in srgb,var(--foglio) 88%,transparent);display:grid;place-items:center;cursor:pointer;color:var(--pomodoro);z-index:2}
 .cuore svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round;transition:transform .15s}
@@ -311,13 +318,15 @@ form.add input::placeholder{color:var(--mut);opacity:1}
 </section>
 <section class="screen" id="s-spesa" hidden>
   <div class="hd"><h1>Spesa</h1><p>Lidl di Tione di Trento</p></div>
+  <div class="seg" id="sp-seg" role="group" aria-label="Vista spesa"><button type="button" data-sv="lista" aria-pressed="true">Da comprare</button><button type="button" data-sv="casa" aria-pressed="false">In casa</button></div>
+  <div class="sync" id="sync"><i></i><span>Solo su questo telefono</span><button class="lnk" id="pin-chg" type="button" hidden>Cambia codice</button></div>
+  <form class="pin" id="pinf" hidden><h3>Codice di casa</h3><p class="help">Inseriscilo una volta su questo telefono per sincronizzare la lista.</p>
+    <input id="pini" inputmode="numeric" autocomplete="one-time-code" maxlength="12" placeholder="Codice" aria-label="Codice di casa"><button class="btn pri" type="submit">Conferma</button><p id="pin-err" role="alert"></p></form>
+  <div id="sv-lista">
   <div class="sum">
     <svg class="ring" viewBox="0 0 84 84" aria-hidden="true"><circle class="trk" cx="42" cy="42" r="34" stroke="#e3e7ea" stroke-width="9" fill="none"/><circle id="ring" cx="42" cy="42" r="34" stroke="#2340b0" stroke-width="9" fill="none" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="213.6" transform="rotate(-90 42 42)" style="transition:stroke-dashoffset .4s"/><text id="ring-t" x="42" y="49.5" text-anchor="middle">0%</text></svg>
     <div><p class="tt" id="sp-t">0 di 0</p><p class="st" id="sp-s"></p></div>
   </div>
-  <div class="sync" id="sync"><i></i><span>Solo su questo telefono</span><button class="lnk" id="pin-chg" type="button" hidden>Cambia codice</button></div>
-  <form class="pin" id="pinf" hidden><h3>Codice di casa</h3><p class="help">Inseriscilo una volta su questo telefono per sincronizzare la lista.</p>
-    <input id="pini" inputmode="numeric" autocomplete="one-time-code" maxlength="12" placeholder="Codice" aria-label="Codice di casa"><button class="btn pri" type="submit">Conferma</button><p id="pin-err" role="alert"></p></form>
   <div class="tools"><label class="cerca"><span class="lente" aria-hidden="true"></span><input id="cerca" type="search" placeholder="Cerca…" autocomplete="off" autocorrect="off" enterkeyhint="search" aria-label="Cerca un prodotto"></label><button class="btn" id="reset" type="button">Azzera spunte</button></div>
   <p class="small nessuno" id="nessuno" hidden>Nessun prodotto trovato.</p>
   <div id="lista"></div>
@@ -325,6 +334,15 @@ form.add input::placeholder{color:var(--mut);opacity:1}
     <form class="add" id="addf"><input id="addi" placeholder="Nuovo prodotto…" maxlength="80" aria-label="Nuovo prodotto" autocomplete="off"><button class="btn pri" type="submit">Aggiungi</button></form></div>
   <div class="notes"><p class="small" id="incasa"></p>
   <p class="small">Prezzi indicativi stimati, da verificare in negozio.</p></div>
+  </div>
+  <div id="sv-casa" hidden>
+    <p class="help casa-help">Spuntate quello che avete in casa. Ogni sera alle 23:59 i pasti dei giorni dopo si adattano a quello che avete comprato e a quello che c'è.</p>
+    <label class="cerca"><span class="lente" aria-hidden="true"></span><input id="ccerca" type="search" placeholder="Cerca…" autocomplete="off" autocorrect="off" enterkeyhint="search" aria-label="Cerca in casa"></label>
+    <p class="small nessuno" id="c-none" hidden></p>
+    <div id="casa-lista"></div>
+    <div class="grp"><h3>Aggiungi alla dispensa</h3>
+      <form class="add" id="casaf"><input id="casai" placeholder="Prodotto…" maxlength="80" aria-label="Prodotto in casa" autocomplete="off"><button class="btn pri" type="submit">Aggiungi</button></form></div>
+  </div>
 </section>
 <section class="screen" id="s-ricette" hidden>
   <div class="hd"><h1>Ricette</h1><p id="r-sub"></p></div>
@@ -364,7 +382,7 @@ const nb=s=>String(s??'').replace(/(\d)\s*([–-])\s*(\d)/g,'$1⁠$2⁠$3').repl
 const eur=n=>(Number(n)||0).toLocaleString('it-IT',{style:'currency',currency:'EUR'});
 const REP=['Frutta e verdura','Pane','Frigo','Dispensa','Surgelati'];
 const DAY=86400000;
-let A={},P=new Set(),rview='settimana';
+let A={},P=new Set(),rview='settimana',AB=[],CS={},sview='lista';
 const RR=id=>M?.ricette?.[id]||A[id];
 const HEART='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>';
 const K=id=>(M?.inizio||'')+':'+id;
@@ -462,7 +480,7 @@ const check='<span class="chk"><svg viewBox="0 0 16 16" aria-hidden="true"><path
 function renderSpesa(){if(!M)return;
   const S=M.spesa||[],by={};for(const it of S)(by[it.reparto]||(by[it.reparto]=[])).push(it);
   const order=[...REP.filter(r=>by[r]),...Object.keys(by).filter(r=>!REP.includes(r))];
-  $('#lista').innerHTML=order.map(rep=>`<div class="grp"><h3>${esc(rep)}</h3>${by[rep].map(it=>`<div class="it${spunte.has(K(it.id))?' done':''}${fx===K(it.id)?' fx':''}" data-id="${esc(it.id)}" role="checkbox" aria-checked="${spunte.has(K(it.id))}" tabindex="0">${check}<span class="tx"><span class="nm">${esc(it.nome)}</span><span class="q">${esc(it.qty)}</span></span><span class="pr">${eur(it.prezzo)}</span></div>`).join('')}</div>`).join('');
+  $('#lista').innerHTML=order.map(rep=>`<div class="grp"><h3>${esc(rep)}${rep==='Casa e igiene'?' <span class="nf">non cibo, non usato per le ricette</span>':''}</h3>${by[rep].map(it=>`<div class="it${spunte.has(K(it.id))?' done':''}${fx===K(it.id)?' fx':''}" data-id="${esc(it.id)}" role="checkbox" aria-checked="${spunte.has(K(it.id))}" tabindex="0">${check}<span class="tx"><span class="nm">${esc(it.nome)}</span><span class="q">${esc(it.qty)}</span></span><span class="pr">${eur(it.prezzo)}</span></div>`).join('')}</div>`).join('');
   $('#extra').innerHTML=extra.length?extra.map(e=>`<div class="it${e.fatto?' done':''}${fx==='e:'+e.id?' fx':''}" data-e="${esc(e.id)}" role="checkbox" aria-checked="${!!e.fatto}" tabindex="0">${check}<span class="tx"><span class="nm">${esc(e.nome)}</span></span><button class="x" data-x="${esc(e.id)}" type="button" aria-label="Rimuovi">${I.x}</button></div>`).join(''):'<p class="hint">Quello che manca in casa: lo vedete tutti e due.</p>';
   fx=null;
   const done=S.filter(i=>spunte.has(K(i.id))).length+extra.filter(e=>e.fatto).length,all=S.length+extra.length,p=all?done/all:0;
@@ -483,6 +501,20 @@ function filtra(){const q=norm(($('#cerca')?.value||'').trim());let n=0;
   document.querySelectorAll('#lista .grp').forEach(g=>{let v=0;g.querySelectorAll('.it').forEach(it=>{if(match(it))v++});g.hidden=!v});
   document.querySelectorAll('#extra .it').forEach(match);
   $('#nessuno').hidden=!q||n>0}
+function renderCasa(){
+  const items={};for(const p of AB)items[p.id]={id:p.id,nome:p.nome,reparto:p.reparto||'Altro',ab:1,def:!!p.ce};
+  for(const [id,c] of Object.entries(CS)){if(!items[id])items[id]={id,nome:c.nome||id,reparto:c.reparto||'Altro'}}
+  const q=norm(($('#ccerca')?.value||'').trim()),by={};let n=0;
+  for(const it of Object.values(items)){if(q&&!norm(it.nome).includes(q))continue;n++;(by[it.reparto]||(by[it.reparto]=[])).push(it)}
+  const order=[...REP.filter(r=>by[r]),...Object.keys(by).filter(r=>!REP.includes(r)&&r!=='Casa e igiene'),...(by['Casa e igiene']?['Casa e igiene']:[])];
+  $('#casa-lista').innerHTML=order.map(rep=>`<div class="grp"><h3>${esc(rep)}</h3>${by[rep].sort((x,y)=>x.nome.localeCompare(y.nome,'it')).map(it=>{const on=CS[it.id]?!!CS[it.id].ce:!!it.def;return `<div class="it${on?' done':''}" data-c="${esc(it.id)}" role="checkbox" aria-checked="${on}" tabindex="0">${check}<span class="tx"><span class="nm">${esc(it.nome)}</span><span class="q">${on?'C’è':'Manca'}</span></span>${it.ab?'':`<button class="x" data-cx="${esc(it.id)}" type="button" aria-label="Rimuovi">${I.x}</button>`}</div>`}).join('')}</div>`).join('');
+  const none=$('#c-none');none.hidden=n>0;none.textContent=q?'Nessun prodotto trovato.':'La dispensa è vuota: aggiungi qui sotto quello che avete in casa.'}
+function setSview(v){sview=v;$('#sv-lista').hidden=v!=='lista';$('#sv-casa').hidden=v!=='casa';
+  document.querySelectorAll('[data-sv]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.sv===v));if(v==='casa')renderCasa()}
+async function pullCasa(){if(!sb)return;const {data,error}=await sb.from('casa').select('*');if(error)return;
+  CS={};for(const r of data)CS[r.id]={ce:r.ce,nome:r.nome,reparto:r.reparto};LS.set('pasti-casa-stato',CS);if(sview==='casa')renderCasa()}
+async function setCasa(id,on,nome,reparto){CS[id]={...(CS[id]||{}),ce:on,nome,reparto};LS.set('pasti-casa-stato',CS);renderCasa();
+  if(sb)await run(sb.from('casa').upsert({id,nome,reparto,ce:on,aggiornato:new Date().toISOString()}))}
 function renderAll(){if(!M)return;renderOggi();renderSettimana();renderRicette();renderSpesa()}
 
 /* ---------- ricetta e cucina ---------- */
@@ -524,7 +556,7 @@ async function pull(){if(!sb)return;
   const [a,b]=await Promise.all([sb.from('spunte').select('id'),sb.from('extra').select('*').order('creato')]);
   if(a.error||b.error){syncState='err';renderSpesa();return}
   spunte=new Set(a.data.map(x=>x.id));extra=b.data;syncState='ok';saveLocal();renderSpesa();pullFav()}
-async function pullFav(){if(!sb)return;const {data,error}=await sb.from('preferiti').select('id');if(error)return;P=new Set(data.map(x=>x.id));LS.set('pasti-preferiti',[...P]);if(M)renderRicette()}
+async function pullFav(){if(!sb)return;const {data,error}=await sb.from('preferiti').select('id');if(error)return;P=new Set(data.map(x=>x.id));LS.set('pasti-preferiti',[...P]);if(M)renderRicette();pullCasa()}
 async function run(q){const {error}=await q;if(error){syncState='err';renderSpesa();setTimeout(pull,1500)}else ping()}
 let ch=null;function ping(){try{ch?.send({type:'broadcast',event:'cambio',payload:{}})}catch{}}
 async function toggleItem(it){const id=K(it);const on=!spunte.has(id);on?spunte.add(id):spunte.delete(id);fx=on?id:null;saveLocal();renderSpesa();
@@ -543,6 +575,17 @@ $('#addf').addEventListener('submit',async e=>{e.preventDefault();const v=$('#ad
 let armed=false;
 $('#cerca').addEventListener('input',filtra);
 $('#rcerca').addEventListener('input',()=>renderRicette());
+$('#sp-seg').addEventListener('click',e=>{const b=e.target.closest('[data-sv]');if(b)setSview(b.dataset.sv)});
+$('#ccerca').addEventListener('input',renderCasa);
+function onCasa(e){const x=e.target.closest('[data-cx]');if(x){const id=x.dataset.cx;delete CS[id];LS.set('pasti-casa-stato',CS);renderCasa();if(sb)run(sb.from('casa').delete().eq('id',id));return}
+  const it=e.target.closest('[data-c]');if(!it)return;const id=it.dataset.c,ab=AB.find(p=>p.id===id),cur=CS[id]||{},was=CS[id]?!!cur.ce:!!ab?.ce;
+  setCasa(id,!was,ab?ab.nome:cur.nome,ab?(ab.reparto||'Altro'):(cur.reparto||'Altro'))}
+$('#casa-lista').addEventListener('click',onCasa);
+$('#casa-lista').addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();onCasa(e)}});
+$('#casaf').addEventListener('submit',e=>{e.preventDefault();const v=$('#casai').value.trim();if(!v)return;$('#casai').value='';
+  const ex=AB.find(p=>norm(p.nome)===norm(v))||Object.entries(CS).map(([id,c])=>({id,...c})).find(c=>norm(c.nome||'')===norm(v));
+  if(ex){setCasa(ex.id,true,ex.nome,ex.reparto||'Altro');return}
+  setCasa('c'+Date.now().toString(36),true,v,'Altro')});
 document.querySelector('.seg').addEventListener('click',e=>{const b=e.target.closest('[data-rv]');if(!b)return;rview=b.dataset.rv;renderRicette()});
 async function toggleFav(id){const on=!P.has(id);on?P.add(id):P.delete(id);LS.set('pasti-preferiti',[...P]);renderRicette();
   document.querySelectorAll('#sh [data-fav]').forEach(b=>{b.setAttribute('aria-pressed',P.has(b.dataset.fav));b.setAttribute('aria-label',P.has(b.dataset.fav)?'Togli dai preferiti':'Aggiungi ai preferiti')});
@@ -576,7 +619,8 @@ $('#pin-chg').addEventListener('click',()=>{LS.set('pasti-casa','');sb=null;sync
 /* ---------- avvio ---------- */
 spunte=new Set(LS.get('pasti-spunte',[]));extra=LS.get('pasti-extra',[]);
 route();
-P=new Set(LS.get('pasti-preferiti',[]));
+P=new Set(LS.get('pasti-preferiti',[]));CS=LS.get('pasti-casa-stato',{})||{};
+fetch('abituale.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).then(d=>{AB=(d&&d.prodotti)||[];if(sview==='casa')renderCasa()}).catch(()=>{});
 fetch('ricettario.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).then(d=>{A=(d&&d.ricette)||{};if(M)renderRicette()}).catch(()=>{});
 fetch('menu.json',{cache:'no-cache'}).then(r=>r.json()).then(d=>{M=d;const ti=todayIdx();sel=Math.min(Math.max(ti,0),M.giorni.length-1);renderAll()})
   .catch(()=>{$('#s-oggi').innerHTML='<div class="empty"><h2>Menù non raggiungibile</h2><p>Controlla la connessione e riapri l’app.</p></div>'});

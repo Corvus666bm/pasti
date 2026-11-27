@@ -1,0 +1,587 @@
+{
+ "aggiornato": "2026-11-27",
+ "nota": "Spesa abituale. 'ce' è lo stato iniziale; lo stato vero lo cambiano le spunte nell'app. 'cibo': false = non si usa per le ricette.",
+ "prodotti": [
+  {
+   "id": "bananeitaliane",
+   "nome": "Banane (italiane)",
+   "reparto": "Frutta e verdura",
+   "ce": false,
+   "cibo": true
+  },
+  {
+   "id": "pomodorinipolilidl",
+   "nome": "Pomodorini (Poli/Lidl)",
+   "reparto": "Frutta e verdura",
+   "ce": false,
+   "cibo": true
+  },
+  {
+   "id": "mandarini",
+   "nome": "Mandarini",
+   "reparto": "Frutta e verdura",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "melanzane",
+   "nome": "Melanzane",
+   "reparto": "Frutta e verdura",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "insalata",
+   "nome": "Insalata",
+   "reparto": "Frutta e verdura",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "zucchine",
+   "nome": "Zucchine",
+   "reparto": "Frutta e verdura",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "avocadopoli",
+   "nome": "Avocado (Poli)",
+   "reparto": "Frutta e verdura",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "patate",
+   "nome": "Patate",
+   "reparto": "Frutta e verdura",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "patatedolci",
+   "nome": "Patate dolci",
+   "reparto": "Frutta e verdura",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "cipolle",
+   "nome": "Cipolle",
+   "reparto": "Frutta e verdura",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "carote",
+   "nome": "Carote",
+   "reparto": "Frutta e verdura",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "peperoni",
+   "nome": "Peperoni",
+   "reparto": "Frutta e verdura",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "prezzemolo",
+   "nome": "Prezzemolo",
+   "reparto": "Frutta e verdura",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "spinaci",
+   "nome": "Spinaci",
+   "reparto": "Frutta e verdura",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "spinacino",
+   "nome": "Spinacino",
+   "reparto": "Frutta e verdura",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "limone",
+   "nome": "Limone",
+   "reparto": "Frutta e verdura",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "fragoleemirtillipoli",
+   "nome": "Fragole e mirtilli (Poli)",
+   "reparto": "Frutta e verdura",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "aglio",
+   "nome": "Aglio",
+   "reparto": "Frutta e verdura",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "sedano",
+   "nome": "Sedano",
+   "reparto": "Frutta e verdura",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "paneafetterustico",
+   "nome": "Pane a fette rustico",
+   "reparto": "Pane",
+   "ce": false,
+   "cibo": true
+  },
+  {
+   "id": "piadine",
+   "nome": "Piadine",
+   "reparto": "Pane",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "paneincassetta",
+   "nome": "Pane in cassetta",
+   "reparto": "Pane",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "seitanlidl",
+   "nome": "Seitan (Lidl)",
+   "reparto": "Frigo",
+   "ce": false,
+   "cibo": true
+  },
+  {
+   "id": "tempehpolilidl",
+   "nome": "Tempeh (Poli/Lidl)",
+   "reparto": "Frigo",
+   "ce": false,
+   "cibo": true
+  },
+  {
+   "id": "tofumegliolidl",
+   "nome": "Tofu (meglio Lidl)",
+   "reparto": "Frigo",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "cotolettevegetalimegliol",
+   "nome": "Cotolette vegetali (meglio Lidl)",
+   "reparto": "Frigo",
+   "ce": false,
+   "cibo": true
+  },
+  {
+   "id": "burgerperpaninolidl",
+   "nome": "Burger per panino (Lidl)",
+   "reparto": "Frigo",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "yogurt",
+   "nome": "Yogurt",
+   "reparto": "Frigo",
+   "ce": false,
+   "cibo": true
+  },
+  {
+   "id": "mozzarellabiopoli",
+   "nome": "Mozzarella bio (Poli)",
+   "reparto": "Frigo",
+   "ce": false,
+   "cibo": true
+  },
+  {
+   "id": "philadelphia",
+   "nome": "Philadelphia",
+   "reparto": "Frigo",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "uova",
+   "nome": "Uova",
+   "reparto": "Frigo",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "burro",
+   "nome": "Burro",
+   "reparto": "Frigo",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "raviolilidl",
+   "nome": "Ravioli (Lidl)",
+   "reparto": "Frigo",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "gnocchilidl",
+   "nome": "Gnocchi (Lidl)",
+   "reparto": "Frigo",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "spatzlelidl",
+   "nome": "Spätzle (Lidl)",
+   "reparto": "Frigo",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "pastaperpizza",
+   "nome": "Pasta per pizza",
+   "reparto": "Frigo",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "basepertortasalata",
+   "nome": "Base per torta salata",
+   "reparto": "Frigo",
+   "ce": false,
+   "cibo": true
+  },
+  {
+   "id": "pastaailegumipolilidl",
+   "nome": "Pasta ai legumi (Poli/Lidl)",
+   "reparto": "Dispensa",
+   "ce": false,
+   "cibo": true
+  },
+  {
+   "id": "pastaintegralequellaseri",
+   "nome": "Pasta integrale (quella seria)",
+   "reparto": "Dispensa",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "quinoa",
+   "nome": "Quinoa",
+   "reparto": "Dispensa",
+   "ce": false,
+   "cibo": true
+  },
+  {
+   "id": "orzo",
+   "nome": "Orzo",
+   "reparto": "Dispensa",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "farina",
+   "nome": "Farina",
+   "reparto": "Dispensa",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "cecipoli",
+   "nome": "Ceci (Poli)",
+   "reparto": "Dispensa",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "lattedicocco",
+   "nome": "Latte di cocco",
+   "reparto": "Dispensa",
+   "ce": false,
+   "cibo": true
+  },
+  {
+   "id": "lattedavena",
+   "nome": "Latte d'avena",
+   "reparto": "Dispensa",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "zuppaecrostini",
+   "nome": "Zuppa e crostini",
+   "reparto": "Dispensa",
+   "ce": false,
+   "cibo": true
+  },
+  {
+   "id": "brodoperminestrina",
+   "nome": "Brodo per minestrina",
+   "reparto": "Dispensa",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "salsadisoia",
+   "nome": "Salsa di soia",
+   "reparto": "Dispensa",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "oliopoli",
+   "nome": "Olio (Poli)",
+   "reparto": "Dispensa",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "oliodisemi",
+   "nome": "Olio di semi",
+   "reparto": "Dispensa",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "aceto",
+   "nome": "Aceto",
+   "reparto": "Dispensa",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "alloro",
+   "nome": "Alloro",
+   "reparto": "Dispensa",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "lievitonormale",
+   "nome": "Lievito normale",
+   "reparto": "Dispensa",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "lievito",
+   "nome": "Lievito",
+   "reparto": "Dispensa",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "bicarbonatolidl",
+   "nome": "Bicarbonato (Lidl)",
+   "reparto": "Dispensa",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "pinoli",
+   "nome": "Pinoli",
+   "reparto": "Dispensa",
+   "ce": false,
+   "cibo": true
+  },
+  {
+   "id": "anacardi",
+   "nome": "Anacardi",
+   "reparto": "Dispensa",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "cereali",
+   "nome": "Cereali",
+   "reparto": "Dispensa",
+   "ce": false,
+   "cibo": true
+  },
+  {
+   "id": "farrosoffiato",
+   "nome": "Farro soffiato",
+   "reparto": "Dispensa",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "fiocchidavenanoninteri",
+   "nome": "Fiocchi d'avena (non interi)",
+   "reparto": "Dispensa",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "biscottipolilidl",
+   "nome": "Biscotti (Poli/Lidl)",
+   "reparto": "Dispensa",
+   "ce": false,
+   "cibo": true
+  },
+  {
+   "id": "marmellata",
+   "nome": "Marmellata",
+   "reparto": "Dispensa",
+   "ce": false,
+   "cibo": true
+  },
+  {
+   "id": "crackers",
+   "nome": "Crackers",
+   "reparto": "Dispensa",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "snackperillavoro",
+   "nome": "Snack per il lavoro",
+   "reparto": "Dispensa",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "tisanesfuse",
+   "nome": "Tisane sfuse",
+   "reparto": "Dispensa",
+   "ce": false,
+   "cibo": true
+  },
+  {
+   "id": "caffe",
+   "nome": "Caffè",
+   "reparto": "Dispensa",
+   "ce": true,
+   "cibo": true
+  },
+  {
+   "id": "salviettechilly",
+   "nome": "Salviette Chilly",
+   "reparto": "Casa e igiene",
+   "ce": false,
+   "cibo": false
+  },
+  {
+   "id": "saleedetersivolavastovig",
+   "nome": "Sale e detersivo lavastoviglie",
+   "reparto": "Casa e igiene",
+   "ce": false,
+   "cibo": false
+  },
+  {
+   "id": "amuchina",
+   "nome": "Amuchina",
+   "reparto": "Casa e igiene",
+   "ce": false,
+   "cibo": false
+  },
+  {
+   "id": "collutorio",
+   "nome": "Collutorio",
+   "reparto": "Casa e igiene",
+   "ce": false,
+   "cibo": false
+  },
+  {
+   "id": "guantidacucina",
+   "nome": "Guanti da cucina",
+   "reparto": "Casa e igiene",
+   "ce": false,
+   "cibo": false
+  },
+  {
+   "id": "cartaigienica",
+   "nome": "Carta igienica",
+   "reparto": "Casa e igiene",
+   "ce": false,
+   "cibo": false
+  },
+  {
+   "id": "assorbenti",
+   "nome": "Assorbenti",
+   "reparto": "Casa e igiene",
+   "ce": false,
+   "cibo": false
+  },
+  {
+   "id": "spugnecucina",
+   "nome": "Spugne cucina",
+   "reparto": "Casa e igiene",
+   "ce": false,
+   "cibo": false
+  },
+  {
+   "id": "dischettidicotone",
+   "nome": "Dischetti di cotone",
+   "reparto": "Casa e igiene",
+   "ce": false,
+   "cibo": false
+  },
+  {
+   "id": "cerotti",
+   "nome": "Cerotti",
+   "reparto": "Casa e igiene",
+   "ce": true,
+   "cibo": false
+  },
+  {
+   "id": "saponeintimo",
+   "nome": "Sapone intimo",
+   "reparto": "Casa e igiene",
+   "ce": true,
+   "cibo": false
+  },
+  {
+   "id": "wcnet",
+   "nome": "WC Net",
+   "reparto": "Casa e igiene",
+   "ce": true,
+   "cibo": false
+  },
+  {
+   "id": "saponemani",
+   "nome": "Sapone mani",
+   "reparto": "Casa e igiene",
+   "ce": true,
+   "cibo": false
+  },
+  {
+   "id": "shampoo",
+   "nome": "Shampoo",
+   "reparto": "Casa e igiene",
+   "ce": true,
+   "cibo": false
+  },
+  {
+   "id": "bagnoschiuma",
+   "nome": "Bagnoschiuma",
+   "reparto": "Casa e igiene",
+   "ce": true,
+   "cibo": false
+  },
+  {
+   "id": "sgrassatore",
+   "nome": "Sgrassatore",
+   "reparto": "Casa e igiene",
+   "ce": true,
+   "cibo": false
+  },
+  {
+   "id": "sacchettibioperlumido",
+   "nome": "Sacchetti bio per l'umido",
+   "reparto": "Casa e igiene",
+   "ce": true,
+   "cibo": false
+  }
+ ]
+}

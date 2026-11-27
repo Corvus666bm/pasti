@@ -1,0 +1,40 @@
+# Copia nel repository i dati segnati nell'app (preferiti, dispensa di casa,
+# spunte della spesa), così Claude li legge quando prepara o adatta il menù.
+# Ogni sera verso le 23 (prima del controllo delle 23:59) e la domenica pomeriggio.
+# L'utente ha scelto consapevolmente di rendere pubblici questi dati.
+name: Esporta dati dell'app
+on:
+  schedule:
+    - cron: "5 22 * * *"
+    - cron: "7 15 * * 0"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  esporta:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Leggi i dati dal database
+        run: |
+          U="https://vstkcwuroupmydglzybw.supabase.co/rest/v1/rpc"
+          K="sb_publishable__GqAHtVB-KW50CP0_VSV1Q_e-2_lCjV"
+          curl -fsS -X POST "$U/elenco_preferiti" -H "apikey: $K" -H "Content-Type: application/json" -d '{}' > /tmp/p.json
+          curl -fsS -X POST "$U/stato_casa" -H "apikey: $K" -H "Content-Type: application/json" -d '{}' > /tmp/s.json
+          python3 - <<'PY'
+          import json, datetime
+          oggi = datetime.date.today().isoformat()
+          ids = json.load(open('/tmp/p.json'))
+          ids = sorted({x if isinstance(x, str) else list(x.values())[0] for x in ids})
+          json.dump({"aggiornato": oggi, "preferiti": ids}, open('preferiti.json', 'w'), ensure_ascii=False, indent=1)
+          st = json.load(open('/tmp/s.json'))
+          st["esportato"] = oggi
+          json.dump(st, open('stato.json', 'w'), ensure_ascii=False, indent=1)
+          PY
+      - name: Salva se è cambiato
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add preferiti.json stato.json
+          git diff --cached --quiet || git commit -m "Esporta dati dell'app"
+          git push
