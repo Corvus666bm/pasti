@@ -1,0 +1,410 @@
+{
+ "aggiornato": "2026-11-30",
+ "ricette": {
+  "burger": {
+   "ingredienti": [
+    "2 confezioni di burger vegetali (4 burger)",
+    "4 panini per hamburger",
+    "800 g di patate",
+    "Pomodorini e insalata",
+    "Olio, sale, paprika"
+   ],
+   "nome": "Burger vegetali con patate al forno",
+   "passi": [
+    "Accendi il forno a 210 °C.",
+    "Taglia le patate a spicchi, condiscile con olio, sale e paprika e cuocile 30–35 minuti, girandole a metà.",
+    "Cuoci i burger in padella come indicato sulla confezione.",
+    "Scalda i panini e componi con insalata e pomodorini.",
+    "Scegli burger vegetali senza formaggio: controlla l'etichetta."
+   ],
+   "portabile": false,
+   "porzioni": "2 porzioni",
+   "tempo": "40 min",
+   "tipo": "vegano",
+   "forma": "burger",
+   "colori": [],
+   "settimane": [
+    "2026-11-30"
+   ]
+  },
+  "chili": {
+   "ingredienti": [
+    "½ cipolla",
+    "½ peperone",
+    "1 carota",
+    "1 lattina di fagioli rossi",
+    "½ lattina di mais",
+    "1 lattina di pomodori pelati",
+    "½ cucchiaino di cumino, ½ di paprika",
+    "150 g di riso basmati",
+    "Olio, sale"
+   ],
+   "nome": "Chili sin carne con riso",
+   "passi": [
+    "Trita cipolla, carota e peperone e falli appassire in padella con l'olio per 8 minuti.",
+    "Aggiungi cumino e paprika e mescola per 1 minuto.",
+    "Unisci pelati schiacciati, fagioli e mais scolati, sala e cuoci 20 minuti a fuoco basso.",
+    "Intanto cuoci il riso in acqua salata e servi il chili sopra."
+   ],
+   "portabile": false,
+   "porzioni": "2 porzioni",
+   "tempo": "35 min",
+   "tipo": "vegano",
+   "forma": "ciotola",
+   "colori": [
+    "#a8321f",
+    "#6b1f14",
+    "#f2c230",
+    "#e2683a"
+   ],
+   "settimane": [
+    "2026-11-30"
+   ]
+  },
+  "curry": {
+   "ingredienti": [
+    "125 g di lenticchie rosse",
+    "½ lattina di latte di cocco (200 ml)",
+    "1 lattina di pomodori pelati",
+    "100 g di spinaci surgelati",
+    "½ cipolla, 1 spicchio d'aglio",
+    "1 cucchiaino di curry in polvere",
+    "150 g di riso basmati",
+    "Olio, sale, limone"
+   ],
+   "nome": "Curry di lenticchie rosse e cocco",
+   "passi": [
+    "Soffriggi cipolla e aglio tritati con l'olio per 5 minuti, poi aggiungi il curry per 1 minuto.",
+    "Aggiungi lenticchie sciacquate, pelati, latte di cocco e 100 ml d'acqua.",
+    "Cuoci 18 minuti mescolando, finché le lenticchie si sfaldano.",
+    "Negli ultimi 5 minuti unisci gli spinaci, sala e aggiungi qualche goccia di limone.",
+    "Servi con il riso basmati cotto intanto in acqua salata."
+   ],
+   "portabile": false,
+   "porzioni": "2 porzioni",
+   "tempo": "30 min",
+   "tipo": "vegano",
+   "forma": "ciotola",
+   "colori": [
+    "#e8a53a",
+    "#f6e7c8",
+    "#3f7d3a",
+    "#d9772a"
+   ],
+   "settimane": [
+    "2026-11-30"
+   ]
+  },
+  "farro": {
+   "ingredienti": [
+    "200 g di farro perlato",
+    "125 g di mozzarelline (ciliegine)",
+    "250 g di pomodorini",
+    "1 cetriolo",
+    "1 lattina di ceci",
+    "1 limone, olio, sale, origano"
+   ],
+   "nome": "Insalata di farro, mozzarelline e pomodorini",
+   "passi": [
+    "Cuoci il farro in acqua salata per circa 20 minuti, scolalo e fallo raffreddare.",
+    "Taglia pomodorini e cetriolo a cubetti e le mozzarelline a metà.",
+    "Unisci tutto con i ceci scolati.",
+    "Condisci con olio, succo di limone, sale e origano."
+   ],
+   "portabile": false,
+   "porzioni": "2 porzioni",
+   "tempo": "30 min",
+   "tipo": "vegetariano",
+   "forma": "ciotola",
+   "colori": [
+    "#c8a46a",
+    "#ffffff",
+    "#e2483b",
+    "#7fb347"
+   ],
+   "settimane": [
+    "2026-11-30"
+   ]
+  },
+  "frittata": {
+   "ingredienti": [
+    "4 uova",
+    "250 g di patate",
+    "200 g di spinaci surgelati",
+    "¼ di cipolla",
+    "Olio, sale, pepe, un pizzico di noce moscata (facoltativa)"
+   ],
+   "nome": "Frittata in padella con patate e spinaci",
+   "passi": [
+    "Taglia le patate a cubetti piccoli e cuocile in padella con olio e cipolla per 10 minuti, coperte.",
+    "Aggiungi gli spinaci surgelati e cuoci 5 minuti, finché l'acqua evapora.",
+    "Sbatti le uova con sale, pepe e noce moscata e versale nella padella.",
+    "Cuoci coperto a fuoco basso per 6 minuti, gira la frittata con il coperchio e cuoci altri 2 minuti."
+   ],
+   "portabile": false,
+   "porzioni": "2 porzioni",
+   "tempo": "25 min",
+   "tipo": "vegetariano",
+   "forma": "frittata",
+   "colori": [
+    "#f2c94c",
+    "#3f7d3a",
+    "#e8d3a0",
+    "#d99a2b"
+   ],
+   "settimane": [
+    "2026-11-30"
+   ]
+  },
+  "pastaceci": {
+   "ingredienti": [
+    "2 lattine di ceci",
+    "300 g di ditalini",
+    "200 g di passata di pomodoro",
+    "1 carota",
+    "½ cipolla",
+    "1 spicchio d'aglio",
+    "Rosmarino secco, olio, sale"
+   ],
+   "nome": "Pasta e ceci",
+   "passi": [
+    "Trita carota, cipolla e aglio e soffriggi in pentola con l'olio per 5 minuti.",
+    "Aggiungi i ceci scolati, la passata, il rosmarino e 1 litro d'acqua. Cuoci 10 minuti.",
+    "Frulla un terzo dei ceci con un mestolo di brodo e rimettili in pentola: diventa cremosa.",
+    "Butta la pasta direttamente nella pentola e cuoci, aggiungendo acqua se serve.",
+    "Fai riposare 5 minuti e finisci con un filo d'olio a crudo."
+   ],
+   "portabile": false,
+   "porzioni": "4 porzioni (doppia dose)",
+   "tempo": "35 min",
+   "tipo": "vegano",
+   "forma": "ciotola",
+   "colori": [
+    "#e6b062",
+    "#f0d49a",
+    "#c9772f",
+    "#7a9e4d"
+   ],
+   "settimane": [
+    "2026-11-30"
+   ]
+  },
+  "pizza": {
+   "ingredienti": [
+    "2 rotoli di pasta per pizza",
+    "300 g di passata di pomodoro",
+    "2 mozzarelle",
+    "1 zucchina",
+    "½ melanzana",
+    "Origano, olio, sale"
+   ],
+   "nome": "Pizza in teglia con verdure",
+   "passi": [
+    "Accendi il forno a 230 °C.",
+    "Stendi i rotoli nelle teglie, condisci la passata con olio, sale e origano e spalmala.",
+    "Aggiungi zucchina e melanzana a fette sottili.",
+    "Cuoci 10 minuti, poi aggiungi la mozzarella a pezzi e cuoci altri 6–8 minuti."
+   ],
+   "portabile": false,
+   "porzioni": "2 porzioni",
+   "tempo": "30 min",
+   "tipo": "vegetariano",
+   "forma": "pizza",
+   "colori": [],
+   "settimane": [
+    "2026-11-30"
+   ]
+  },
+  "risotto": {
+   "ingredienti": [
+    "180 g di riso Carnaroli",
+    "500 g di zucca",
+    "½ cipolla",
+    "1 litro di brodo vegetale",
+    "Rosmarino secco, olio, sale, pepe"
+   ],
+   "nome": "Risotto alla zucca e rosmarino",
+   "passi": [
+    "Taglia la zucca a cubetti e cuocila con la cipolla e l'olio per 10 minuti, finché è morbida.",
+    "Aggiungi il riso e tostalo per 2 minuti.",
+    "Aggiungi il brodo caldo un mestolo alla volta, mescolando, per circa 17 minuti, con un pizzico di rosmarino.",
+    "A fuoco spento schiaccia un po' di zucca nel riso e manteca con un filo d'olio crudo e pepe: diventa cremoso anche senza formaggio."
+   ],
+   "portabile": false,
+   "porzioni": "2 porzioni",
+   "tempo": "40 min",
+   "tipo": "vegano",
+   "forma": "ciotola",
+   "colori": [
+    "#f0b15a",
+    "#fbe7c0",
+    "#e07b2a",
+    "#7a9e4d"
+   ],
+   "settimane": [
+    "2026-11-30"
+   ]
+  },
+  "vellutata": {
+   "ingredienti": [
+    "500 g di zucca",
+    "1 patata",
+    "1 carota",
+    "½ cipolla",
+    "½ lattina di latte di cocco (il resto di quella del curry)",
+    "Pane casereccio",
+    "1 confezione di hummus (200 g)",
+    "Olio, sale, pepe"
+   ],
+   "nome": "Vellutata di zucca con crostoni e hummus",
+   "passi": [
+    "Taglia zucca, patata, carota e cipolla a pezzi.",
+    "Mettili in pentola, copri appena con acqua salata e cuoci 20 minuti.",
+    "Frulla tutto con il latte di cocco fino a ottenere una crema e regola di sale e pepe.",
+    "Tosta il pane in padella o in forno e spalmaci l'hummus.",
+    "Servi la vellutata con un filo d'olio e i crostoni."
+   ],
+   "portabile": false,
+   "porzioni": "2 porzioni",
+   "tempo": "35 min",
+   "tipo": "vegano",
+   "forma": "ciotola",
+   "colori": [
+    "#ef8a2c",
+    "#f7b15c",
+    "#fff1d6",
+    "#5c8f3a"
+   ],
+   "settimane": [
+    "2026-11-30"
+   ]
+  },
+  "wrap": {
+   "ingredienti": [
+    "4 piadine o tortillas",
+    "1 confezione di hummus (200 g)",
+    "1 zucchina",
+    "½ melanzana",
+    "1 peperone",
+    "1 lattina di ceci, scolati",
+    "Insalata, olio, sale"
+   ],
+   "nome": "Wrap con hummus e verdure grigliate",
+   "passi": [
+    "Taglia zucchina, melanzana e peperone a fette sottili.",
+    "Grigliale in padella antiaderente con un filo d'olio e un pizzico di sale, 3–4 minuti per lato.",
+    "Scalda le piadine 30 secondi per lato.",
+    "Spalma l'hummus, aggiungi verdure, ceci e insalata, poi arrotola."
+   ],
+   "portabile": false,
+   "porzioni": "2 porzioni",
+   "tempo": "20 min",
+   "tipo": "vegano",
+   "forma": "wrap",
+   "colori": [
+    "#f1d9a6",
+    "#7fb347",
+    "#d9432a",
+    "#f3e7c9"
+   ],
+   "settimane": [
+    "2026-11-30"
+   ]
+  },
+  "insalatariso": {
+   "nome": "Insalata di riso con piselli, mais e uova",
+   "tipo": "vegetariano",
+   "tempo": "25 min",
+   "porzioni": "2 porzioni",
+   "portabile": false,
+   "ingredienti": [
+    "160 g di riso basmati",
+    "150 g di piselli surgelati",
+    "½ lattina di mais",
+    "2 uova",
+    "½ peperone (il resto di quello del chili)",
+    "100 g di pomodorini",
+    "½ limone, olio, sale"
+   ],
+   "passi": [
+    "Cuoci il riso in acqua salata; negli ultimi 4 minuti aggiungi i piselli nella stessa pentola.",
+    "Intanto rassoda le uova: 9 minuti in acqua che bolle, poi in acqua fredda.",
+    "Scola riso e piselli e passali sotto l'acqua fredda.",
+    "Unisci mais scolato, peperone a cubetti, pomodorini a metà e uova a spicchi.",
+    "Condisci con olio, succo di limone e sale."
+   ],
+   "forma": "ciotola",
+   "colori": [
+    "#f3e3b0",
+    "#f2c230",
+    "#7fb347",
+    "#ffffff"
+   ],
+   "settimane": [
+    "2026-11-30"
+   ]
+  },
+  "pastazucchine": {
+   "nome": "Pasta con zucchine, limone e mandorle",
+   "tipo": "vegano",
+   "tempo": "20 min",
+   "porzioni": "2 porzioni",
+   "portabile": false,
+   "ingredienti": [
+    "180 g di penne",
+    "2 zucchine",
+    "1 limone (scorza e succo)",
+    "1 spicchio d'aglio",
+    "30 g di mandorle a lamelle (facoltative)",
+    "Olio, sale, pepe"
+   ],
+   "passi": [
+    "Metti a bollire l'acqua per la pasta.",
+    "Taglia le zucchine a rondelle sottili e cuocile in padella con olio e aglio per 8 minuti.",
+    "Cuoci la pasta e scolala tenendo un mestolo d'acqua di cottura.",
+    "Salta la pasta con le zucchine, l'acqua di cottura, la scorza e un po' di succo di limone.",
+    "Finisci con le mandorle tostate in padella 2 minuti e un filo d'olio."
+   ],
+   "forma": "ciotola",
+   "colori": [
+    "#e9cf8f",
+    "#7fb347",
+    "#f6e27a",
+    "#5c8f3a"
+   ],
+   "settimane": [
+    "2026-11-30"
+   ]
+  },
+  "gnocchi": {
+   "nome": "Gnocchi al pomodoro e mozzarella",
+   "tipo": "vegetariano",
+   "tempo": "20 min",
+   "porzioni": "2 porzioni",
+   "portabile": false,
+   "ingredienti": [
+    "500 g di gnocchi di patate freschi",
+    "200 g di passata di pomodoro",
+    "1 mozzarella",
+    "½ cipolla",
+    "Origano, olio, sale"
+   ],
+   "passi": [
+    "Soffriggi la cipolla tritata con l'olio per 4 minuti.",
+    "Aggiungi la passata, sala e cuoci 10 minuti.",
+    "Cuoci gli gnocchi in acqua salata: sono pronti quando salgono a galla.",
+    "Scolali nel sugo, aggiungi la mozzarella a cubetti e l'origano, mescola finché fila."
+   ],
+   "forma": "ciotola",
+   "colori": [
+    "#d9432a",
+    "#f7e7c4",
+    "#ffffff",
+    "#3f7d3a"
+   ],
+   "settimane": [
+    "2026-11-30"
+   ]
+  }
+ }
+}

@@ -148,6 +148,17 @@ svg.ic{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-wid
 .cerca .lente{position:absolute;left:13px;width:20px;height:20px;background:var(--mut);pointer-events:none;-webkit-mask:var(--i-lente) center/contain no-repeat;mask:var(--i-lente) center/contain no-repeat}
 :root{--i-lente:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M15.5 15.5L20 20'/%3E%3C/svg%3E")}
 .nessuno{margin:14px 4px 0}
+.seg{display:flex;gap:4px;padding:4px;border-radius:14px;background:var(--foglio);border:1px solid var(--riga);margin:0 0 10px}
+.seg button{flex:1;min-height:44px;border:0;border-radius:10px;background:none;color:var(--mut);font:600 15px var(--font);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--verza);color:#fff}
+.rcerca{margin:0 0 12px}
+.rcw{position:relative;display:flex;min-width:0}.rcw>.rc{flex:1;min-width:0}
+.cuore{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:0;background:color-mix(in srgb,var(--foglio) 88%,transparent);display:grid;place-items:center;cursor:pointer;color:var(--pomodoro);z-index:2}
+.cuore svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round;transition:transform .15s}
+.cuore[aria-pressed=true] svg{fill:currentColor}
+.cuore:active svg{transform:scale(.85)}
+.sheet .cuore{top:8px;right:auto;left:8px}
+.rc .wk{font-size:12px;color:var(--mut)}
 .it[hidden],.grp[hidden]{display:none!important}
 #copy::before{content:"";width:20px;height:20px;flex:none;background:currentColor;-webkit-mask:var(--i-copy) center/contain no-repeat;mask:var(--i-copy) center/contain no-repeat}
 :root{--i-copy:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='11' height='11' rx='2'/%3E%3Cpath d='M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3'/%3E%3C/svg%3E");
@@ -317,7 +328,10 @@ form.add input::placeholder{color:var(--mut);opacity:1}
 </section>
 <section class="screen" id="s-ricette" hidden>
   <div class="hd"><h1>Ricette</h1><p id="r-sub"></p></div>
+  <div class="seg" role="group" aria-label="Quali ricette"><button type="button" data-rv="settimana" aria-pressed="true">Settimana</button><button type="button" data-rv="tutte" aria-pressed="false">Tutte</button><button type="button" data-rv="preferiti" aria-pressed="false">Preferiti</button></div>
+  <label class="cerca rcerca"><span class="lente" aria-hidden="true"></span><input id="rcerca" type="search" placeholder="Piatto o ingrediente…" autocomplete="off" autocorrect="off" enterkeyhint="search" aria-label="Cerca una ricetta"></label>
   <div class="grid" id="grid"></div>
+  <p class="small nessuno" id="r-none" hidden></p>
 </section>
 
 <nav class="tabbar" aria-label="Sezioni">
@@ -350,6 +364,9 @@ const nb=s=>String(s??'').replace(/(\d)\s*([–-])\s*(\d)/g,'$1⁠$2⁠$3').repl
 const eur=n=>(Number(n)||0).toLocaleString('it-IT',{style:'currency',currency:'EUR'});
 const REP=['Frutta e verdura','Pane','Frigo','Dispensa','Surgelati'];
 const DAY=86400000;
+let A={},P=new Set(),rview='settimana';
+const RR=id=>M?.ricette?.[id]||A[id];
+const HEART='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>';
 const K=id=>(M?.inizio||'')+':'+id;
 let M=null,spunte=new Set(),extra=[],sel=0,sb=null,syncState='local';
 let fx=null; // riga appena spuntata: solo lei anima il tratto di penna
@@ -431,9 +448,16 @@ function renderSettimana(){
   const ti=todayIdx();$('#w-title').textContent=M.titolo||'';
   $('#chips').innerHTML=M.giorni.map((g,i)=>{const d=dateOf(i);return `<button class="chip${i===sel?' on':''}${i===ti?' today':''}" data-d="${i}" type="button" aria-pressed="${i===sel}"><span>${esc(g.giorno.slice(0,3))}</span><b>${d.getDate()}</b></button>`}).join('');
   const g=M.giorni[sel];$('#w-day').innerHTML=g?mealCard(g.pranzo,'Pranzo')+mealCard(g.cena,'Cena'):''}
-function renderRicette(){const R=Object.entries(M.ricette);
-  $('#r-sub').textContent=`${R.length} piatti, di cui ${R.filter(([,r])=>r.tipo==='vegano').length} vegani`;
-  $('#grid').innerHTML=R.map(([id,r])=>`<button class="rc" data-open="${esc(id)}" type="button"><div class="art" style="background:${bg(r)}">${art(id,r)}</div><div class="bd"><b>${esc(r.nome)}</b><span class="rm">${tag(r.tipo)}<span>${esc(r.tempo)}</span></span></div></button>`).join('')}
+function renderRicette(){if(!M)return;
+  const W=M.ricette||{},all={...A,...W},q=norm(($('#rcerca')?.value||'').trim());
+  let ids=rview==='settimana'?Object.keys(W):rview==='preferiti'?Object.keys(all).filter(i=>P.has(i)):Object.keys(all);
+  if(rview!=='settimana')ids.sort((x,y)=>(W[y]?1:0)-(W[x]?1:0)||String(all[x].nome).localeCompare(all[y].nome,'it'));
+  if(q)ids=ids.filter(i=>norm(all[i].nome+' '+(all[i].ingredienti||[]).join(' ')).includes(q));
+  const ve=ids.filter(i=>all[i].tipo==='vegano').length;
+  $('#r-sub').textContent=rview==='settimana'?`${ids.length} piatti, di cui ${ve} vegani`:rview==='tutte'?`${Object.keys(all).length} ricette nel vostro ricettario`:`${[...P].filter(i=>all[i]).length} preferiti: tornano nel menù appena possibile`;
+  document.querySelectorAll('[data-rv]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.rv===rview));
+  $('#grid').innerHTML=ids.map(id=>{const r=all[id];return `<div class="rcw"><button class="rc" data-open="${esc(id)}" type="button"><div class="art" style="background:${bg(r)}">${art(id,r)}</div><div class="bd"><b>${esc(r.nome)}</b><span class="rm">${tag(r.tipo)}<span>${esc(r.tempo)}</span></span>${rview!=='settimana'&&W[id]?'<span class="wk">Questa settimana</span>':''}</div></button><button class="cuore" type="button" data-fav="${esc(id)}" aria-pressed="${P.has(id)}" aria-label="${P.has(id)?'Togli dai preferiti':'Aggiungi ai preferiti'}">${HEART}</button></div>`}).join('');
+  const none=$('#r-none');none.hidden=ids.length>0;none.textContent=q?'Nessuna ricetta trovata.':rview==='preferiti'?'Nessun preferito ancora: tocca il cuore su una ricetta che vi è piaciuta.':''}
 const check='<span class="chk"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span>';
 function renderSpesa(){if(!M)return;
   const S=M.spesa||[],by={};for(const it of S)(by[it.reparto]||(by[it.reparto]=[])).push(it);
@@ -462,8 +486,8 @@ function filtra(){const q=norm(($('#cerca')?.value||'').trim());let n=0;
 function renderAll(){if(!M)return;renderOggi();renderSettimana();renderRicette();renderSpesa()}
 
 /* ---------- ricetta e cucina ---------- */
-function openRecipe(id){const r=M?.ricette[id];if(!r)return;
-  $('#sh').innerHTML=`<div class="grab" aria-hidden="true"></div><div class="art" style="background:${bg(r)}">${art(id,r)}<button class="close" id="sh-x" type="button" aria-label="Chiudi">${I.x}</button></div><div class="bd">
+function openRecipe(id){const r=RR(id);if(!r)return;
+  $('#sh').innerHTML=`<div class="grab" aria-hidden="true"></div><div class="art" style="background:${bg(r)}">${art(id,r)}<button class="close" id="sh-x" type="button" aria-label="Chiudi">${I.x}</button><button class="cuore" type="button" data-fav="${esc(id)}" aria-pressed="${P.has(id)}" aria-label="${P.has(id)?'Togli dai preferiti':'Aggiungi ai preferiti'}">${HEART}</button></div><div class="bd">
   <h2 id="sh-name">${esc(r.nome)}</h2><div class="meta">${tag(r.tipo)}<span>${esc(r.tempo)}</span><span>${esc(r.porzioni)}</span></div>
   <h3>Ingredienti</h3><ul class="ing">${r.ingredienti.map(x=>`<li>${nb(esc(x))}</li>`).join('')}</ul>
   <h3>Preparazione</h3><ol class="steps">${r.passi.map(x=>`<li><span>${nb(esc(x))}</span></li>`).join('')}</ol></div>
@@ -472,7 +496,7 @@ function openRecipe(id){const r=M?.ricette[id];if(!r)return;
 const closeSheet=()=>$('#sheet').classList.remove('open');
 $('#sheet').addEventListener('click',e=>{if(e.target.id==='sheet'||e.target.closest('#sh-x'))closeSheet()});
 let ck={id:null,i:0},lock=null;
-function drawCook(){const r=M.ricette[ck.id],n=r.passi.length,last=ck.i===n-1;
+function drawCook(){const r=RR(ck.id),n=r.passi.length,last=ck.i===n-1;
   $('#ck-name').textContent=r.nome;$('#ck-num').textContent=`Passo ${ck.i+1} di ${n}`;$('#ck-txt').textContent=nb(r.passi[ck.i]);
   $('#ck-then').classList.toggle('end',last);$('#ck-then .lb').textContent=last?'Ultimo passo':'Poi';
   $('#ck-nx').textContent=last?'Quando hai finito, tocca Fatto!':nb(r.passi[ck.i+1]);
@@ -481,12 +505,12 @@ function drawCook(){const r=M.ricette[ck.id],n=r.passi.length,last=ck.i===n-1;
   $('.cook .mid').scrollTop=0;
   $('#ck-dots').innerHTML=r.passi.map((_,j)=>`<i class="${j<=ck.i?'on':''}"></i>`).join('');
   $('#ck-prev').disabled=ck.i===0;$('#ck-prev').style.opacity=ck.i===0?.4:1;$('#ck-next').textContent=ck.i===n-1?'Fatto!':'Avanti'}
-async function openCook(id){if(!M?.ricette[id])return;closeSheet();ck={id,i:0};$('#ck-ingd').open=false;$('#cook').hidden=false;drawCook();
+async function openCook(id){if(!RR(id))return;closeSheet();ck={id,i:0};$('#ck-ingd').open=false;$('#cook').hidden=false;drawCook();
   try{lock=await navigator.wakeLock?.request('screen')}catch{}}
 function closeCook(){$('#cook').hidden=true;try{lock?.release()}catch{}lock=null}
 $('#ck-x').addEventListener('click',closeCook);
 $('#ck-prev').addEventListener('click',()=>{if(ck.i>0){ck.i--;drawCook()}});
-$('#ck-next').addEventListener('click',()=>{const n=M.ricette[ck.id].passi.length;if(ck.i<n-1){ck.i++;drawCook()}else closeCook()});
+$('#ck-next').addEventListener('click',()=>{const n=RR(ck.id).passi.length;if(ck.i<n-1){ck.i++;drawCook()}else closeCook()});
 addEventListener('keydown',e=>{if(e.key==='Escape'){closeSheet();closeCook()}
   if(!$('#cook').hidden){if(e.key==='ArrowRight')$('#ck-next').click();if(e.key==='ArrowLeft')$('#ck-prev').click()}});
 document.addEventListener('click',e=>{const o=e.target.closest('[data-open]'),c=e.target.closest('[data-cook]'),d=e.target.closest('[data-d]');
@@ -499,7 +523,8 @@ function saveLocal(){LS.set('pasti-spunte',[...spunte]);LS.set('pasti-extra',ext
 async function pull(){if(!sb)return;
   const [a,b]=await Promise.all([sb.from('spunte').select('id'),sb.from('extra').select('*').order('creato')]);
   if(a.error||b.error){syncState='err';renderSpesa();return}
-  spunte=new Set(a.data.map(x=>x.id));extra=b.data;syncState='ok';saveLocal();renderSpesa()}
+  spunte=new Set(a.data.map(x=>x.id));extra=b.data;syncState='ok';saveLocal();renderSpesa();pullFav()}
+async function pullFav(){if(!sb)return;const {data,error}=await sb.from('preferiti').select('id');if(error)return;P=new Set(data.map(x=>x.id));LS.set('pasti-preferiti',[...P]);if(M)renderRicette()}
 async function run(q){const {error}=await q;if(error){syncState='err';renderSpesa();setTimeout(pull,1500)}else ping()}
 let ch=null;function ping(){try{ch?.send({type:'broadcast',event:'cambio',payload:{}})}catch{}}
 async function toggleItem(it){const id=K(it);const on=!spunte.has(id);on?spunte.add(id):spunte.delete(id);fx=on?id:null;saveLocal();renderSpesa();
@@ -517,6 +542,12 @@ $('#addf').addEventListener('submit',async e=>{e.preventDefault();const v=$('#ad
   else{extra.push({id:'l'+Date.now(),nome:v,fatto:false});saveLocal();renderSpesa()}});
 let armed=false;
 $('#cerca').addEventListener('input',filtra);
+$('#rcerca').addEventListener('input',()=>renderRicette());
+document.querySelector('.seg').addEventListener('click',e=>{const b=e.target.closest('[data-rv]');if(!b)return;rview=b.dataset.rv;renderRicette()});
+async function toggleFav(id){const on=!P.has(id);on?P.add(id):P.delete(id);LS.set('pasti-preferiti',[...P]);renderRicette();
+  document.querySelectorAll('#sh [data-fav]').forEach(b=>{b.setAttribute('aria-pressed',P.has(b.dataset.fav));b.setAttribute('aria-label',P.has(b.dataset.fav)?'Togli dai preferiti':'Aggiungi ai preferiti')});
+  if(sb)await run(on?sb.from('preferiti').upsert({id}):sb.from('preferiti').delete().eq('id',id))}
+document.addEventListener('click',e=>{const f=e.target.closest('[data-fav]');if(f){e.stopPropagation();toggleFav(f.dataset.fav)}},true);
 $('#reset').addEventListener('click',async()=>{const b=$('#reset');
   if(!armed){armed=true;b.textContent='Sicuro?';setTimeout(()=>{armed=false;b.textContent='Azzera spunte'},3500);return}
   armed=false;b.textContent='Azzera spunte';spunte=new Set();extra=extra.filter(e=>!e.fatto);saveLocal();renderSpesa();
@@ -545,6 +576,8 @@ $('#pin-chg').addEventListener('click',()=>{LS.set('pasti-casa','');sb=null;sync
 /* ---------- avvio ---------- */
 spunte=new Set(LS.get('pasti-spunte',[]));extra=LS.get('pasti-extra',[]);
 route();
+P=new Set(LS.get('pasti-preferiti',[]));
+fetch('ricettario.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).then(d=>{A=(d&&d.ricette)||{};if(M)renderRicette()}).catch(()=>{});
 fetch('menu.json',{cache:'no-cache'}).then(r=>r.json()).then(d=>{M=d;const ti=todayIdx();sel=Math.min(Math.max(ti,0),M.giorni.length-1);renderAll()})
   .catch(()=>{$('#s-oggi').innerHTML='<div class="empty"><h2>Menù non raggiungibile</h2><p>Controlla la connessione e riapri l’app.</p></div>'});
 startSync();
