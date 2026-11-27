@@ -1,79 +1,73 @@
 {
  "titolo": "30 novembre – 6 dicembre",
  "inizio": "2026-11-30",
- "nota": "Turno di mattina: i pranzi segnati come avanzi si portano al lavoro. Le cene da 4 porzioni bastano anche per il pranzo del giorno dopo.",
+ "nota": "Un solo pranzo a doppia dose: la pasta e ceci di lunedì. L'altra metà la mangiate martedì a pranzo oppure lunedì sera. I pranzi da lunedì a sabato si possono portare al lavoro.",
  "offerte": [],
  "giorni": [
   {
-   "cena": {
-    "id": "chili",
-    "nota": "Doppia dose: metà per domani"
-   },
    "giorno": "Lunedì",
    "pranzo": {
-    "id": "wrap"
+    "id": "pastaceci",
+    "nota": "Doppia dose: l'altra metà domani a pranzo o stasera"
+   },
+   "cena": {
+    "id": "frittata"
    }
   },
   {
-   "cena": {
-    "id": "frittata",
-    "nota": "Doppia dose: metà per domani"
-   },
    "giorno": "Martedì",
    "pranzo": {
-    "id": "chili",
+    "id": "pastaceci",
     "nota": "Avanzi di lunedì"
+   },
+   "cena": {
+    "id": "curry"
    }
   },
   {
-   "cena": {
-    "id": "pastaceci",
-    "nota": "Doppia dose: metà per domani"
-   },
    "giorno": "Mercoledì",
    "pranzo": {
-    "id": "frittata",
-    "nota": "Avanzi di martedì, con insalata"
+    "id": "wrap"
+   },
+   "cena": {
+    "id": "risotto"
    }
   },
   {
-   "cena": {
-    "id": "curry",
-    "nota": "Doppia dose: metà per domani"
-   },
    "giorno": "Giovedì",
-   "pranzo": {
-    "id": "pastaceci",
-    "nota": "Avanzi di mercoledì"
-   }
-  },
-  {
-   "cena": {
-    "id": "pizza"
-   },
-   "giorno": "Venerdì",
-   "pranzo": {
-    "id": "curry",
-    "nota": "Avanzi di giovedì"
-   }
-  },
-  {
-   "cena": {
-    "id": "burger"
-   },
-   "giorno": "Sabato",
    "pranzo": {
     "id": "farro",
     "nota": "Il farro si può cuocere la sera prima"
+   },
+   "cena": {
+    "id": "chili"
    }
   },
   {
-   "cena": {
-    "id": "vellutata"
+   "giorno": "Venerdì",
+   "pranzo": {
+    "id": "insalatariso"
    },
+   "cena": {
+    "id": "pizza"
+   }
+  },
+  {
+   "giorno": "Sabato",
+   "pranzo": {
+    "id": "pastazucchine"
+   },
+   "cena": {
+    "id": "burger"
+   }
+  },
+  {
    "giorno": "Domenica",
    "pranzo": {
-    "id": "risotto"
+    "id": "gnocchi"
+   },
+   "cena": {
+    "id": "vellutata"
    }
   }
  ],
@@ -103,27 +97,26 @@
   },
   "chili": {
    "ingredienti": [
-    "1 cipolla",
-    "1 peperone",
-    "2 carote",
-    "3 lattine di fagioli rossi",
-    "1 lattina di mais",
-    "2 lattine di pomodori pelati",
-    "1 cucchiaino di cumino, 1 di paprika",
-    "300 g di riso basmati",
+    "½ cipolla",
+    "½ peperone",
+    "1 carota",
+    "1 lattina di fagioli rossi",
+    "½ lattina di mais",
+    "1 lattina di pomodori pelati",
+    "½ cucchiaino di cumino, ½ di paprika",
+    "150 g di riso basmati",
     "Olio, sale"
    ],
    "nome": "Chili sin carne con riso",
    "passi": [
-    "Trita cipolla, carote e peperone e falli appassire in pentola con l'olio per 8 minuti.",
-    "Aggiungi cumino e paprika, mescola per 1 minuto.",
-    "Unisci pelati schiacciati, fagioli e mais scolati. Sala e cuoci 25 minuti a fuoco basso.",
-    "Intanto cuoci il riso in acqua salata.",
-    "Metti da parte 2 porzioni in un contenitore per il pranzo di domani."
+    "Trita cipolla, carota e peperone e falli appassire in padella con l'olio per 8 minuti.",
+    "Aggiungi cumino e paprika e mescola per 1 minuto.",
+    "Unisci pelati schiacciati, fagioli e mais scolati, sala e cuoci 20 minuti a fuoco basso.",
+    "Intanto cuoci il riso in acqua salata e servi il chili sopra."
    ],
    "portabile": true,
-   "porzioni": "4 porzioni",
-   "tempo": "40 min",
+   "porzioni": "2 porzioni",
+   "tempo": "35 min",
    "tipo": "vegano",
    "forma": "ciotola",
    "colori": [
@@ -135,25 +128,25 @@
   },
   "curry": {
    "ingredienti": [
-    "250 g di lenticchie rosse",
-    "1 lattina di latte di cocco",
-    "1 lattina di pomodori pelati",
-    "200 g di spinaci surgelati",
-    "1 cipolla, 2 spicchi d'aglio",
-    "2 cucchiaini di curry in polvere",
-    "300 g di riso basmati",
+    "125 g di lenticchie rosse",
+    "½ lattina di latte di cocco (200 ml)",
+    "½ lattina di pomodori pelati",
+    "100 g di spinaci surgelati",
+    "½ cipolla, 1 spicchio d'aglio",
+    "1 cucchiaino di curry in polvere",
+    "150 g di riso basmati",
     "Olio, sale, limone"
    ],
    "nome": "Curry di lenticchie rosse e cocco",
    "passi": [
     "Soffriggi cipolla e aglio tritati con l'olio per 5 minuti, poi aggiungi il curry per 1 minuto.",
-    "Aggiungi lenticchie sciacquate, pelati, latte di cocco e 300 ml d'acqua.",
-    "Cuoci 20 minuti mescolando: le lenticchie si sfaldano e il curry si addensa.",
-    "Negli ultimi 5 minuti unisci gli spinaci. Sala e aggiungi qualche goccia di limone.",
-    "Servi con il riso basmati. Metti da parte 2 porzioni per domani."
+    "Aggiungi lenticchie sciacquate, pelati, latte di cocco e 150 ml d'acqua.",
+    "Cuoci 18 minuti mescolando, finché le lenticchie si sfaldano.",
+    "Negli ultimi 5 minuti unisci gli spinaci, sala e aggiungi qualche goccia di limone.",
+    "Servi con il riso basmati cotto intanto in acqua salata."
    ],
    "portabile": true,
-   "porzioni": "4 porzioni",
+   "porzioni": "2 porzioni",
    "tempo": "30 min",
    "tipo": "vegano",
    "forma": "ciotola",
@@ -194,24 +187,23 @@
   },
   "frittata": {
    "ingredienti": [
-    "8 uova",
-    "500 g di patate",
-    "400 g di spinaci surgelati",
-    "½ cipolla",
-    "50 g di grana grattugiato",
+    "4 uova",
+    "250 g di patate",
+    "200 g di spinaci surgelati",
+    "¼ di cipolla",
+    "30 g di grana grattugiato",
     "Olio, sale, pepe"
    ],
    "nome": "Frittata in padella con patate e spinaci",
    "passi": [
-    "Taglia le patate a cubetti piccoli e cuocile in una padella grande con olio e cipolla per 12 minuti, coperte.",
+    "Taglia le patate a cubetti piccoli e cuocile in padella con olio e cipolla per 10 minuti, coperte.",
     "Aggiungi gli spinaci surgelati e cuoci 5 minuti, finché l'acqua evapora.",
     "Sbatti le uova con grana, sale e pepe e versale nella padella.",
-    "Cuoci coperto a fuoco basso per 8 minuti, poi gira la frittata aiutandoti con il coperchio e cuoci altri 3 minuti.",
-    "È buona anche fredda: metà va nel contenitore per domani."
+    "Cuoci coperto a fuoco basso per 6 minuti, gira la frittata con il coperchio e cuoci altri 2 minuti."
    ],
    "portabile": true,
-   "porzioni": "4 porzioni",
-   "tempo": "30 min",
+   "porzioni": "2 porzioni",
+   "tempo": "25 min",
    "tipo": "vegetariano",
    "forma": "frittata",
    "colori": [
@@ -237,10 +229,10 @@
     "Aggiungi i ceci scolati, la passata, il rosmarino e 1 litro d'acqua. Cuoci 10 minuti.",
     "Frulla un terzo dei ceci con un mestolo di brodo e rimettili in pentola: diventa cremosa.",
     "Butta la pasta direttamente nella pentola e cuoci, aggiungendo acqua se serve.",
-    "Fai riposare 5 minuti e finisci con un filo d'olio a crudo."
+    "Fai riposare 5 minuti e finisci con un filo d'olio a crudo. Metti metà in un contenitore."
    ],
    "portabile": true,
-   "porzioni": "4 porzioni",
+   "porzioni": "4 porzioni (doppia dose)",
    "tempo": "35 min",
    "tipo": "vegano",
    "forma": "ciotola",
@@ -362,267 +354,380 @@
     "#d9432a",
     "#f3e7c9"
    ]
+  },
+  "insalatariso": {
+   "nome": "Insalata di riso con piselli, mais e uova",
+   "tipo": "vegetariano",
+   "tempo": "25 min",
+   "porzioni": "2 porzioni",
+   "portabile": true,
+   "ingredienti": [
+    "160 g di riso basmati",
+    "150 g di piselli surgelati",
+    "½ lattina di mais",
+    "2 uova",
+    "100 g di pomodorini",
+    "½ limone, olio, sale"
+   ],
+   "passi": [
+    "Cuoci il riso in acqua salata; negli ultimi 4 minuti aggiungi i piselli nella stessa pentola.",
+    "Intanto rassoda le uova: 9 minuti in acqua che bolle, poi in acqua fredda.",
+    "Scola riso e piselli e passali sotto l'acqua fredda.",
+    "Unisci mais scolato, pomodorini a metà e uova a spicchi.",
+    "Condisci con olio, succo di limone e sale."
+   ],
+   "forma": "ciotola",
+   "colori": [
+    "#f3e3b0",
+    "#f2c230",
+    "#7fb347",
+    "#ffffff"
+   ]
+  },
+  "pastazucchine": {
+   "nome": "Pasta con zucchine, limone e mandorle",
+   "tipo": "vegano",
+   "tempo": "20 min",
+   "porzioni": "2 porzioni",
+   "portabile": true,
+   "ingredienti": [
+    "180 g di penne",
+    "2 zucchine",
+    "1 limone (scorza e succo)",
+    "1 spicchio d'aglio",
+    "30 g di mandorle a lamelle (facoltative)",
+    "Olio, sale, pepe"
+   ],
+   "passi": [
+    "Metti a bollire l'acqua per la pasta.",
+    "Taglia le zucchine a rondelle sottili e cuocile in padella con olio e aglio per 8 minuti.",
+    "Cuoci la pasta e scolala tenendo un mestolo d'acqua di cottura.",
+    "Salta la pasta con le zucchine, l'acqua di cottura, la scorza e un po' di succo di limone.",
+    "Finisci con le mandorle tostate in padella 2 minuti e un filo d'olio."
+   ],
+   "forma": "ciotola",
+   "colori": [
+    "#e9cf8f",
+    "#7fb347",
+    "#f6e27a",
+    "#5c8f3a"
+   ]
+  },
+  "gnocchi": {
+   "nome": "Gnocchi al pomodoro e mozzarella",
+   "tipo": "vegetariano",
+   "tempo": "20 min",
+   "porzioni": "2 porzioni",
+   "portabile": false,
+   "ingredienti": [
+    "500 g di gnocchi di patate freschi",
+    "200 g di passata di pomodoro",
+    "1 mozzarella",
+    "½ cipolla",
+    "Origano, olio, sale"
+   ],
+   "passi": [
+    "Soffriggi la cipolla tritata con l'olio per 4 minuti.",
+    "Aggiungi la passata, sala e cuoci 10 minuti.",
+    "Cuoci gli gnocchi in acqua salata: sono pronti quando salgono a galla.",
+    "Scolali nel sugo, aggiungi la mozzarella a cubetti e l'origano, mescola finché fila."
+   ],
+   "forma": "ciotola",
+   "colori": [
+    "#d9432a",
+    "#f7e7c4",
+    "#ffffff",
+    "#3f7d3a"
+   ]
   }
  },
  "spesa": [
   {
    "id": "cipolle",
    "nome": "Cipolle",
-   "prezzo": 1.29,
    "qty": "rete da 1 kg",
-   "reparto": "Frutta e verdura"
+   "reparto": "Frutta e verdura",
+   "prezzo": 1.29
   },
   {
    "id": "aglio",
    "nome": "Aglio",
-   "prezzo": 0.99,
    "qty": "1 retina",
-   "reparto": "Frutta e verdura"
+   "reparto": "Frutta e verdura",
+   "prezzo": 0.99
   },
   {
    "id": "carote",
    "nome": "Carote",
-   "prezzo": 0.99,
    "qty": "1 kg",
-   "reparto": "Frutta e verdura"
+   "reparto": "Frutta e verdura",
+   "prezzo": 0.99
   },
   {
    "id": "patate",
    "nome": "Patate",
-   "prezzo": 1.99,
    "qty": "2 kg",
-   "reparto": "Frutta e verdura"
+   "reparto": "Frutta e verdura",
+   "prezzo": 1.99
   },
   {
    "id": "zucca",
    "nome": "Zucca",
-   "prezzo": 1.49,
    "qty": "circa 1 kg",
-   "reparto": "Frutta e verdura"
+   "reparto": "Frutta e verdura",
+   "prezzo": 1.49
   },
   {
    "id": "peperoni",
    "nome": "Peperoni",
-   "prezzo": 1.79,
    "qty": "2 pezzi",
-   "reparto": "Frutta e verdura"
+   "reparto": "Frutta e verdura",
+   "prezzo": 1.79
   },
   {
    "id": "zucchine",
    "nome": "Zucchine",
-   "prezzo": 1.29,
-   "qty": "500 g",
-   "reparto": "Frutta e verdura"
+   "qty": "1 kg",
+   "reparto": "Frutta e verdura",
+   "prezzo": 2.49
   },
   {
    "id": "melanzana",
    "nome": "Melanzana",
-   "prezzo": 0.89,
    "qty": "1 pezzo",
-   "reparto": "Frutta e verdura"
+   "reparto": "Frutta e verdura",
+   "prezzo": 0.89
   },
   {
    "id": "pomodorini",
    "nome": "Pomodorini",
-   "prezzo": 1.79,
    "qty": "500 g",
-   "reparto": "Frutta e verdura"
+   "reparto": "Frutta e verdura",
+   "prezzo": 1.79
   },
   {
    "id": "cetriolo",
    "nome": "Cetriolo",
-   "prezzo": 0.59,
    "qty": "1 pezzo",
-   "reparto": "Frutta e verdura"
+   "reparto": "Frutta e verdura",
+   "prezzo": 0.59
   },
   {
    "id": "insalata",
    "nome": "Insalata in busta",
-   "prezzo": 1.98,
-   "qty": "2 confezioni",
-   "reparto": "Frutta e verdura"
+   "qty": "1 confezione",
+   "reparto": "Frutta e verdura",
+   "prezzo": 0.99
   },
   {
    "id": "limoni",
    "nome": "Limoni",
-   "prezzo": 0.99,
    "qty": "1 retina",
-   "reparto": "Frutta e verdura"
+   "reparto": "Frutta e verdura",
+   "prezzo": 0.99
   },
   {
    "id": "piadine",
    "nome": "Piadine o tortillas",
-   "prezzo": 1.29,
    "qty": "1 confezione",
-   "reparto": "Pane"
+   "reparto": "Pane",
+   "prezzo": 1.29
   },
   {
    "id": "panini",
    "nome": "Panini per hamburger",
-   "prezzo": 1.19,
    "qty": "4 pezzi",
-   "reparto": "Pane"
+   "reparto": "Pane",
+   "prezzo": 1.19
   },
   {
    "id": "pane",
    "nome": "Pane casereccio",
-   "prezzo": 1.29,
    "qty": "1 pezzo",
-   "reparto": "Pane"
+   "reparto": "Pane",
+   "prezzo": 1.29
   },
   {
    "id": "uova",
    "nome": "Uova",
-   "prezzo": 2.19,
-   "qty": "10 pezzi",
-   "reparto": "Frigo"
+   "qty": "6 pezzi",
+   "reparto": "Frigo",
+   "prezzo": 1.39
   },
   {
    "id": "mozzarella",
    "nome": "Mozzarella",
-   "prezzo": 1.58,
-   "qty": "2 × 125 g",
-   "reparto": "Frigo"
+   "qty": "3 × 125 g",
+   "reparto": "Frigo",
+   "prezzo": 2.37
   },
   {
    "id": "feta",
    "nome": "Feta",
-   "prezzo": 1.49,
    "qty": "200 g",
-   "reparto": "Frigo"
+   "reparto": "Frigo",
+   "prezzo": 1.49
   },
   {
    "id": "scamorza",
    "nome": "Scamorza affumicata",
-   "prezzo": 1.29,
    "qty": "1 pezzo",
-   "reparto": "Frigo"
+   "reparto": "Frigo",
+   "prezzo": 1.29
   },
   {
    "id": "grana",
    "nome": "Grana grattugiato",
-   "prezzo": 1.79,
    "qty": "100 g",
-   "reparto": "Frigo"
+   "reparto": "Frigo",
+   "prezzo": 1.79
   },
   {
    "id": "hummus",
    "nome": "Hummus",
-   "prezzo": 2.78,
    "qty": "2 confezioni da 200 g",
-   "reparto": "Frigo"
+   "reparto": "Frigo",
+   "prezzo": 2.78
   },
   {
    "id": "burger",
    "nome": "Burger vegetali",
-   "prezzo": 4.98,
    "qty": "2 confezioni",
-   "reparto": "Frigo"
+   "reparto": "Frigo",
+   "prezzo": 4.98
   },
   {
    "id": "pastapizza",
    "nome": "Pasta per pizza stesa",
-   "prezzo": 2.38,
    "qty": "2 rotoli",
-   "reparto": "Frigo"
+   "reparto": "Frigo",
+   "prezzo": 2.38
+  },
+  {
+   "id": "gnocchi",
+   "nome": "Gnocchi di patate freschi",
+   "qty": "500 g",
+   "reparto": "Frigo",
+   "prezzo": 1.29
   },
   {
    "id": "fagioli",
    "nome": "Fagioli rossi in lattina",
-   "prezzo": 1.77,
-   "qty": "3 lattine",
-   "reparto": "Dispensa"
+   "qty": "1 lattina",
+   "reparto": "Dispensa",
+   "prezzo": 0.59
   },
   {
    "id": "mais",
    "nome": "Mais in lattina",
-   "prezzo": 0.69,
    "qty": "1 lattina",
-   "reparto": "Dispensa"
+   "reparto": "Dispensa",
+   "prezzo": 0.69
   },
   {
    "id": "ceci",
    "nome": "Ceci in lattina",
-   "prezzo": 2.36,
    "qty": "4 lattine",
-   "reparto": "Dispensa"
+   "reparto": "Dispensa",
+   "prezzo": 2.36
   },
   {
    "id": "lenticchie",
    "nome": "Lenticchie rosse decorticate",
-   "prezzo": 1.49,
    "qty": "500 g",
-   "reparto": "Dispensa"
+   "reparto": "Dispensa",
+   "prezzo": 1.49
   },
   {
    "id": "pelati",
    "nome": "Pomodori pelati",
-   "prezzo": 1.77,
-   "qty": "3 lattine",
-   "reparto": "Dispensa"
+   "qty": "2 lattine",
+   "reparto": "Dispensa",
+   "prezzo": 1.18
   },
   {
    "id": "passata",
    "nome": "Passata di pomodoro",
-   "prezzo": 0.79,
    "qty": "1 bottiglia da 700 g",
-   "reparto": "Dispensa"
+   "reparto": "Dispensa",
+   "prezzo": 0.79
   },
   {
    "id": "cocco",
    "nome": "Latte di cocco",
-   "prezzo": 1.29,
    "qty": "1 lattina da 400 ml",
-   "reparto": "Dispensa"
+   "reparto": "Dispensa",
+   "prezzo": 1.29
   },
   {
    "id": "basmati",
    "nome": "Riso basmati",
-   "prezzo": 1.99,
    "qty": "1 kg",
-   "reparto": "Dispensa"
+   "reparto": "Dispensa",
+   "prezzo": 1.99
   },
   {
    "id": "carnaroli",
    "nome": "Riso Carnaroli",
-   "prezzo": 2.19,
    "qty": "1 kg",
-   "reparto": "Dispensa"
+   "reparto": "Dispensa",
+   "prezzo": 2.19
   },
   {
    "id": "ditalini",
    "nome": "Pasta ditalini",
-   "prezzo": 0.69,
    "qty": "500 g",
-   "reparto": "Dispensa"
+   "reparto": "Dispensa",
+   "prezzo": 0.69
+  },
+  {
+   "id": "penne",
+   "nome": "Penne",
+   "qty": "500 g",
+   "reparto": "Dispensa",
+   "prezzo": 0.69
   },
   {
    "id": "farro",
    "nome": "Farro perlato",
-   "prezzo": 1.49,
    "qty": "400 g",
-   "reparto": "Dispensa"
+   "reparto": "Dispensa",
+   "prezzo": 1.49
+  },
+  {
+   "id": "mandorle",
+   "nome": "Mandorle a lamelle",
+   "qty": "1 bustina (facoltative)",
+   "reparto": "Dispensa",
+   "prezzo": 1.79
   },
   {
    "id": "curry",
    "nome": "Curry in polvere",
-   "prezzo": 0.99,
    "qty": "1 barattolo",
-   "reparto": "Dispensa"
+   "reparto": "Dispensa",
+   "prezzo": 0.99
   },
   {
    "id": "spezie",
    "nome": "Cumino e paprika",
-   "prezzo": 1.98,
    "qty": "solo se mancano",
-   "reparto": "Dispensa"
+   "reparto": "Dispensa",
+   "prezzo": 1.98
   },
   {
    "id": "spinaci",
    "nome": "Spinaci surgelati",
-   "prezzo": 1.49,
-   "qty": "1 kg",
-   "reparto": "Surgelati"
+   "qty": "1 confezione",
+   "reparto": "Surgelati",
+   "prezzo": 1.49
+  },
+  {
+   "id": "piselli",
+   "nome": "Piselli surgelati",
+   "qty": "450 g",
+   "reparto": "Surgelati",
+   "prezzo": 1.09
   }
  ],
  "inCasa": [
