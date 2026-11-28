@@ -201,6 +201,11 @@ svg.ic{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-wid
 .it .nm{display:inline;font-weight:500;line-height:1.3;-webkit-box-decoration-break:clone;box-decoration-break:clone;
   background:linear-gradient(var(--penna),var(--penna)) 0 58%/0 2.5px no-repeat}
 .it .q{display:block;margin-top:2px;font-size:15px;line-height:1.3;color:var(--mut)}
+.presi summary{list-style:none;display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding-right:20px}
+.presi summary::-webkit-details-marker{display:none}
+.presi summary h3{color:var(--mut)}
+.presi summary::after{content:"";flex:none;width:9px;height:9px;border-right:2px solid var(--mut);border-bottom:2px solid var(--mut);transform:translateY(-3px) rotate(45deg);transition:transform .2s var(--ease)}
+.presi[open] summary::after{transform:translateY(2px) rotate(-135deg)}
 .rimossi{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:4px;font-size:13px;color:var(--mut)}
 .rimossi b{font-weight:600;margin-right:2px}
 .rimossi button{min-height:36px;padding:0 12px;border-radius:18px;border:1px solid var(--riga);background:var(--foglio);color:var(--ink);font:500 14px var(--font);cursor:pointer}
@@ -424,7 +429,7 @@ const THUMB='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 15H5.5a2 2
 const HEART='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>';
 const K=id=>(M?.inizio||'')+':'+id;
 let M=null,spunte=new Set(),extra=[],sel=0,sb=null,syncState='local';
-let fx=null; // riga appena spuntata: solo lei anima il tratto di penna
+let fx=null,presiOpen=false; // riga appena spuntata: solo lei anima il tratto di penna
 
 /* ---------- icone ---------- */
 const ic=d=>`<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${d}</svg>`;
@@ -522,8 +527,15 @@ function renderSpesa(){if(!M)return;
     HID=(M.spesa||[]).filter(it=>gia(it)&&!spunte.has(RMK(it.id))),S=(M.spesa||[]).filter(it=>!gia(it)&&!spunte.has(RMK(it.id))),by={};
   const rb=$('#sp-rim');rb.hidden=!RM.length;rb.innerHTML=RM.length?'<b>Tolti dalla lista:</b>'+RM.map(x=>`<button type="button" data-unrm="${esc(x.id)}" aria-label="Rimetti ${esc(x.nome)}">${esc(x.nome)}</button>`).join(''):'';for(const it of S)(by[it.reparto]||(by[it.reparto]=[])).push(it);
   const order=[...REP.filter(r=>by[r]),...Object.keys(by).filter(r=>!REP.includes(r))];
-  $('#lista').innerHTML=order.map(rep=>`<div class="grp"><h3>${esc(rep)}${rep==='Casa e igiene'?' <span class="nf">non cibo, non usato per le ricette</span>':''}</h3>${by[rep].map(it=>`<div class="it${spunte.has(K(it.id))?' done':''}${fx===K(it.id)?' fx':''}" data-id="${esc(it.id)}" role="checkbox" aria-checked="${spunte.has(K(it.id))}" tabindex="0">${check}<span class="tx"><span class="nm">${esc(it.nome)}</span><span class="q">${esc(it.qty)}</span></span><span class="pr">${eur(it.prezzo)}</span><button class="x" data-rm="${esc(it.id)}" type="button" aria-label="Togli ${esc(it.nome)} dalla lista">${I.x}</button></div>`).join('')}</div>`).join('');
-  $('#extra').innerHTML=extra.length?extra.map(e=>`<div class="it${e.fatto?' done':''}${fx==='e:'+e.id?' fx':''}" data-e="${esc(e.id)}" role="checkbox" aria-checked="${!!e.fatto}" tabindex="0">${check}<span class="tx"><span class="nm">${esc(e.nome)}</span></span><button class="x" data-x="${esc(e.id)}" type="button" aria-label="Rimuovi">${I.x}</button></div>`).join(''):'<p class="hint">Quello che manca in casa: lo vedete tutti e due.</p>';
+  const tk=it=>spunte.has(K(it.id)),vis=it=>!tk(it)||fx===K(it.id),PR=S.filter(it=>!vis(it)),PE=extra.filter(e=>e.fatto&&fx!=='e:'+e.id);
+  for(const r of order){by[r]=by[r].filter(vis);if(!by[r].length)delete by[r]}
+  const row=it=>`<div class="it done" data-id="${esc(it.id)}" role="checkbox" aria-checked="true" tabindex="0">${check}<span class="tx"><span class="nm">${esc(it.nome)}</span><span class="q">${esc(it.qty)}</span></span><span class="pr">${eur(it.prezzo)}</span></div>`;
+  const rowE=e=>`<div class="it done" data-e="${esc(e.id)}" role="checkbox" aria-checked="true" tabindex="0">${check}<span class="tx"><span class="nm">${esc(e.nome)}</span></span></div>`;
+  const presi=PR.length+PE.length?`<details class="grp presi" id="presi"${presiOpen?' open':''}><summary><h3>Già presi (${PR.length+PE.length})</h3></summary><p class="hint">Tocca un prodotto per rimetterlo da comprare.</p>${PR.map(row).join('')}${PE.map(rowE).join('')}</details>`:'';
+  $('#lista').innerHTML=order.filter(r=>by[r]).map(rep=>`<div class="grp"><h3>${esc(rep)}${rep==='Casa e igiene'?' <span class="nf">non cibo, non usato per le ricette</span>':''}</h3>${by[rep].map(it=>`<div class="it${spunte.has(K(it.id))?' done':''}${fx===K(it.id)?' fx':''}" data-id="${esc(it.id)}" role="checkbox" aria-checked="${spunte.has(K(it.id))}" tabindex="0">${check}<span class="tx"><span class="nm">${esc(it.nome)}</span><span class="q">${esc(it.qty)}</span></span><span class="pr">${eur(it.prezzo)}</span><button class="x" data-rm="${esc(it.id)}" type="button" aria-label="Togli ${esc(it.nome)} dalla lista">${I.x}</button></div>`).join('')}</div>`).join('')+presi;
+  $('#presi')?.addEventListener('toggle',e=>{presiOpen=e.target.open});
+  const EX=extra.filter(e=>!e.fatto||fx==='e:'+e.id);
+  $('#extra').innerHTML=EX.length?EX.map(e=>`<div class="it${e.fatto?' done':''}${fx==='e:'+e.id?' fx':''}" data-e="${esc(e.id)}" role="checkbox" aria-checked="${!!e.fatto}" tabindex="0">${check}<span class="tx"><span class="nm">${esc(e.nome)}</span></span><button class="x" data-x="${esc(e.id)}" type="button" aria-label="Rimuovi">${I.x}</button></div>`).join(''):'<p class="hint">Quello che manca in casa: lo vedete tutti e due.</p>';
   fx=null;
   const done=S.filter(i=>spunte.has(K(i.id))).length+extra.filter(e=>e.fatto).length,all=S.length+extra.length,p=all?done/all:0;
   const left=S.filter(i=>!spunte.has(K(i.id))).reduce((a,b)=>a+(Number(b.prezzo)||0),0);
@@ -678,11 +690,11 @@ async function pull(){if(!sb)return;
 async function pullFav(){if(!sb)return;const {data,error}=await sb.from('preferiti').select('id');if(error)return;P=new Set(data.map(x=>x.id));LS.set('pasti-preferiti',[...P]);const nb=await sb.from('bocciati').select('id');if(!nb.error){B=new Set(nb.data.map(x=>x.id));LS.set('pasti-bocciati',[...B])}if(M)renderRicette();pullCasa()}
 async function run(q){const {error}=await q;if(error){syncState='err';renderSpesa();setTimeout(pull,1500)}else ping()}
 let ch=null;function ping(){try{ch?.send({type:'broadcast',event:'cambio',payload:{}})}catch{}}
-async function toggleItem(it){const id=K(it);const on=!spunte.has(id);on?spunte.add(id):spunte.delete(id);fx=on?id:null;saveLocal();
+async function toggleItem(it){const id=K(it);const on=!spunte.has(id);on?spunte.add(id):spunte.delete(id);fx=on?id:null;saveLocal();if(on)setTimeout(renderSpesa,700);
   const sp=(M.spesa||[]).find(x=>x.id===it);if(on&&sp){const ci=casaItems()[linkOf(sp)];if(ci&&CS[ci.id]&&!CS[ci.id].ce)setCasa(ci.id,true,ci.nome,ci.reparto)}
   renderSpesa();
   if(sb)await run(on?sb.from('spunte').upsert({id}):sb.from('spunte').delete().eq('id',id))}
-async function toggleExtra(id){const e=extra.find(x=>String(x.id)===id);if(!e)return;e.fatto=!e.fatto;fx=e.fatto?'e:'+id:null;saveLocal();renderSpesa();
+async function toggleExtra(id){const e=extra.find(x=>String(x.id)===id);if(!e)return;e.fatto=!e.fatto;fx=e.fatto?'e:'+id:null;saveLocal();renderSpesa();if(e.fatto)setTimeout(renderSpesa,700);
   if(sb)await run(sb.from('extra').update({fatto:e.fatto}).eq('id',id))}
 async function removeExtra(id){extra=extra.filter(x=>String(x.id)!==id);saveLocal();renderSpesa();
   if(sb)await run(sb.from('extra').delete().eq('id',id))}
