@@ -512,9 +512,9 @@ function renderRicette(){if(!M)return;
   const none=$('#r-none');none.hidden=ids.length>0;none.textContent=q?'Nessuna ricetta trovata.':rview==='preferiti'?'Nessun preferito ancora: tocca il cuore su una ricetta che vi è piaciuta.':''}
 const check='<span class="chk"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span>';
 function renderSpesa(){if(!M)return;
-  const S=M.spesa||[],by={},CI=casaItems(),gia=it=>!spunte.has(K(it.id))&&CI[linkOf(it)]?.on;for(const it of S)(by[it.reparto]||(by[it.reparto]=[])).push(it);
+  const CI=casaItems(),gia=it=>!spunte.has(K(it.id))&&CI[linkOf(it)]?.on,HID=(M.spesa||[]).filter(gia),S=(M.spesa||[]).filter(it=>!gia(it)),by={};for(const it of S)(by[it.reparto]||(by[it.reparto]=[])).push(it);
   const order=[...REP.filter(r=>by[r]),...Object.keys(by).filter(r=>!REP.includes(r))];
-  $('#lista').innerHTML=order.map(rep=>`<div class="grp"><h3>${esc(rep)}${rep==='Casa e igiene'?' <span class="nf">non cibo, non usato per le ricette</span>':''}</h3>${by[rep].map(it=>`<div class="it${spunte.has(K(it.id))?' done':''}${fx===K(it.id)?' fx':''}" data-id="${esc(it.id)}" role="checkbox" aria-checked="${spunte.has(K(it.id))}" tabindex="0">${check}<span class="tx"><span class="nm">${esc(it.nome)}</span><span class="q">${esc(it.qty)}</span>${gia(it)?'<span class="gia">Risulta già in casa</span>':''}</span><span class="pr">${eur(it.prezzo)}</span></div>`).join('')}</div>`).join('');
+  $('#lista').innerHTML=order.map(rep=>`<div class="grp"><h3>${esc(rep)}${rep==='Casa e igiene'?' <span class="nf">non cibo, non usato per le ricette</span>':''}</h3>${by[rep].map(it=>`<div class="it${spunte.has(K(it.id))?' done':''}${fx===K(it.id)?' fx':''}" data-id="${esc(it.id)}" role="checkbox" aria-checked="${spunte.has(K(it.id))}" tabindex="0">${check}<span class="tx"><span class="nm">${esc(it.nome)}</span><span class="q">${esc(it.qty)}</span></span><span class="pr">${eur(it.prezzo)}</span></div>`).join('')}</div>`).join('');
   $('#extra').innerHTML=extra.length?extra.map(e=>`<div class="it${e.fatto?' done':''}${fx==='e:'+e.id?' fx':''}" data-e="${esc(e.id)}" role="checkbox" aria-checked="${!!e.fatto}" tabindex="0">${check}<span class="tx"><span class="nm">${esc(e.nome)}</span></span><button class="x" data-x="${esc(e.id)}" type="button" aria-label="Rimuovi">${I.x}</button></div>`).join(''):'<p class="hint">Quello che manca in casa: lo vedete tutti e due.</p>';
   fx=null;
   const done=S.filter(i=>spunte.has(K(i.id))).length+extra.filter(e=>e.fatto).length,all=S.length+extra.length,p=all?done/all:0;
@@ -522,7 +522,7 @@ function renderSpesa(){if(!M)return;
   $('#sp-t').textContent=`${done} di ${all} presi`;
   $('#sp-s').textContent=left>0?`Restano circa ${eur(left)}`:'Spesa completata!';
   $('#ring').style.strokeDashoffset=(213.6*(1-p)).toFixed(1);$('#ring-t').textContent=Math.round(p*100)+'%';
-  $('#incasa').textContent='Di solito già in casa: '+(M.inCasa||[]).join(', ')+'.'+((M.dispensa||[]).length?' Avanzato dalle settimane scorse (non serve ricomprarlo): '+M.dispensa.map(d=>d.nome+(d.qty?' ('+d.qty+')':'')).join(', ')+'.':'');
+  $('#incasa').textContent=(HID.length?'Non in lista perché li avete già in casa: '+HID.map(x=>x.nome.toLowerCase()).join(', ')+'. Se uno è finito, segnalo come «Manca» in «In casa» e torna qui. ':'')+'Di solito già in casa: '+(M.inCasa||[]).join(', ')+'.'+((M.dispensa||[]).length?' Avanzato dalle settimane scorse (non serve ricomprarlo): '+M.dispensa.map(d=>d.nome+(d.qty?' ('+d.qty+')':'')).join(', ')+'.':'');
   const sy=$('#sync');sy.className='sync'+(syncState==='ok'?' ok':syncState==='err'?' err':'');
   sy.querySelector('span').textContent=syncState==='ok'?'Sincronizzata':syncState==='err'?'Non sincronizzata':syncState==='pin'?'Inserisci il codice di casa':'Solo su questo telefono';
   $('#pinf').hidden=syncState!=='pin';$('#pin-chg').hidden=syncState!=='ok'&&syncState!=='err';
@@ -554,10 +554,10 @@ function renderCasa(){
   $('#casa-lista').innerHTML=order.map(rep=>`<div class="grp"><h3>${esc(rep)}</h3>${by[rep].sort((x,y)=>x.nome.localeCompare(y.nome,'it')).map(it=>{const on=it.on;return `<div class="it${on?' done':''}" data-c="${esc(it.id)}" role="checkbox" aria-checked="${on}" tabindex="0">${check}<span class="tx"><span class="nm">${esc(it.nome)}</span><span class="q">${on?'C’è':'Manca'}</span></span>${it.ab?'':`<button class="x" data-cx="${esc(it.id)}" type="button" aria-label="Rimuovi">${I.x}</button>`}</div>`}).join('')}</div>`).join('');
   const none=$('#c-none');none.hidden=n>0;none.textContent=q?'Nessun prodotto trovato.':'La dispensa è vuota: aggiungi qui sotto quello che avete in casa.'}
 function setSview(v){sview=v;$('#sv-lista').hidden=v!=='lista';$('#sv-casa').hidden=v!=='casa';
-  document.querySelectorAll('[data-sv]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.sv===v));if(v==='casa')renderCasa()}
+  document.querySelectorAll('[data-sv]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.sv===v));if(v==='casa')renderCasa();else renderSpesa()}
 async function pullCasa(){if(!sb)return;const {data,error}=await sb.from('casa').select('*');if(error)return;
-  CS={};for(const r of data)CS[r.id]={ce:r.ce,nome:r.nome,reparto:r.reparto};LS.set('pasti-casa-stato',CS);if(sview==='casa')renderCasa()}
-async function setCasa(id,on,nome,reparto){CS[id]={...(CS[id]||{}),ce:on,nome,reparto};LS.set('pasti-casa-stato',CS);renderCasa();
+  CS={};for(const r of data)CS[r.id]={ce:r.ce,nome:r.nome,reparto:r.reparto};LS.set('pasti-casa-stato',CS);if(sview==='casa')renderCasa();renderSpesa()}
+async function setCasa(id,on,nome,reparto){CS[id]={...(CS[id]||{}),ce:on,nome,reparto};LS.set('pasti-casa-stato',CS);renderCasa();renderSpesa();
   if(sb)await run(sb.from('casa').upsert({id,nome,reparto,ce:on,aggiornato:new Date().toISOString()}))}
 function renderAll(){if(!M)return;renderOggi();renderSettimana();renderRicette();renderSpesa()}
 
