@@ -201,6 +201,11 @@ svg.ic{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-wid
 .it .nm{display:inline;font-weight:500;line-height:1.3;-webkit-box-decoration-break:clone;box-decoration-break:clone;
   background:linear-gradient(var(--penna),var(--penna)) 0 58%/0 2.5px no-repeat}
 .it .q{display:block;margin-top:2px;font-size:15px;line-height:1.3;color:var(--mut)}
+.rimossi{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:4px;font-size:13px;color:var(--mut)}
+.rimossi b{font-weight:600;margin-right:2px}
+.rimossi button{min-height:36px;padding:0 12px;border-radius:18px;border:1px solid var(--riga);background:var(--foglio);color:var(--ink);font:500 14px var(--font);cursor:pointer}
+.rimossi button::after{content:" ↺";color:var(--verza-t);font-weight:700}
+#casa-rim{margin-top:16px}
 .it .gia{display:block;margin-top:2px;font-size:13px;line-height:1.3;font-weight:600;color:var(--verza-t)}
 .it.done .gia{display:none}
 .it.done .nm{color:var(--mut);background-size:100% 2.5px}
@@ -362,13 +367,14 @@ form.add input::placeholder{color:var(--mut);opacity:1}
   <div id="lista"></div>
   <div class="grp"><h3>Aggiunti da voi</h3><div id="extra"></div>
     <form class="add" id="addf"><input id="addi" placeholder="Nuovo prodotto…" maxlength="80" aria-label="Nuovo prodotto" autocomplete="off"><button class="btn pri" type="submit">Aggiungi</button></form></div>
-  <div class="notes"><p class="small" id="incasa"></p>
+  <div class="notes"><div class="rimossi" id="sp-rim" hidden></div><p class="small" id="incasa"></p>
   <p class="small">Prezzi indicativi stimati, da verificare in negozio.</p></div>
   </div>
   <div id="sv-casa" hidden>
     <p class="help casa-help">Spuntate quello che avete in casa. Ogni sera alle 23:59 i pasti dei giorni dopo si adattano a quello che avete comprato e a quello che c'è.</p>
     <label class="cerca"><span class="lente" aria-hidden="true"></span><input id="ccerca" type="search" placeholder="Cerca…" autocomplete="off" autocorrect="off" enterkeyhint="search" aria-label="Cerca in casa"></label>
     <p class="small nessuno" id="c-none" hidden></p>
+    <div class="rimossi" id="casa-rim" hidden></div>
     <div id="casa-lista"></div>
     <div class="grp"><h3>Aggiungi alla dispensa</h3>
       <form class="add" id="casaf"><input id="casai" placeholder="Prodotto…" maxlength="80" aria-label="Prodotto in casa" autocomplete="off"><button class="btn pri" type="submit">Aggiungi</button></form></div>
@@ -512,9 +518,11 @@ function renderRicette(){if(!M)return;
   const none=$('#r-none');none.hidden=ids.length>0;none.textContent=q?'Nessuna ricetta trovata.':rview==='preferiti'?'Nessun preferito ancora: tocca il cuore su una ricetta che vi è piaciuta.':''}
 const check='<span class="chk"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span>';
 function renderSpesa(){if(!M)return;
-  const CI=casaItems(),gia=it=>!spunte.has(K(it.id))&&CI[linkOf(it)]?.on,HID=(M.spesa||[]).filter(gia),S=(M.spesa||[]).filter(it=>!gia(it)),by={};for(const it of S)(by[it.reparto]||(by[it.reparto]=[])).push(it);
+  const CI=casaItems(),gia=it=>!spunte.has(K(it.id))&&CI[linkOf(it)]?.on,RM=(M.spesa||[]).filter(it=>spunte.has(RMK(it.id))),
+    HID=(M.spesa||[]).filter(it=>gia(it)&&!spunte.has(RMK(it.id))),S=(M.spesa||[]).filter(it=>!gia(it)&&!spunte.has(RMK(it.id))),by={};
+  const rb=$('#sp-rim');rb.hidden=!RM.length;rb.innerHTML=RM.length?'<b>Tolti dalla lista:</b>'+RM.map(x=>`<button type="button" data-unrm="${esc(x.id)}" aria-label="Rimetti ${esc(x.nome)}">${esc(x.nome)}</button>`).join(''):'';for(const it of S)(by[it.reparto]||(by[it.reparto]=[])).push(it);
   const order=[...REP.filter(r=>by[r]),...Object.keys(by).filter(r=>!REP.includes(r))];
-  $('#lista').innerHTML=order.map(rep=>`<div class="grp"><h3>${esc(rep)}${rep==='Casa e igiene'?' <span class="nf">non cibo, non usato per le ricette</span>':''}</h3>${by[rep].map(it=>`<div class="it${spunte.has(K(it.id))?' done':''}${fx===K(it.id)?' fx':''}" data-id="${esc(it.id)}" role="checkbox" aria-checked="${spunte.has(K(it.id))}" tabindex="0">${check}<span class="tx"><span class="nm">${esc(it.nome)}</span><span class="q">${esc(it.qty)}</span></span><span class="pr">${eur(it.prezzo)}</span></div>`).join('')}</div>`).join('');
+  $('#lista').innerHTML=order.map(rep=>`<div class="grp"><h3>${esc(rep)}${rep==='Casa e igiene'?' <span class="nf">non cibo, non usato per le ricette</span>':''}</h3>${by[rep].map(it=>`<div class="it${spunte.has(K(it.id))?' done':''}${fx===K(it.id)?' fx':''}" data-id="${esc(it.id)}" role="checkbox" aria-checked="${spunte.has(K(it.id))}" tabindex="0">${check}<span class="tx"><span class="nm">${esc(it.nome)}</span><span class="q">${esc(it.qty)}</span></span><span class="pr">${eur(it.prezzo)}</span><button class="x" data-rm="${esc(it.id)}" type="button" aria-label="Togli ${esc(it.nome)} dalla lista">${I.x}</button></div>`).join('')}</div>`).join('');
   $('#extra').innerHTML=extra.length?extra.map(e=>`<div class="it${e.fatto?' done':''}${fx==='e:'+e.id?' fx':''}" data-e="${esc(e.id)}" role="checkbox" aria-checked="${!!e.fatto}" tabindex="0">${check}<span class="tx"><span class="nm">${esc(e.nome)}</span></span><button class="x" data-x="${esc(e.id)}" type="button" aria-label="Rimuovi">${I.x}</button></div>`).join(''):'<p class="hint">Quello che manca in casa: lo vedete tutti e due.</p>';
   fx=null;
   const done=S.filter(i=>spunte.has(K(i.id))).length+extra.filter(e=>e.fatto).length,all=S.length+extra.length,p=all?done/all:0;
@@ -544,14 +552,15 @@ function casaItems(){const items={};
   for(const x of M?.spesa||[]){const id=linkOf(x);
     if(!items[id])items[id]={id,nome:x.nome,reparto:x.reparto||'Altro',ab:1,def:false,cibo:true};
     if(spunte.has(K(x.id)))items[id].bought=1}
-  for(const it of Object.values(items))it.on=CS[it.id]?!!CS[it.id].ce:(it.def||!!it.bought);
+  for(const it of Object.values(items)){it.rim=CS[it.id]?.reparto===RIM;it.on=!it.rim&&(CS[it.id]?!!CS[it.id].ce:(it.def||!!it.bought))}
   return items}
 function renderCasa(){
-  const items=casaItems();
+  const all=casaItems(),items={},RMs=[];for(const [k,v] of Object.entries(all))(v.rim?RMs.push(v):items[k]=v);
+  const cr=$('#casa-rim');cr.hidden=!RMs.length;cr.innerHTML=RMs.length?'<b>Tolti dalla dispensa:</b>'+RMs.map(x=>`<button type="button" data-cunrm="${esc(x.id)}" aria-label="Rimetti ${esc(x.nome)}">${esc(x.nome)}</button>`).join(''):'';
   const q=norm(($('#ccerca')?.value||'').trim()),by={};let n=0;
   for(const it of Object.values(items)){if(q&&!norm(it.nome).includes(q))continue;n++;(by[it.reparto]||(by[it.reparto]=[])).push(it)}
   const order=[...REP.filter(r=>by[r]),...Object.keys(by).filter(r=>!REP.includes(r)&&r!=='Casa e igiene'),...(by['Casa e igiene']?['Casa e igiene']:[])];
-  $('#casa-lista').innerHTML=order.map(rep=>`<div class="grp"><h3>${esc(rep)}</h3>${by[rep].sort((x,y)=>x.nome.localeCompare(y.nome,'it')).map(it=>{const on=it.on;return `<div class="it${on?' done':''}" data-c="${esc(it.id)}" role="checkbox" aria-checked="${on}" tabindex="0">${check}<span class="tx"><span class="nm">${esc(it.nome)}</span><span class="q">${on?'C’è':'Manca'}</span></span>${it.ab?'':`<button class="x" data-cx="${esc(it.id)}" type="button" aria-label="Rimuovi">${I.x}</button>`}</div>`}).join('')}</div>`).join('');
+  $('#casa-lista').innerHTML=order.map(rep=>`<div class="grp"><h3>${esc(rep)}</h3>${by[rep].sort((x,y)=>x.nome.localeCompare(y.nome,'it')).map(it=>{const on=it.on;return `<div class="it${on?' done':''}" data-c="${esc(it.id)}" role="checkbox" aria-checked="${on}" tabindex="0">${check}<span class="tx"><span class="nm">${esc(it.nome)}</span><span class="q">${on?'C’è':'Manca'}</span></span><button class="x" data-cx="${esc(it.id)}" type="button" aria-label="Togli ${esc(it.nome)}">${I.x}</button></div>`}).join('')}</div>`).join('');
   const none=$('#c-none');none.hidden=n>0;none.textContent=q?'Nessun prodotto trovato.':'La dispensa è vuota: aggiungi qui sotto quello che avete in casa.'}
 function setSview(v){sview=v;$('#sv-lista').hidden=v!=='lista';$('#sv-casa').hidden=v!=='casa';
   document.querySelectorAll('[data-sv]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.sv===v));if(v==='casa')renderCasa();else renderSpesa()}
@@ -608,7 +617,7 @@ function skipOf(i,p){if(!M)return null;const k=skKey(i,p);
   return null}
 const skipTxt=s=>s.tipo==='fuori'?'Mangiato fuori':'Mangiato altro'+(s.nota?': '+s.nota:'');
 /* cosa c'è da usare: dispensa (senza "Casa e igiene") + spesa spuntata di questa settimana */
-function pantryItems(){return Object.values(casaItems()).filter(x=>x.cibo).map(x=>({id:x.id,nome:x.nome,reparto:x.reparto,on:x.on,casa:1}))}
+function pantryItems(){return Object.values(casaItems()).filter(x=>x.cibo&&!x.rim).map(x=>({id:x.id,nome:x.nome,reparto:x.reparto,on:x.on,casa:1}))}
 let skS=null;
 function openSkip(i,p){const m=M?.giorni?.[i]?.[p];if(!M?.ricette?.[m?.id])return;const old=skipOf(i,p);
   skS={i,p,tipo:old?.tipo||'fuori',nota:old?.nota||'',usati:new Set(old?.usati||[])};drawSkip();
@@ -648,6 +657,17 @@ $('#sh').addEventListener('click',e=>{if(!skS)return;
 $('#sh').addEventListener('keydown',e=>{const u=skS&&e.target.closest('[data-sku]');if(u&&(e.key===' '||e.key==='Enter')){e.preventDefault();toggleSku(u)}});
 $('#sh').addEventListener('input',e=>{if(skS&&e.target.id==='sk-n')skS.nota=e.target.value});
 
+/* ---------- togliere prodotti ----------
+   Da comprare: riga speciale "rimosso|inizio|id" nella tabella spunte (vale solo per la settimana).
+   In casa: riga della tabella casa con reparto "Rimossi" e ce=false (per il menù conta come "non c'è"). */
+const RMP='rimosso|',RIM='Rimossi',RMK=id=>RMP+(M?.inizio||'')+'|'+id;
+async function rmSpesa(id,on){const k=RMK(id);on?spunte.add(k):spunte.delete(k);saveLocal();renderSpesa();
+  if(sb)await run(on?sb.from('spunte').upsert({id:k}):sb.from('spunte').delete().eq('id',k))}
+$('#lista').addEventListener('click',e=>{const r=e.target.closest('[data-rm]');if(r){e.stopPropagation();rmSpesa(r.dataset.rm,true)}});
+$('#sp-rim').addEventListener('click',e=>{const r=e.target.closest('[data-unrm]');if(r)rmSpesa(r.dataset.unrm,false)});
+$('#casa-rim').addEventListener('click',async e=>{const r=e.target.closest('[data-cunrm]');if(!r)return;const id=r.dataset.cunrm;
+  delete CS[id];LS.set('pasti-casa-stato',CS);renderCasa();renderSpesa();if(sb)await run(sb.from('casa').delete().eq('id',id))});
+
 /* ---------- lista: salvataggio locale o Supabase ---------- */
 const LS={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
 function saveLocal(){LS.set('pasti-spunte',[...spunte]);LS.set('pasti-extra',extra)}
@@ -666,7 +686,7 @@ async function toggleExtra(id){const e=extra.find(x=>String(x.id)===id);if(!e)re
   if(sb)await run(sb.from('extra').update({fatto:e.fatto}).eq('id',id))}
 async function removeExtra(id){extra=extra.filter(x=>String(x.id)!==id);saveLocal();renderSpesa();
   if(sb)await run(sb.from('extra').delete().eq('id',id))}
-function onItem(e){if(e.target.closest('[data-x]'))return;const it=e.target.closest('.it');if(!it)return;
+function onItem(e){if(e.target.closest('[data-x],[data-rm]'))return;const it=e.target.closest('.it');if(!it)return;
   if(it.dataset.id)toggleItem(it.dataset.id);else if(it.dataset.e)toggleExtra(it.dataset.e)}
 for(const el of [$('#lista'),$('#extra')]){el.addEventListener('click',onItem);el.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();onItem(e)}})}
 $('#extra').addEventListener('click',e=>{const x=e.target.closest('[data-x]');if(x)removeExtra(x.dataset.x)});
@@ -678,7 +698,9 @@ $('#cerca').addEventListener('input',filtra);
 $('#rcerca').addEventListener('input',()=>renderRicette());
 $('#sp-seg').addEventListener('click',e=>{const b=e.target.closest('[data-sv]');if(b)setSview(b.dataset.sv)});
 $('#ccerca').addEventListener('input',renderCasa);
-function onCasa(e){const x=e.target.closest('[data-cx]');if(x){const id=x.dataset.cx;delete CS[id];LS.set('pasti-casa-stato',CS);renderCasa();if(sb)run(sb.from('casa').delete().eq('id',id));return}
+function onCasa(e){const x=e.target.closest('[data-cx]');if(x){const id=x.dataset.cx,it=casaItems()[id];
+    if(it&&it.ab){setCasa(id,false,it.nome,RIM);return} // prodotto della spesa abituale o del menù: nascosto, si può rimettere
+    delete CS[id];LS.set('pasti-casa-stato',CS);renderCasa();renderSpesa();if(sb)run(sb.from('casa').delete().eq('id',id));return}
   const el=e.target.closest('[data-c]');if(!el)return;const it=casaItems()[el.dataset.c];if(!it)return;
   setCasa(it.id,!it.on,it.nome,it.reparto)}
 $('#casa-lista').addEventListener('click',onCasa);
@@ -701,8 +723,8 @@ async function toggleNo(id){const on=!B.has(id);on?B.add(id):B.delete(id);LS.set
 document.addEventListener('click',e=>{const f=e.target.closest('[data-no]');if(f){e.stopPropagation();toggleNo(f.dataset.no)}},true);
 $('#reset').addEventListener('click',async()=>{const b=$('#reset');
   if(!armed){armed=true;b.textContent='Sicuro?';setTimeout(()=>{armed=false;b.textContent='Azzera spunte'},3500);return}
-  armed=false;b.textContent='Azzera spunte';spunte=new Set([...spunte].filter(x=>x.startsWith(SKP)));extra=extra.filter(e=>!e.fatto);saveLocal();renderSpesa();
-  if(sb){await run(sb.from('spunte').delete().not('id','like',SKP+'%'));await run(sb.from('extra').delete().eq('fatto',true))}});
+  armed=false;b.textContent='Azzera spunte';spunte=new Set([...spunte].filter(x=>x.startsWith(SKP)||x.startsWith(RMP)));extra=extra.filter(e=>!e.fatto);saveLocal();renderSpesa();
+  if(sb){await run(sb.from('spunte').delete().not('id','like',SKP+'%').not('id','like',RMP+'%'));await run(sb.from('extra').delete().eq('fatto',true))}});
 
 let lib=null;
 function connect(pin){const C=window.PASTI_CONFIG;
