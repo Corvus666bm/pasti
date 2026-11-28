@@ -523,14 +523,16 @@
    "nome": "Melanzana",
    "qty": "1 pezzo",
    "reparto": "Frutta e verdura",
-   "prezzo": 0.89
+   "prezzo": 0.89,
+   "casa": "melanzane"
   },
   {
    "id": "pomodorini",
    "nome": "Pomodorini",
    "qty": "500 g",
    "reparto": "Frutta e verdura",
-   "prezzo": 1.79
+   "prezzo": 1.79,
+   "casa": "pomodorinipolilidl"
   },
   {
    "id": "cetriolo",
@@ -551,7 +553,8 @@
    "nome": "Limoni",
    "qty": "1 retina",
    "reparto": "Frutta e verdura",
-   "prezzo": 0.99
+   "prezzo": 0.99,
+   "casa": "limone"
   },
   {
    "id": "piadine",
@@ -586,7 +589,8 @@
    "nome": "Mozzarella",
    "qty": "3 × 125 g + 1 confezione di ciliegine da 125 g",
    "reparto": "Frigo",
-   "prezzo": 3.16
+   "prezzo": 3.16,
+   "casa": "mozzarellabiopoli"
   },
   {
    "id": "hummus",
@@ -600,21 +604,24 @@
    "nome": "Burger vegetali senza formaggio",
    "qty": "2 confezioni",
    "reparto": "Frigo",
-   "prezzo": 4.98
+   "prezzo": 4.98,
+   "casa": "burgerperpaninolidl"
   },
   {
    "id": "pastapizza",
    "nome": "Pasta per pizza stesa",
    "qty": "2 rotoli",
    "reparto": "Frigo",
-   "prezzo": 2.38
+   "prezzo": 2.38,
+   "casa": "pastaperpizza"
   },
   {
    "id": "gnocchi",
    "nome": "Gnocchi di patate freschi",
    "qty": "500 g",
    "reparto": "Frigo",
-   "prezzo": 1.29
+   "prezzo": 1.29,
+   "casa": "gnocchilidl"
   },
   {
    "id": "fagioli",
@@ -635,7 +642,8 @@
    "nome": "Ceci in lattina",
    "qty": "4 lattine",
    "reparto": "Dispensa",
-   "prezzo": 2.36
+   "prezzo": 2.36,
+   "casa": "cecipoli"
   },
   {
    "id": "lenticchie",
@@ -726,7 +734,8 @@
    "nome": "Spinaci surgelati",
    "qty": "1 confezione",
    "reparto": "Surgelati",
-   "prezzo": 1.49
+   "prezzo": 1.49,
+   "casa": "spinacisurgelati"
   },
   {
    "id": "piselli",
